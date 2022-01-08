@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+    <entry>
+      <title><![CDATA[Test3]]></title>
+      <url>/test3/2021/01/11/test3/</url>
+      <content type="text"><![CDATA[posting test3]]></content>
+      <categories>
+        
+          <category> test3 </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> test3 </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[Test2]]></title>
+      <url>/test2/2021/01/10/test2/</url>
+      <content type="text"><![CDATA[posting test2]]></content>
+      <categories>
+        
+          <category> test2 </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> test2 </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[Test1]]></title>
+      <url>/test1/2021/01/09/test1/</url>
+      <content type="text"><![CDATA[posting test1fdkljafdfasdasfsadfas22dfasfdsfasfasf3333423432fgadafasfsa222fdsfasdafdasfdsdfasfsfdffdsfasfasfsfasfasdfas]]></content>
+      <categories>
+        
+          <category> test1 </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> test1 </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+</search>
