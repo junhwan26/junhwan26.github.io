@@ -558,7 +558,7 @@ pre .k, pre .kd, pre .kn, pre .kp, pre .kr, pre .kt, pre .javascript .function {
 .links-of-author { margin-top: 20px; }
 
 .links-of-author a { display: inline-block; vertical-align: middle; margin-right: 10px; margin-bottom: 10px; border-bottom-color: #555; font-size: 13px; }
-.links-of-author a:before { display: inline-block; vertical-align: middle; margin-right: 3px; content: " "; width: 4px; height: 4px; border-radius: 50%; background: #ff5eff; }
+.links-of-author a:before { display: inline-block; vertical-align: middle; margin-right: 3px; content: " "; width: 4px; height: 4px; border-radius: 50%; background: yellow; }
 
 .links-of-blogroll { font-size: 13px; }
 
@@ -723,9 +723,6 @@ pre .k, pre .kd, pre .kn, pre .kp, pre .kr, pre .kt, pre .javascript .function {
 
 .site-uv, .site-pv, .page-pv { display: inline-block; }
 .site-uv .busuanzi-value, .site-pv .busuanzi-value, .page-pv .busuanzi-value { margin: 0 5px; }
-
-.site-uv { margin-right: 10px; }
-.site-uv::after { content: "|"; padding-left: 10px; }
 
 .comments-button { background-color: #b7b7b7; background-image: url(/assets/images/button/fa-pencil-square-o.png); /* 16px x 16px */ background-repeat: no-repeat; /* make the background image appear only once */ background-position: 5% 50%; /* first value is horizontal; second is vertical */ border: none; border-radius: .313em; color: white; /* color of text */ text-align: center; padding-left: 25px; /* space between text and left-border; here taken the icon into account*/ margin: auto; margin-top: 30px; /* space to the top element */ }
 
