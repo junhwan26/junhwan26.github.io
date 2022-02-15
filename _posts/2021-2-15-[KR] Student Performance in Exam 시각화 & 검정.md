@@ -1,5 +1,5 @@
 ---
-title: [KR] Student Performance in Exam 시각화 & 검정
+title: Student Performance in Exam 시각화 & 검정
 description: StudentsPerformance dataset from kaggle
 categories:
  - R
@@ -348,8 +348,3 @@ hist
 - 높은 학력을 가진 학부모의 자녀들의 성적이 비교적 상위권에 위치해있다는 것을 알 수 있었고 이것은 학부모의 교육에 대한 경험과 관심이 자녀들의 성적에 영향을 준 것이라고 생각합니다.
 
 
-
-
-```R
-
-```
