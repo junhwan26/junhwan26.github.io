@@ -1,5 +1,5 @@
 ---
-title: \[KR\] Student Performance in Exam 시각화 & 검정
+title: &#91;KR&#91; Student Performance in Exam 시각화 & 검정
 description: Analysis StudentsPerformance dataset from kaggle
 categories:
  - R
@@ -9,6 +9,9 @@ tags: DataScience Statistics R
 이 주제는 2021년 2학기 고려대학교 오찬욱 교수님의 통계계산프로그래밍(STAT204) 강의의 프로젝트 과제로 제출하였습니다.
 
 ***
+
+[&#91;KR&#91; Student Performance in Exam 시각화 & 검정](https://www.kaggle.com/junhwan26/kr-student-performance-in-exam).
+
 # 목표
 
 이 프로젝트의 목적은 다음 성별, 부모의 소득, 부모의 학력 수준과 시험 성적 사이에 유의미한 관계가 있는지에 대해 알아보는 것입니다. 
