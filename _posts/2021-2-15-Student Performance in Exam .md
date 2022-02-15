@@ -1,5 +1,5 @@
 ---
-title: &#91;KR&#91; Student Performance in Exam 시각화 & 검정
+title: \[KR\] Student Performance in Exam 시각화 & 검정
 description: Analysis StudentsPerformance dataset from kaggle
 categories:
  - R
@@ -10,7 +10,7 @@ tags: DataScience Statistics R
 
 ***
 
-[&#91;KR&#91; Student Performance in Exam 시각화 & 검정](https://www.kaggle.com/junhwan26/kr-student-performance-in-exam).
+[\[KR\[; Student Performance in Exam 시각화 & 검정 (kaggle)](https://www.kaggle.com/junhwan26/kr-student-performance-in-exam).
 
 # 목표
 
