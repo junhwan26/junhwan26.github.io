@@ -1,5 +1,5 @@
 ---
-title: \[KR\] Student Performance in Exam 시각화 & 검정
+title: Student Performance in Exam 시각화 & 검정
 description: Analysis StudentsPerformance dataset from kaggle
 categories:
  - R
