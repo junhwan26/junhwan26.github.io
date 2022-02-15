@@ -10,7 +10,7 @@ tags: DataScience Statistics R
 
 ***
 
-[![Kaggle Badge](https://img.shields.io/badge/Junhwan26-20BEFF?style=flat-square&logo=Kaggle&logoColor=white)]&nbsp;[\[KR\] Student Performance in Exam 시각화 & 검정 (kaggle)](https://www.kaggle.com/junhwan26/kr-student-performance-in-exam).
+[Kaggle Badge](https://img.shields.io/badge/style=flat-square&logo=Kaggle&logoColor=white)&nbsp;[\[KR\] Student Performance in Exam 시각화 & 검정 (kaggle)](https://www.kaggle.com/junhwan26/kr-student-performance-in-exam).
 
 # 목표
 
