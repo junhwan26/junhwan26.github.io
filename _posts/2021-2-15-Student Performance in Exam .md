@@ -1,5 +1,5 @@
 ---
-title: Student Performance in Exam 시각화 & 검정
+title: Student Performance in Exam
 description: StudentsPerformance dataset from kaggle
 categories:
  - R
