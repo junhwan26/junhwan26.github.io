@@ -4,6 +4,7 @@ description: definitions
 categories:
  - Statistics
 tags: MathematicalStatistics definition
+use_math: true
 ---
 
 # 3 Discrete Random Variables and Their Probability Distributions

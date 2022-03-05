@@ -4,6 +4,7 @@ description: Analysis StudentsPerformance dataset from kaggle
 categories:
  - R
 tags: DataScience Statistics R
+use_math: true
 ---
 
 이 주제는 2021년 2학기 고려대학교 오찬욱 교수님의 통계계산프로그래밍(STAT204) 강의의 프로젝트 과제로 제출하였습니다.
