@@ -1,5 +1,3 @@
-
-
 ---
 title: 3 Discrete Random Variables and Their Probability Distributions
 description: definitions
@@ -7,6 +5,7 @@ categories:
  - Statistics
 tags: MathematicalStatistics definition
 ---
+
 # 3 Discrete Random Variables and Their Probability Distributions
 ## 3.1 BasicDefinition
 ### Definition 3.1
