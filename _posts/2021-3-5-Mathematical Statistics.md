@@ -38,7 +38,9 @@ $Y$가 $y$를 값으로 가질 확률 $P(Y = y)$는 $y$를 값으로 가지는 �
 이산형 변수 $Y$에 대한 확률 분포는 모든 Y에 대해 $p(y) = P(Y = y)$를 규정하는 공식, 표 또는 그래프로 나타낼 수 있다.
 
 ### THEOREM 3.1
-> For any discrete probability distribution, the following must be true:</br>1. $0≤ p(y)≤1$ for all $y$.</br>2. $\sum_y p(y) = 1$, where the summation is over all values of $y$ with nonzero probability
+> For any discrete probability distribution, the following must be true:
+> 1. $0≤ p(y)≤1$ for all $y$.
+> 2. $\sum_y p(y) = 1$, where the summation is over all values of $y$ with nonzero probability
 
 
 

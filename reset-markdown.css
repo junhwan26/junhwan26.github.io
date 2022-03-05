@@ -1,0 +1,84 @@
+/** Theming */
+body[class*=vscode] {
+    background: #FFF;
+	max-width: 980px;
+    padding: 45px;
+    word-wrap: break-word;
+    background-color: #fff;
+    border-right: 1px solid #ddd;
+}
+
+[class*=vscode], [class*=vscode] code {
+	color: #333;
+}
+
+[class*=vscode] a, [class*=vscode] a code {
+	color:#4078c0;
+}
+
+[class*=vscode] h1 {
+    border-bottom: 1px solid #eee
+}
+
+[class*=vscode] pre {
+	margin: 0;
+	padding: 0;
+	margin-bottom: 16px
+}
+
+[class*=vscode] pre code {
+	color:#D7BA7D;
+}
+
+[class*=vscode] code > div {
+	color:#333;
+	background: #f7f7f7;
+	border-radius: 0;
+	margin: 0;
+	font-size: 85%;
+	line-height: 1.45;
+}
+
+[class*=vscode] blockquote {
+	margin-left: 0;
+	margin-right: 0;
+    border-left: 0.25em solid #ddd;
+	background: #FFF;
+}
+
+/* Overwrite vscode dark markdown theme */
+body {
+	background-color: white !important;
+	padding: .5em 5em;
+}
+
+.vscode-dark {
+	color: rgb(30, 30, 30);
+}
+
+.vscode-dark code {
+	color: #333;
+	tab-size: 2em;
+	background-color: #f7f7f7 !important;
+	padding: 0 !important;
+	padding-top: 0.2em !important;
+	padding-bottom: 0.2em !important;
+}
+
+.vscode-dark code > div {
+	background-color: #f7f7f7;
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark blockquote {
+	background: #fefefe;
+}
