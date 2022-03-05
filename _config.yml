@@ -45,13 +45,9 @@ highlight:
 
 #### Markdown Processors
 ## 'redcarpet' is unsupported on GitHub Pages now.
-
-# Conversion
 markdown: kramdown
-highlighter: rouge
-lsi: false
-excerpt_separator: "\n\n"
-incremental: false
+kramdown:
+    input: GFM
 
 # Default Attributes
 ## Docs: https://jekyllrb.com/docs/configuration/#front-matter-defaults
