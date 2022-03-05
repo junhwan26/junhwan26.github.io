@@ -83,4 +83,7 @@
   {% include _third-party/scroll-cookie.html %}
   {% include _third-party/exturl.html %}
 </body>
+  {% if page.use_math %}
+    {% include Mathjax.html %}
+  {% endif %}
 </html>
