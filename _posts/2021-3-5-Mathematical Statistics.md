@@ -11,7 +11,7 @@ tags: MathematicalStatistics
 ### Definition 3.1
 > A random variable **_Y_** is said to be _**discrete**_ if it can assume only a finite or countably infinite number of distinct values 
 
-랜덤 변수 $Y$는 finite하거나 countably infinite한 고유 값만 가정할 수 있는 경우 $discrete$라고 합니다.
+랜덤 변수 $Y$는 finite하거나 countably infinite한 고유 값만 가정할 수 있는 경우 $discrete$라고 한다.
 
 #### Countably infinite
  > A set is countably infinite if its elements can be put in one-to-one correspondence with the set of natural numbers. 
@@ -33,7 +33,7 @@ $Y$가 $y$를 값으로 가질 확률 $P(Y = y)$는 $y$를 값으로 가지는 �
 변수가 가질 수 있는 단일 관측치
 
 ### Definition 3.3
-> _The probability distribution_ for a discrete variable $Y$ can be represented by a formula, a table, or a graph that provides $p(y) = P(Y = y)$ for all y.
+> _The probability distribution_ for a discrete variable $Y$ can be represented by a formula, a table, or a graph that provides $p(y) = P(Y = y)$ for all $y$.
 
 이산형 변수 $Y$에 대한 확률 분포는 모든 Y에 대해 $p(y) = P(Y = y)$를 규정하는 공식, 표 또는 그래프로 나타낼 수 있다.
 
@@ -42,8 +42,3 @@ $Y$가 $y$를 값으로 가질 확률 $P(Y = y)$는 $y$를 값으로 가지는 �
 > 1. $0≤ p(y)≤1$ for all $y$.
 > 2. $\sum_y p(y) = 1$, where the summation is over all values of $y$ with nonzero probability
 
-
-
-$$
-hi
-$$
