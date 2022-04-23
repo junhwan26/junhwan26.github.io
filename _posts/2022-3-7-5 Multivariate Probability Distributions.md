@@ -10,14 +10,14 @@ tags: MathematicalStatistics
 
 ---
 
-## 5.6 SpecialTheorems
+## 5.6 Special Theorems
 
 ### THEOREM 5.6
 >Let $c$ be a constant. Then
 >$$E(c) = c.$$
 
 ### THEOREM 5.7
->Let g(Y1,Y2) be a function of the random variables $Y1$ and $Y2$ and let $c$ be a constant. Then
+>Let $g(Y1,Y2)$ be a function of the random variables $Y1$ and $Y2$ and let $c$ be a constant. Then
 >$$E[cg(Y1, Y2)] = cE[g(Y1, Y2)].$$
 
 ### THEOREM 5.8

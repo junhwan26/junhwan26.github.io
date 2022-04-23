@@ -81,7 +81,7 @@ $Y$가 $y$를 값으로 가질 확률 $P(Y = y)$는 $y$를 값으로 가지는 �
 >$$ V(Y)=σ^2 = E[(Y −μ)^2]= E(Y^2)−μ^2.$$
 
 ---
-## 3.4 TheBinomialProbabilityDistribution
+## 3.4 The Binomial Probability Distribution
 
 ### DEFINITION 3.6
 > A binomial experiment possesses the following properties:
@@ -118,3 +118,13 @@ $Y$가 $y$를 값으로 가질 확률 $P(Y = y)$는 $y$를 값으로 가지는 �
 ### THEOREM 3.8
 > If $Y$ is a random variable with a geometric distribution,
 >$$μ=E(Y)={1\over p} \quad and \quad σ^2=V(Y)={1−p \over p^2}.$$
+
+## 3.6 The Negative Binomial Probability Distribution
+
+### DEFINITION 3.9
+>A random variable Y is said to have a ***negative binomial probability distribution*** if and only if
+>$$p(y)= {y-1\choose r-1}p^r q^{y−r},\quad  y=r,r+1,r+2,..., 0≤p≤1.$$
+
+### THEOREM 3.9
+> If Y is a random variable with a negative binomial distribution,
+> $$ μ=E(Y)= {r \over p}\quad and\quad σ^2=V(Y)= {r(1−p) \over p^2}. $$
