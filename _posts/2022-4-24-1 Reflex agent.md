@@ -1,6 +1,6 @@
 ---
-title: 5 Multivariate Probability Distributions
-description: Mathematical Statistics - 7th Edition - Wackerly
+title: Uniformed Search
+description: based on Pieter Abbeel for CS188 Intro to AI at UC Berkeley. & Hyunwoo J. Kim for CSE365 at KOREA Univ
 categories:
  - ComputerScience
 tags: AI 
