@@ -1,9 +1,10 @@
 ---
-title: 4 Continuous Variables and Their Probability Distributions
-description: Mathematical Statistics - 7th Edition - Wackerly
+title: "[수리통계학] Continuous Variables and Their Probability Distributions"
 categories:
  - Statistics
-tags: MathematicalStatistics 
+tags: 
+- MathematicalStatistics
+- STAT232
 ---
 
 # 4 Continuous Variables and Their Probability Distributions

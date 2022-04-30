@@ -1,512 +1,59 @@
-
 <!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Posts by Tag - Slow and Steady</title>
+<meta name="description" content="Data Science, Computer Science, Statistics, AI.">
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-<html class="theme-next muse use-motion" lang="en">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/assets/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  <meta name="author" content="Junhwan">
   
 
 
-
-
-
-
-<link href="/assets/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/assets/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Jekyll, NexT" />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Junhwan's Blog" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico?v=5.1.1" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<meta name="keywords" content="Jekyll, NexT">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Junhwan's Blog">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Slow and Steady">
+<meta property="og:title" content="Posts by Tag">
 <meta property="og:url" content="http://localhost:4000/tags/">
-<meta property="og:site_name" content="Junhwan's Blog">
-<meta property="og:locale" content="en">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Junhwan's Blog">
 
 
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Muse',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://localhost:4000/"/>
+  <meta property="og:description" content="Data Science, Computer Science, Statistics, AI.">
 
 
 
 
 
-  <title>              Tags | Junhwan's Blog      </title>
+
+
+
+
+
+
+  
+
   
 
 
+<link rel="canonical" href="http://localhost:4000/tags/">
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="en">
-
-  
-  
-
-  <div class="container sidebar-position-left page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"> <div class="site-brand-wrapper">
-  <div class="site-meta ">
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
     
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Junhwan's Blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle">...</p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            Home
-          </a>
-        </li>
-      
-        
-        
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            Categories
-          </a>
-        </li>
-      
-        
-        
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            Archives
-          </a>
-        </li>
-      
-        
-        
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            Tags
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-<div id="posts" class="posts-expand">
-<header class="post-header">
-
-	<h1 class="post-title" itemprop="name headline">
+      "@type": "Person",
+      "name": "Junhwan",
+      "url": "http://localhost:4000/"
     
-      Tags
-    
-  </h1>
-
-
-
-</header>
-
-  
-  
-    <div class="tag-cloud">
-      <div class="tag-cloud-title">
-          
-            3 tags in total
-          
-      </div>
-      <div class="tag-cloud-tags">
-        
-        
-        
-        
-        
-        
-        
-
-
-
-        <a href="/tag/#/test1" style="font-size: 12px;color: rgb(204,204,204)">test1</a> <a href="/tag/#/test2" style="font-size: 12px;color: rgb(204,204,204)">test2</a> <a href="/tag/#/test3" style="font-size: 12px;color: rgb(204,204,204)">test3</a>
-      </div>
-    </div>
-  
-</div>
-
-
-          </div>
-          
-
-
-          
-
-        </div>
-        
-          
-
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-
-      <section class="site-overview sidebar-panel sidebar-panel-active">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/assets/images/avatar.gif"
-               alt="Junhwan" />
-          <p class="site-author-name" itemprop="name">Junhwan</p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives/">
-                <span class="site-state-item-count">3</span>
-                <span class="site-state-item-name">posts</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-categories">
-              <a href="/categories/">
-                <span class="site-state-item-count">3</span>
-                <span class="site-state-item-name">categories</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              <a href="/tags/">
-                <span class="site-state-item-count">3</span>
-                <span class="site-state-item-name">tags</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-        
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
-            
-              
-              
-              <span class="links-of-author-item">
-                <a href="https://github.com/junhwan26" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
-              
-              
-              <span class="links-of-author-item">
-                <a href="https://www.instagram.com/jxnhwxn26/" target="_blank" title="Instagram">
-                  
-                    <i class="fa fa-fw fa-instagram"></i>
-                  
-                  Instagram
-                </a>
-              </span>
-            
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
-
-      
-
-    </div>
-  </aside>
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  
-  
-  &copy; 
-  <span itemprop="copyrightYear">2022</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Junhwan</span>
-</div>
-
-
-<div class="powered-by">
-  Powered by <a class="theme-link" href="https://jekyllrb.com">Jekyll</a>
-</div>
-
-<div class="theme-info">
-  Theme -
-  <a class="theme-link" href="https://github.com/simpleyyt/jekyll-theme-next">
-    NexT.Muse
-  </a>
-</div>
-
-
-        
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-  
-    <span class="site-uv">
-      <i class="fa fa-user"></i>
-      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-      
-    </span>
-  
-
-  
-</div>
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
   }
 </script>
 
@@ -516,152 +63,956 @@
 
 
 
+<!-- end _includes/seo.html -->
 
 
 
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Slow and Steady Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
 
 
 
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+  </head>
 
+  <body class="layout--tags">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
 
-
-
-
-
-
-
-  
-   
-  
-  
-  
-  
-  
-  <script type="text/javascript" src="/assets/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  
-  
-  
-  
-  <script type="text/javascript" src="/assets/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  
-  
-  
-  
-  <script type="text/javascript" src="/assets/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  
-  
-  
-  
-  <script type="text/javascript" src="/assets/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  
-  
-  
-  
-  <script type="text/javascript" src="/assets/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  
-  
-  
-  
-  <script type="text/javascript" src="/assets/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/assets/js/src/utils.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/assets/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-  <script type="text/javascript" src="/assets/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/assets/js/src/post-details.js?v=5.1.1"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/assets/js/src/bootstrap.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-  
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
 
     
 
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Slow and Steady
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/year-archive/">Archive</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">tag</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/">Category</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
   
 
 
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/images/profile.png" alt="Junhwan" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Junhwan</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>-</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Republic of Korea</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:gjwnsghks02@gmail.com" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+            <li><a href="https://www.kaggle.com/junhwan26" rel="nofollow noopener noreferrer me"><i class="fab fa-fw fa-kaggle" aria-hidden="true"></i><span class="label">kaggle</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/junhwan26" rel="nofollow noopener noreferrer me"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://www.instagram.com/jxnhwxn26/" rel="nofollow noopener noreferrer me"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i><span class="label">Instagram</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+  
+  </div>
 
 
+
+  <div class="archive">
+    
+      <h1 id="page-title" class="page__title">Posts by Tag</h1>
+    
+    
+
+
+
+
+
+<ul class="taxonomy__index">
+  
+    
+      
+    
+      
+        <li>
+          <a href="#mathematicalstatistics">
+            <strong>MathematicalStatistics</strong> <span class="taxonomy__count">3</span>
+          </a>
+        </li>
+      
+    
+      
+        <li>
+          <a href="#stat232">
+            <strong>STAT232</strong> <span class="taxonomy__count">3</span>
+          </a>
+        </li>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+      
+        <li>
+          <a href="#statistics">
+            <strong>Statistics</strong> <span class="taxonomy__count">1</span>
+          </a>
+        </li>
+      
+    
+      
+    
+      
+    
+      
+        <li>
+          <a href="#ai">
+            <strong>AI</strong> <span class="taxonomy__count">1</span>
+          </a>
+        </li>
+      
+    
+      
+        <li>
+          <a href="#cose361">
+            <strong>COSE361</strong> <span class="taxonomy__count">1</span>
+          </a>
+        </li>
+      
+    
+      
+        <li>
+          <a href="#algorithm">
+            <strong>algorithm</strong> <span class="taxonomy__count">1</span>
+          </a>
+        </li>
+      
+    
+      
+        <li>
+          <a href="#cse214">
+            <strong>CSE214</strong> <span class="taxonomy__count">1</span>
+          </a>
+        </li>
+      
+    
+  
+</ul>
 
 
 
   
+    
+  
+    
+      <section id="mathematicalstatistics" class="taxonomy__section">
+        <h2 class="archive__subtitle">MathematicalStatistics</h2>
+        <div class="entries-list">
+          
+            
 
 
 
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/statistics/5-Multivariate-Probability-Distributions/" rel="permalink">[수리통계학] Multivariate Probability Distributions
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 분 소요
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">5 Multivariate Probability Distributions
+
+</p>
+  </article>
+</div>
+
+          
+            
 
 
 
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/statistics/4-Continuous-Variables-and-Their-Probability-Distributions/" rel="permalink">[수리통계학] Continuous Variables and Their Probability Distributions
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 분 소요
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">4 Continuous Variables and Their Probability Distributions
+
+</p>
+  </article>
+</div>
+
+          
+            
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/statistics/3-Discrete-Random-Variables-and-Their-Probability-Distributions/" rel="permalink">[수리통계학] Discrete Random Variables and Their Probability Distributions
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 분 소요
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">3 Discrete Random Variables and Their Probability Distributions
+
+</p>
+  </article>
+</div>
+
+          
+        </div>
+        <a href="#page-title" class="back-to-top">맨 위로 이동 &uarr;</a>
+      </section>
+    
+  
+    
+      <section id="stat232" class="taxonomy__section">
+        <h2 class="archive__subtitle">STAT232</h2>
+        <div class="entries-list">
+          
+            
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/statistics/5-Multivariate-Probability-Distributions/" rel="permalink">[수리통계학] Multivariate Probability Distributions
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 분 소요
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">5 Multivariate Probability Distributions
+
+</p>
+  </article>
+</div>
+
+          
+            
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/statistics/4-Continuous-Variables-and-Their-Probability-Distributions/" rel="permalink">[수리통계학] Continuous Variables and Their Probability Distributions
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 분 소요
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">4 Continuous Variables and Their Probability Distributions
+
+</p>
+  </article>
+</div>
+
+          
+            
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/statistics/3-Discrete-Random-Variables-and-Their-Probability-Distributions/" rel="permalink">[수리통계학] Discrete Random Variables and Their Probability Distributions
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 분 소요
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">3 Discrete Random Variables and Their Probability Distributions
+
+</p>
+  </article>
+</div>
+
+          
+        </div>
+        <a href="#page-title" class="back-to-top">맨 위로 이동 &uarr;</a>
+      </section>
+    
+  
+    
+  
+    
+  
+    
+  
+    
   
 
   
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
 
   
+    
+      <section id="statistics" class="taxonomy__section">
+        <h2 class="archive__subtitle">Statistics</h2>
+        <div class="entries-list">
+          
+            
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/%EC%9A%A9%EC%96%B4%EC%A0%95%EB%A6%AC/EDA/" rel="permalink">[용어정리] EDA
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          최대 1 분 소요
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Exploratory Data Analysis (EDA) - 탐색적 데이터 분석
+
+EDA는 데이터 분석을 위하기 위해 주로 데이터 시각화(graphic)을 사용하여 dataset에 대해 직관적인으로 이해 하는 과정
+
+
+  Dataset에 대한 통찰력을 극대화.
+  기초 구조 확인
+...</p>
+  </article>
+</div>
+
+          
+        </div>
+        <a href="#page-title" class="back-to-top">맨 위로 이동 &uarr;</a>
+      </section>
+    
+  
+    
+  
+    
+  
+    
+      <section id="ai" class="taxonomy__section">
+        <h2 class="archive__subtitle">AI</h2>
+        <div class="entries-list">
+          
+            
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/computerscience/1-Uniformed-Search/" rel="permalink">[AI] Uniformed Search
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 분 소요
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">용어 정리
+strategy : 전략
+complete : solution이 하나 존재 할 때 그 solution을 찾는 것이 보장되어 있는가?
+optimal : 최단 경로(the least cost path)를 찾는 것이 보장되어 있는가?   
+
+
+</p>
+  </article>
+</div>
+
+          
+        </div>
+        <a href="#page-title" class="back-to-top">맨 위로 이동 &uarr;</a>
+      </section>
+    
+  
+    
+      <section id="cose361" class="taxonomy__section">
+        <h2 class="archive__subtitle">COSE361</h2>
+        <div class="entries-list">
+          
+            
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/computerscience/1-Uniformed-Search/" rel="permalink">[AI] Uniformed Search
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 분 소요
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">용어 정리
+strategy : 전략
+complete : solution이 하나 존재 할 때 그 solution을 찾는 것이 보장되어 있는가?
+optimal : 최단 경로(the least cost path)를 찾는 것이 보장되어 있는가?   
+
+
+</p>
+  </article>
+</div>
+
+          
+        </div>
+        <a href="#page-title" class="back-to-top">맨 위로 이동 &uarr;</a>
+      </section>
+    
+  
+    
+      <section id="algorithm" class="taxonomy__section">
+        <h2 class="archive__subtitle">algorithm</h2>
+        <div class="entries-list">
+          
+            
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/computerscience/Algorithm/" rel="permalink">[AL] 1. Intro
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          최대 1 분 소요
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">fsfd
+</p>
+  </article>
+</div>
+
+          
+        </div>
+        <a href="#page-title" class="back-to-top">맨 위로 이동 &uarr;</a>
+      </section>
+    
+  
+    
+      <section id="cse214" class="taxonomy__section">
+        <h2 class="archive__subtitle">CSE214</h2>
+        <div class="entries-list">
+          
+            
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/computerscience/Algorithm/" rel="permalink">[AL] 1. Intro
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          최대 1 분 소요
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">fsfd
+</p>
+  </article>
+</div>
+
+          
+        </div>
+        <a href="#page-title" class="back-to-top">맨 위로 이동 &uarr;</a>
+      </section>
+    
   
 
 
-  
+  </div>
+</div>
+    </div>
 
-  
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
 
-  
+      </div>
+    
 
-</body>
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="mailto:gjwnsghks02@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
+      
+        
+          <li><a href="https://www.kaggle.com/junhwan26" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-kaggle" aria-hidden="true"></i> kaggle</a></li>
+        
+      
+        
+          <li><a href="https://github.com/junhwan26" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://www.instagram.com/jxnhwxn26/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 Junhwan. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
 </html>
-

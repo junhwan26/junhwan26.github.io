@@ -1,9 +1,10 @@
 ---
-title: 3 Discrete Random Variables and Their Probability Distributions
-description: Mathematical Statistics - 7th Edition - Wackerly
+title: "[수리통계학] Discrete Random Variables and Their Probability Distributions"
 categories:
  - Statistics
-tags: MathematicalStatistics 
+tags: 
+- MathematicalStatistics
+- STAT232
 ---
 
 # 3 Discrete Random Variables and Their Probability Distributions

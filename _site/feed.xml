@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-04-30T18:51:17+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Slow and Steady</title><subtitle>Data Science, Computer Science, Statistics, AI.</subtitle><author><name>Junhwan</name></author><entry><title type="html">[AI] Uniformed Search</title><link href="http://localhost:4000/computerscience/1-Uniformed-Search/" rel="alternate" type="text/html" title="[AI] Uniformed Search" /><published>2022-04-24T00:00:00+09:00</published><updated>2022-04-24T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/1%20Uniformed%20Search</id><content type="html" xml:base="http://localhost:4000/computerscience/1-Uniformed-Search/"><![CDATA[<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>용어 정리
+strategy : 전략
+complete : solution이 하나 존재 할 때 그 solution을 찾는 것이 보장되어 있는가?
+optimal : 최단 경로(the least cost path)를 찾는 것이 보장되어 있는가?   
+</code></pre></div></div>
+
+<h1 id="uniformed-search">Uniformed Search</h1>
+<h2 id="agents">Agents</h2>
+<h3 id="rational-agents">Rational agents</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Rational agent</code>는 명확한 선호도를 가지고 기대치를 통해 불확실성을 모델링하고, 모든 실행 가능한 행동 중 항상 자신에게 최적의 결과를 가져오도록 행동을 수행하도록 선택하는 agent이다.
+    <h3 id="reflex-agents">Reflex agents</h3>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">Reflex agent</code>s는 현재 상태에 기반을 두어 다음 <code class="language-plaintext highlighter-rouge">action</code>을 선택하는 <code class="language-plaintext highlighter-rouge">agent</code>로 이 Action이 가져올 미래에 대해 고려하지 않는다.</li>
+</ul>
+
+<h3 id="planning-agents">Planning agents</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Planning agents</code>는 (가설화된) <code class="language-plaintext highlighter-rouge">sequences of action</code>에 기반을 두어 결정한다.</li>
+  <li><code class="language-plaintext highlighter-rouge">World</code>가 <code class="language-plaintext highlighter-rouge">action</code>에 대응하여 어떻게 변해가는지에 대한 모델을 가지고 있다.</li>
+</ul>
+
+<h2 id="search">Search</h2>
+<h3 id="search-problem">Search Problem</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Search Problem</code>은 <code class="language-plaintext highlighter-rouge">state space</code>(상태 공간), <code class="language-plaintext highlighter-rouge">successor function</code>(후계 함수 action, cost 포함), <code class="language-plaintext highlighter-rouge">start state</code> (시작 상태) 및 <code class="language-plaintext highlighter-rouge">goal test</code>로 구성된다.</li>
+  <li>솔루션은 <code class="language-plaintext highlighter-rouge">start state</code>(시작 상태)를 <code class="language-plaintext highlighter-rouge">goal state</code>(목표 상태)로 변환하는 <code class="language-plaintext highlighter-rouge">sequenc of action</code>(plan)이다.</li>
+</ul>
+
+<h3 id="state-space-graph">State Space Graph</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">State space graph</code>는 <code class="language-plaintext highlighter-rouge">search problem</code>의 수학적 표현이다. <code class="language-plaintext highlighter-rouge">Node</code>들은 <code class="language-plaintext highlighter-rouge">state</code>를, <code class="language-plaintext highlighter-rouge">arcs</code>는 <code class="language-plaintext highlighter-rouge">action</code>을 나타내며 이것이 가르키는 <code class="language-plaintext highlighter-rouge">node</code>는 그 <code class="language-plaintext highlighter-rouge">action</code>의 결과이다.</li>
+  <li>Search graph에서 각 state는 한 번씩 등장한다.</li>
+  <li>전체 그래프는 매우 크기 때문에 메모리에 거의 만들 수 없지만 유용한 아이디어이다.</li>
+</ul>
+
+<h3 id="search-tree">Search Tree</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Root node</code>는 <code class="language-plaintext highlighter-rouge">start state</code>이고 자녀는 후계자에 해당된다.</li>
+  <li><code class="language-plaintext highlighter-rouge">Node</code>가 <code class="language-plaintext highlighter-rouge">state</code>를 표시하지만 이러한 <code class="language-plaintext highlighter-rouge">state</code>를 달성하는 계획에 해당된다.</li>
+  <li>대부분의 문제에서 우리는 절대 <code class="language-plaintext highlighter-rouge">tree</code> 전체를 만들 수 없습니다.</li>
+</ul>
+
+<h3 id="state-space-graphs-vs-search-trees">State Space Graphs vs Search Trees</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">search tree</code>의 각 <code class="language-plaintext highlighter-rouge">node</code>는 <code class="language-plaintext highlighter-rouge">state space graph</code>의 전체 경로이다.</li>
+  <li>우리는 필요에 따라 <code class="language-plaintext highlighter-rouge">tree</code>를 만들고, 가능한 한 적게 만듭니다.</li>
+</ul>
+
+<h3 id="depth-first-search">Depth-First Search</h3>
+<ul>
+  <li>Strategy: expand a a deepest node first</li>
+  <li>Implementation: Frontier is a LIFO stack</li>
+  <li><strong>Properties</strong> with depth <code class="language-plaintext highlighter-rouge">m</code> tree
+    <ul>
+      <li>time : $O(bm)$</li>
+      <li>space : $O(b^m)$</li>
+      <li>Is it complete?
+        <ul>
+          <li>m could be infinite, so only if we prevent cycles (more later)</li>
+        </ul>
+      </li>
+      <li>Is it optimal?
+        <ul>
+          <li>No, it finds the “leftmost” solution</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="breath-frist-search">Breath-Frist Search</h3>
+<ul>
+  <li>Strategy: expand a shallowest node first</li>
+  <li>Implementation: Fringe is a FIFO queue</li>
+  <li><strong>Properties</strong> with depth <code class="language-plaintext highlighter-rouge">m</code>, shallowest solution’s depth <code class="language-plaintext highlighter-rouge">s</code> tree
+    <ul>
+      <li>time : $O(b^s)$</li>
+      <li>space : $O(b^m)$</li>
+      <li>Is it complete?
+        <ul>
+          <li>Yes, s must be finite if a solution exists</li>
+        </ul>
+      </li>
+      <li>Is it optimal?
+        <ul>
+          <li>If costs are equal</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="uniform-cost-search">Uniform Cost Search</h3>
+<ul>
+  <li>Strategy: expand a cheapest node first:</li>
+  <li>Implementation: Fringe is a priority queue (priority: cumulative cost)</li>
+  <li><strong>Properties</strong> with depth <code class="language-plaintext highlighter-rouge">m</code>, solution costs $C^*$ and arcs cost at least $\epsilon$
+    <ul>
+      <li>time : $O(b^{C^*/\epsilon})$</li>
+      <li>space : $O(b^m)$</li>
+      <li>Is it complete?
+        <ul>
+          <li>Yes, Assuming best solution has a finite cost and minimum arc cost is positive</li>
+        </ul>
+      </li>
+      <li>Is it optimal?
+        <ul>
+          <li>Yes</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Explores options in every “direction”</li>
+  <li>No information about goal location</li>
+</ul>]]></content><author><name>Junhwan</name></author><category term="ComputerScience" /><category term="AI" /><category term="COSE361" /><summary type="html"><![CDATA[용어 정리 strategy : 전략 complete : solution이 하나 존재 할 때 그 solution을 찾는 것이 보장되어 있는가? optimal : 최단 경로(the least cost path)를 찾는 것이 보장되어 있는가?]]></summary></entry><entry><title type="html">[AL] 1. Intro</title><link href="http://localhost:4000/computerscience/Algorithm/" rel="alternate" type="text/html" title="[AL] 1. Intro" /><published>2022-04-24T00:00:00+09:00</published><updated>2022-04-24T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/Algorithm</id><content type="html" xml:base="http://localhost:4000/computerscience/Algorithm/"><![CDATA[<p>fsfd</p>]]></content><author><name>Junhwan</name></author><category term="ComputerScience" /><category term="algorithm" /><category term="CSE214" /><summary type="html"><![CDATA[고려대학교 이도길 교수님의 알고리즘(CSE214) 강의를 정리한 내용입니다.]]></summary></entry><entry><title type="html">[수리통계학] Multivariate Probability Distributions</title><link href="http://localhost:4000/statistics/5-Multivariate-Probability-Distributions/" rel="alternate" type="text/html" title="[수리통계학] Multivariate Probability Distributions" /><published>2022-03-07T00:00:00+09:00</published><updated>2022-03-07T00:00:00+09:00</updated><id>http://localhost:4000/statistics/5%20Multivariate%20Probability%20Distributions</id><content type="html" xml:base="http://localhost:4000/statistics/5-Multivariate-Probability-Distributions/"><![CDATA[<h1 id="5-multivariate-probability-distributions">5 Multivariate Probability Distributions</h1>
+
+<hr />
+
+<h2 id="56-special-theorems">5.6 Special Theorems</h2>
+
+<h3 id="theorem-56">THEOREM 5.6</h3>
+<blockquote>
+  <p>Let $c$ be a constant. Then
+\(E(c) = c.\)</p>
+</blockquote>
+
+<h3 id="theorem-57">THEOREM 5.7</h3>
+<blockquote>
+  <p>Let $g(Y1,Y2)$ be a function of the random variables $Y1$ and $Y2$ and let $c$ be a constant. Then
+\(E[cg(Y1, Y2)] = cE[g(Y1, Y2)].\)</p>
+</blockquote>
+
+<h3 id="theorem-58">THEOREM 5.8</h3>
+<blockquote>
+  <p>Let $Y1$ and $Y2$ be random variables and $g_1(Y_1,Y_2),\ g_2(Y_1,Y_2),\ \cdots,\ g_k(Y_1,Y_2)$ be functions of $Y_1$ and $Y_2$. Then
+\(E[g_1(Y_1,Y_2)\ +\ g2(Y_1,Y_2)\ +\ ···\ +\ g_k(Y_1,Y_2)]
+= E[g_1(Y_1,Y_2)]+ E[g_2(Y_1,Y_2)]+\ ···\ +\ E[g_k(Y_1,Y_2)].\)</p>
+</blockquote>
+
+<h3 id="theorem-59">THEOREM 5.9</h3>
+<blockquote>
+  <p>Let $Y_1$ and $Y_2$ be independent random variables and $g(Y_1)$ and $h(Y_2)$ be functions of only $Y_1$ and $Y_2$, respectively. Then
+\(E[g(Y_1)h(Y_2)] = E[g(Y_1)]E[h(Y_2)],\)
+provided that the expectations exist.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="57-the-covariance-of-two-random-variables">5.7 The Covariance of Two Random Variables</h2>
+
+<h3 id="definition-510">DEFINITION 5.10</h3>
+<blockquote>
+  <p>If $Y_1$ and $Y_2$ are random variables with means $μ_1$ and $μ_2$, respectively, the covariance of $Y_1$ and $Y_2$ is
+\(Cov(Y_1, Y_2) = E [(Y_1 − μ_1)(Y_2 − μ_2)] .\)</p>
+</blockquote>
+
+<h3 id="theorem-510">THEOREM 5.10</h3>
+<blockquote>
+  <p>If $Y_1$ and $Y_2$ are random variables with means $μ_1$ and $μ_2$, respectively, then 
+\(Cov(Y_1, Y_2) = E [(Y_1 − μ_1)(Y_2 − μ_2)] = E(Y_1Y_2) − E(Y_1)E(Y_2).\)</p>
+</blockquote>
+
+<h3 id="theorem-511">THEOREM 5.11</h3>
+<blockquote>
+  <p>If $Y_1$ and $Y_2$ are independent random variables, then 
+\(Cov(Y_1, Y_2) = 0.\)
+Thus, independent random variables must be uncorrelated.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="58-the-expected-value-and-variance-of-linear-functions-of-random-variables">5.8 The Expected Value and Variance of Linear Functions of Random Variables</h2>
+
+<h3 id="theorem-512">THEOREM 5.12</h3>
+<blockquote>
+  <p>Let $Y_1,Y_2,…,Y_n$ and $X_1, X_2,…, X_m$ be random variables with $E(Y_i) = μ_i$ and $E ( X_j ) = ξ_j$. Define
+\(U_1=\sum^{n}_{i=1}a_iY_i\quad and\quad  U_2=\sum^{n}_{j=1}b_jX_j\)
+for constants $a_1,a_2,…,a_n$ and $b_1,b_2,…,b_m.$ Then the following hold:</p>
+
+  <p><strong>a</strong>    $E(U_1)= \sum^n_{i=1}a_iμ_i.$</p>
+
+  <p><strong>b</strong>    $V(U_1) = \sum^n_{i=1} a_i^2V(Y_i) + 2\sum\sum_{ 1≤i&lt;j≤n} a_ia_jCov(Y_i,Y_j)$, where the double sum is over all pairs $(i, j)$ with $i &lt; j$.</p>
+
+  <p><strong>c</strong>    $Cov(U_1,U_2)=\sum_{i=1}^n\sum_{j=1}^m a_ib_jCov(Y_i,X_j)$.</p>
+</blockquote>]]></content><author><name>Junhwan</name></author><category term="Statistics" /><category term="MathematicalStatistics" /><category term="STAT232" /><summary type="html"><![CDATA[5 Multivariate Probability Distributions]]></summary></entry><entry><title type="html">[수리통계학] Continuous Variables and Their Probability Distributions</title><link href="http://localhost:4000/statistics/4-Continuous-Variables-and-Their-Probability-Distributions/" rel="alternate" type="text/html" title="[수리통계학] Continuous Variables and Their Probability Distributions" /><published>2022-03-06T00:00:00+09:00</published><updated>2022-03-06T00:00:00+09:00</updated><id>http://localhost:4000/statistics/4%20Continuous%20Variables%20and%20Their%20Probability%20Distributions</id><content type="html" xml:base="http://localhost:4000/statistics/4-Continuous-Variables-and-Their-Probability-Distributions/"><![CDATA[<h1 id="4-continuous-variables-and-their-probability-distributions">4 Continuous Variables and Their Probability Distributions</h1>
+
+<hr />
+
+<h2 id="42-the-probability-distribution-for-a-continuous-random-variable">4.2 The Probability Distribution for a Continuous Random Variable</h2>
+
+<h3 id="definition-41">DEFINITION 4.1</h3>
+<blockquote>
+  <p>Let $Y$ denote any random variable. The distribution function of $Y$ , denoted by $F(y)$, is such that $F(y) = P(Y ≤ y)$ for $−∞ &lt; y &lt; ∞.$</p>
+</blockquote>
+
+<h3 id="theorem-41">THEOREM 4.1</h3>
+<blockquote>
+  <p>Let Y denote any random variable. The distribution function of $Y$, denoted by $F(y)$, is such that $F(y) = P(Y ≤ y)$ for $−∞ &lt; y &lt; ∞.$</p>
+</blockquote>
+
+<h3 id="definition-42">DEFINITION 4.2</h3>
+<blockquote>
+  <p>A random variable $Y$ with distribution function $F(y)$ is said to be continuous if $F(y)$ is continuous, for $−∞ &lt; y &lt; ∞.$</p>
+</blockquote>
+
+<h3 id="definition-43">DEFINITION 4.3</h3>
+<blockquote>
+  <p>Let $F(y)$ be the distribution function for a continuous random variable $Y$. Then $f(y)$, given by
+$f(y)= dF(y)= {dF^′(y) \over dy}$
+wherever the derivative exists, is called the probability density function for the random variable $Y$ .</p>
+</blockquote>
+
+<h3 id="theorem-42">THEOREM 4.2</h3>
+<blockquote>
+  <p><strong>Properties of a Density Function</strong> If $f(y)$ is a density function for a continuous random variable, then</p>
+  <ol>
+    <li>$f(y) ≥ 0$ for all $y$, $−∞&lt;y&lt;∞.$</li>
+    <li>$\int_{-∞}^{∞} f(y)dy=1.$</li>
+  </ol>
+</blockquote>
+
+<h3 id="definition-44">DEFINITION 4.4</h3>
+<blockquote>
+  <p>Let $Y$ denote any random variable. If $0 &lt; p &lt; 1$, the $p$th <strong><em>quantile</em></strong> of $Y$, denoted by $\phi_p$, is the smallest value such that $P(Y ≤ \phi_p) = F(\phi_p) ≥ p.$ If $Y$ is continuous, $\phi_p$ is the smallest value such that $F(\phi_p) = P(Y ≤ \phi_p) = p.$ Some prefer to call $\phi_p$ the $100p$th percentile of Y.</p>
+</blockquote>
+
+<h3 id="theorem-43">THEOREM 4.3</h3>
+<blockquote>
+  <p>If the random variable $Y$ has density function $f (y)$ and $a &lt; b$, then the probability that $Y$ falls in the interval $[a, b]$ is
+\(P(a ≤ Y ≤ b) = \int_{a}^{b}f (y) dy.\)</p>
+</blockquote>
+
+<hr />
+
+<h2 id="43-expected-values-for-continuous-random-variables">4.3 Expected Values for Continuous Random Variables</h2>
+
+<h3 id="definition-45">DEFINITION 4.5</h3>
+<blockquote>
+  <p>The expected value of a continuous random variable $Y$ is 
+\(E(Y) =\int_{-∞}^{∞}yf(y)\ dy\) 
+provided that the integral exists.</p>
+</blockquote>
+
+<h3 id="theroem-44">THEROEM 4.4</h3>
+<blockquote>
+  <p>Let $g(Y )$ be a function of $Y$ ; then the expected value of $g(Y )$ is given by 
+\(E [g(Y )] = \int_{-∞}^{∞}g(y)f(y)\ dy\)
+provided that the integral exists.</p>
+</blockquote>
+
+<h3 id="theorem-45">THEOREM 4.5</h3>
+<blockquote>
+  <p>Let $c$ be a constant and let $g(Y), g_1(Y), g_2(Y),…,g_k(Y)$ be functions of a continuous random variable $Y$ . Then the following results hold:</p>
+  <ol>
+    <li>$E(c) = c.$</li>
+    <li>$E[cg(Y)] = cE[g(Y)].$</li>
+    <li>$E[g_1(Y)+g_2(Y)+···+gk(Y)] = E[g_1(Y)]+E[g_2(Y)]+···+E[g_k(Y)].$</li>
+  </ol>
+</blockquote>]]></content><author><name>Junhwan</name></author><category term="Statistics" /><category term="MathematicalStatistics" /><category term="STAT232" /><summary type="html"><![CDATA[4 Continuous Variables and Their Probability Distributions]]></summary></entry><entry><title type="html">[수리통계학] Discrete Random Variables and Their Probability Distributions</title><link href="http://localhost:4000/statistics/3-Discrete-Random-Variables-and-Their-Probability-Distributions/" rel="alternate" type="text/html" title="[수리통계학] Discrete Random Variables and Their Probability Distributions" /><published>2022-03-05T00:00:00+09:00</published><updated>2022-03-05T00:00:00+09:00</updated><id>http://localhost:4000/statistics/3%20Discrete%20Random%20Variables%20and%20Their%20Probability%20Distributions</id><content type="html" xml:base="http://localhost:4000/statistics/3-Discrete-Random-Variables-and-Their-Probability-Distributions/"><![CDATA[<h1 id="3-discrete-random-variables-and-their-probability-distributions">3 Discrete Random Variables and Their Probability Distributions</h1>
+
+<hr />
+
+<h2 id="31-basic-definition">3.1 Basic DEFINITION</h2>
+<h3 id="definition-31">DEFINITION 3.1</h3>
+<blockquote>
+  <p>A random variable <strong><em>Y</em></strong> is said to be <em><strong>discrete</strong></em> if it can assume only a finite or countably infinite number of distinct values</p>
+</blockquote>
+
+<p>랜덤 변수 $Y$는 finite하거나 countably infinite한 고유 값만 가정할 수 있는 경우 $discrete$라고 한다.</p>
+
+<h4 id="countably-infinite">Countably infinite</h4>
+<blockquote>
+  <p>A set is countably infinite if its elements can be put in one-to-one correspondence with the set of natural numbers.</p>
+</blockquote>
+
+<p>원소들이 자연수들의 집합과 일대일 대응에 놓일 수 있다면 그 집합은 countably infinite하다.</p>
+
+<p>Countably infinite하다는 것은 우리가 영원히 셀 수 없을 정도로 큰 집합을 설명하는 것과 대조적이다. finite sets을 포함하지 않는 다는 것을 강조할 때 사용한다.</p>
+
+<hr />
+
+<h2 id="32-the-probability-distribution-for-a-discrete-random-variable">3.2 The Probability Distribution for a Discrete Random Variable</h2>
+
+<h3 id="definition-32">DEFINITION 3.2</h3>
+<blockquote>
+  <p>The probability that $Y$ takes on the value $y$, $P(Y = y)$, is defined as the sum of the probabilities of all sample points in S that are assigned the value y. We will sometimes denote $P(Y = y)$ by $p(y)$.</p>
+</blockquote>
+
+<p>$Y$가 $y$를 값으로 가질 확률 $P(Y = y)$는 $y$를 값으로 가지는 모든 표본점의 확률의 합으로 정의된다.</p>
+
+<h4 id="sample-point-표본점">sample point (표본점)</h4>
+<blockquote>
+  <p>a single possible observed value of a variable.
+변수가 가질 수 있는 단일 관측치</p>
+</blockquote>
+
+<h3 id="definition-33">DEFINITION 3.3</h3>
+<blockquote>
+  <p><em>The probability distribution</em> for a discrete variable $Y$ can be represented by a formula, a table, or a graph that provides $p(y) = P(Y = y)$ for all $y$.</p>
+</blockquote>
+
+<p>이산형 변수 $Y$에 대한 확률 분포는 모든 Y에 대해 $p(y) = P(Y = y)$를 규정하는 공식, 표 또는 그래프로 나타낼 수 있다.</p>
+
+<h3 id="theorem-31">THEOREM 3.1</h3>
+<blockquote>
+  <p>For any discrete probability distribution, the following must be true:</p>
+  <ol>
+    <li>$0≤ p(y)≤1$ for all $y$.</li>
+    <li>$\sum_y p(y) = 1$, where the summation is over all values of $y$ with nonzero probability</li>
+  </ol>
+</blockquote>
+
+<hr />
+
+<h2 id="33-the-expected-value-of-a-random-variable-or-a-function-of-a-random-variable">3.3 The Expected Value of a Random Variable or a Function of a Random Variable</h2>
+
+<h3 id="dfinition-34">Dfinition 3.4</h3>
+<blockquote>
+  <p>Let $Y$ be a discrete random variable with the probability function $p(y)$. Then the expected value of $Y$ , $E(Y)$, is defined to be
+\(E(Y)=\sum yp(y).\)</p>
+</blockquote>
+
+<h3 id="theorem-32">THEOREM 3.2</h3>
+<blockquote>
+  <p>Let $Y$ be a discrete random variable with probability function $p(y)$ and $g(Y)$ be a real-valued function of $Y$. Then the expected value of $g(Y)$ is given by
+\(E[g(Y)] = \sum_{all\ y} g(y)p(y).\)</p>
+</blockquote>
+
+<h3 id="definition-35">DEFINITION 3.5</h3>
+<blockquote>
+  <p>If $Y$ is a random variable with mean $E(Y) = μ$, the variance of a random variable $Y$ is defined to be the expected value of $(Y − μ)^2$. That is,
+\(V (Y) = E [(Y − μ)^2].\)
+The <em>standard deviation</em> of $Y$ is the positive square root of $V (Y )$.</p>
+</blockquote>
+
+<h3 id="theorem-33">THEOREM 3.3</h3>
+<blockquote>
+  <p>Let $Y$ be a discrete random variable with probability function $p(y)$ and c be a constant. Then $E(c) = c$.</p>
+</blockquote>
+
+<h3 id="theorem-34">THEOREM 3.4</h3>
+<blockquote>
+  <p>Let $Y$ be a discrete random variable with probability function $p(y)$, $g(Y)$ be a function of $Y$ , and c be a constant. Then
+\(E[cg(Y)] = cE[g(Y)].\)</p>
+</blockquote>
+
+<h3 id="theorem-35">THEOREM 3.5</h3>
+<blockquote>
+  <p>Let $Y$ be a discrete random variable with probability function $p(y)$ and $g_1(Y ), g_2(Y),…, g_k(Y)$ be $k$ functions of $Y$. Then
+\(E [g_1 (Y ) + g_2 (Y ) + · · · + g_k (Y )] = E [g_1 (Y )] + E [g_2 (Y )] + · · · + E [g_k (Y )].\)</p>
+</blockquote>
+
+<h3 id="theotem-36">THEOTEM 3.6</h3>
+<blockquote>
+  <p>Let $Y$ be a discrete random variable with probability function $p(y)$ and mean $E(Y) = μ$; then
+\(V(Y)=σ^2 = E[(Y −μ)^2]= E(Y^2)−μ^2.\)</p>
+</blockquote>
+
+<hr />
+<h2 id="34-the-binomial-probability-distribution">3.4 The Binomial Probability Distribution</h2>
+
+<h3 id="definition-36">DEFINITION 3.6</h3>
+<blockquote>
+  <p>A binomial experiment possesses the following properties:</p>
+  <ol>
+    <li>The experiment consists of a fixed number, $n$, of identical trials.</li>
+    <li>Each trial results in one of two outcomes: success, $S$, or failure, $F$.</li>
+    <li>The probability of success on a single trial is equal to some value $p$ and remains the same from trial to trial. The probability of a failure is equal to $q = (1 − p)$.</li>
+    <li>The trials are independent.</li>
+    <li>The random variable of interest is $Y$ , the number of successes observed during the $n$ trials.</li>
+  </ol>
+</blockquote>
+
+<p>이항 실험의 특성</p>
+
+<ol>
+  <li>실험은  고정된 n개의 동일한 시행으로 구성된다.</li>
+  <li>각 시행의 결과는 성공, $S$ 또는 실패, $F$의 두 가지 결과 중 하나이다.</li>
+  <li>각 시행에서 에서 성공할 확률은 어떤 값 $p$와 같다.같은 시행에서 실패 확률은 $q = (1 - p).$ 이다.</li>
+  <li>각 시행은 독립이다.</li>
+  <li>관심 랜덤 변수는 Y이며, $n$개의 시행 중 관찰된 성공 횟수입니다.</li>
+</ol>
+
+<h3 id="definition-37">DEFINITION 3.7</h3>
+<blockquote>
+  <p>A random variable $Y$ is said to have a binomial distribution based on n trials with success probability p if and only if
+\(p(y)= {n\choose y}p^yq^{n−y},\qquad  y=0,1,2,...,\ n\ and\ 0≤p≤1.\)</p>
+</blockquote>
+
+<h3 id="theorem-37">THEOREM 3.7</h3>
+<blockquote>
+  <p>Let $Y$ be a binomial random variable based on $n$ trials and success probability $p$. Then
+\(μ=E(Y)=np\quad and\quad σ^2 =V(Y)=npq.\)</p>
+</blockquote>
+
+<hr />
+
+<h2 id="35-the-geometric-probability-distribution">3.5 The Geometric Probability Distribution</h2>
+
+<h3 id="definition-38">DEFINITION 3.8</h3>
+<blockquote>
+  <p>A random variable $Y$ is said to have a geometric probability distribution if and only if
+\(p(y)=q^{y−1}p,\quad y=1,2,3,...,\quad 0≤p≤1.\)</p>
+</blockquote>
+
+<h3 id="theorem-38">THEOREM 3.8</h3>
+<blockquote>
+  <p>If $Y$ is a random variable with a geometric distribution,
+\(μ=E(Y)={1\over p} \quad and \quad σ^2=V(Y)={1−p \over p^2}.\)</p>
+</blockquote>
+
+<h2 id="36-the-negative-binomial-probability-distribution">3.6 The Negative Binomial Probability Distribution</h2>
+
+<h3 id="definition-39">DEFINITION 3.9</h3>
+<blockquote>
+  <p>A random variable Y is said to have a <strong><em>negative binomial probability distribution</em></strong> if and only if
+\(p(y)= {y-1\choose r-1}p^r q^{y−r},\quad  y=r,r+1,r+2,..., 0≤p≤1.\)</p>
+</blockquote>
+
+<h3 id="theorem-39">THEOREM 3.9</h3>
+<blockquote>
+  <p>If Y is a random variable with a negative binomial distribution,
+\(μ=E(Y)= {r \over p}\quad and\quad σ^2=V(Y)= {r(1−p) \over p^2}.\)</p>
+</blockquote>]]></content><author><name>Junhwan</name></author><category term="Statistics" /><category term="MathematicalStatistics" /><category term="STAT232" /><summary type="html"><![CDATA[3 Discrete Random Variables and Their Probability Distributions]]></summary></entry><entry><title type="html">[용어정리] EDA</title><link href="http://localhost:4000/%EC%9A%A9%EC%96%B4%EC%A0%95%EB%A6%AC/EDA/" rel="alternate" type="text/html" title="[용어정리] EDA" /><published>2022-02-02T00:00:00+09:00</published><updated>2022-02-02T00:00:00+09:00</updated><id>http://localhost:4000/%EC%9A%A9%EC%96%B4%EC%A0%95%EB%A6%AC/EDA</id><content type="html" xml:base="http://localhost:4000/%EC%9A%A9%EC%96%B4%EC%A0%95%EB%A6%AC/EDA/"><![CDATA[<h1 id="exploratory-data-analysis-eda---탐색적-데이터-분석">Exploratory Data Analysis (EDA) - 탐색적 데이터 분석</h1>
+
+<p>EDA는 데이터 분석을 위하기 위해 주로 데이터 시각화(graphic)을 사용하여 dataset에 대해 직관적인으로 이해 하는 과정</p>
+
+<ol>
+  <li>Dataset에 대한 통찰력을 극대화.</li>
+  <li>기초 구조 확인</li>
+  <li>중요 변수 추출</li>
+  <li>특이치(outliers)와 이상치(anomalies)를 탐지</li>
+  <li>기초적인 가정을 시험</li>
+  <li>parsimonious models 개발</li>
+  <li>최적 인자 설정</li>
+</ol>
+
+<h2 id="목적">목적</h2>
+
+<p>dataset과 dataset의 기본 구조에 대한 통찰력을 극대화 시키는 것이다.</p>
+
+<ul>
+  <li>본격적인 데이터 분석에 들어가기 앞서 데이터의 수집을 결정할 수 있으다.</li>
+  <li>다양한 각도에서 살펴보는 과정을 통해 문제 정의 단계에서 발견하지 못한 다양한 패턴을 발견할 수 있다.</li>
+  <li>데이터 이해를 통해 적절한 통계 도구를 제시하고 추가적인 자료수집을 위한 기반이 된다.</li>
+</ul>
+
+<blockquote>
+  <p>“<em>Exploratory data analysis is an attitude , a state of flexibility, a willingness to look for those things that we believe are not there, as well as those we believe to be there</em>”</p>
+
+  <p>“ ‘탐색적 데이터 분석(EDA)’은 우리가 존재한다고 믿는 것들은 물론이고 존재하지 않는다고 믿는 것들을 발견하려는 태도, 유연성, 그리고 자발성이다. “</p>
+
+  <p>-Jhon Turkey</p>
+</blockquote>]]></content><author><name>Junhwan</name></author><category term="용어정리" /><category term="Statistics" /><summary type="html"><![CDATA[Exploratory Data Analysis (EDA) - 탐색적 데이터 분석 EDA는 데이터 분석을 위하기 위해 주로 데이터 시각화(graphic)을 사용하여 dataset에 대해 직관적인으로 이해 하는 과정 Dataset에 대한 통찰력을 극대화. 기초 구조 확인 중요 변수 추출 특이치(outliers)와 이상치(anomalies)를 탐지 기초적인 가정을 시험 parsimonious models 개발 최적 인자 설정 목적 dataset과 dataset의 기본 구조에 대한 통찰력을 극대화 시키는 것이다. 본격적인 데이터 분석에 들어가기 앞서 데이터의 수집을 결정할 수 있으다. 다양한 각도에서 살펴보는 과정을 통해 문제 정의 단계에서 발견하지 못한 다양한 패턴을 발견할 수 있다. 데이터 이해를 통해 적절한 통계 도구를 제시하고 추가적인 자료수집을 위한 기반이 된다. “Exploratory data analysis is an attitude , a state of flexibility, a willingness to look for those things that we believe are not there, as well as those we believe to be there” “ ‘탐색적 데이터 분석(EDA)’은 우리가 존재한다고 믿는 것들은 물론이고 존재하지 않는다고 믿는 것들을 발견하려는 태도, 유연성, 그리고 자발성이다. “ -Jhon Turkey]]></summary></entry></feed>
