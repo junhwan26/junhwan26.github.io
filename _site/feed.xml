@@ -1,4 +1,303 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-04-30T18:51:17+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Slow and Steady</title><subtitle>Data Science, Computer Science, Statistics, AI.</subtitle><author><name>Junhwan</name></author><entry><title type="html">[AI] Uniformed Search</title><link href="http://localhost:4000/computerscience/1-Uniformed-Search/" rel="alternate" type="text/html" title="[AI] Uniformed Search" /><published>2022-04-24T00:00:00+09:00</published><updated>2022-04-24T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/1%20Uniformed%20Search</id><content type="html" xml:base="http://localhost:4000/computerscience/1-Uniformed-Search/"><![CDATA[<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>용어 정리
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-05-01T02:49:52+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Slow and Steady</title><subtitle>Data Science, Computer Science, Statistics, AI.</subtitle><author><name>Junhwan</name></author><entry><title type="html">[AL] 1. Intro</title><link href="http://localhost:4000/computerscience/AL-1.-Intro/" rel="alternate" type="text/html" title="[AL] 1. Intro" /><published>2022-04-30T00:00:00+09:00</published><updated>2022-04-30T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/%5BAL%5D%201.%20Intro</id><content type="html" xml:base="http://localhost:4000/computerscience/AL-1.-Intro/"><![CDATA[<h2 id="algorithm을-공부해야하는-이유">Algorithm을 공부해야하는 이유</h2>
+
+<h3 id="컴퓨터-전문가가-되려고-하는-학생이라면">컴퓨터 전문가가 되려고 하는 학생이라면</h3>
+<ul>
+  <li>실용적인 이유
+    <ul>
+      <li>다양한 컴퓨팅 분야의 중요한 Algorithm의 표준적인 집합을 알아야한다.</li>
+      <li>새로운 Algorithm을 디자인하고 효율성을 분석할 수 있어야 한다.</li>
+    </ul>
+  </li>
+  <li>이론적인 이유
+    <ul>
+      <li>algorithmics은 컴퓨터 과학의 기반이다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="computing-related-학생이-아니라면">computing-related 학생이 아니라면</h3>
+<ul>
+  <li>Algorithm이 없는 컴퓨터 프로그램은 존재하지 않는다.</li>
+  <li>컴퓨터 어플리케이션이 우리의 직업적, 개인적인 삶의 거의 모든 면에서 필수불가결해지면서, Algorithm을 공부하는 것은 점점 더 많은 사람들에게 필수가 됨</li>
+</ul>
+
+<p><strong>Algorithm을 공부하는 것은 분석 기술을 기르는데 유용하다.</strong></p>
+
+<h2 id="what-is-an-algorithm">What is an algorithm</h2>
+
+<p>An algorithm is a sequence of unambiguous instructions for solving a problem, i.e., for obtaining a required output for any legitimate input in a finite amount of time.</p>
+
+<p>Algorithm은 문제를 해결하기 위한 명확한 명령의 연속이다. 즉, 제한된 시간 내에 모든 허용된 입력에 필요한 출력을 얻기 위한 것이다.</p>
+
+<h2 id="algorithm의-특징">Algorithm의 특징</h2>
+<p>The nonambiguity requirement for each step of an algorithm cannot be compromised.</p>
+
+<p>각 단계는 애매하지 않아야한다.</p>
+
+<p>The range of inputs for which an algorithm works has to be specified carefully.</p>
+
+<p>Algorithm이 작동하는 입력의 범위가 구체적으로 명시 되어야한다.</p>
+
+<p>The same algorithm can be represented in several different ways.</p>
+
+<p>같은 Algorithm은 여러 방법으로 표현될 수 있다.</p>
+
+<p>There may exist several algorithms for solving the same problem.</p>
+
+<p>같은 문제를 푸는 Algorithm은 다양하게 존재할 수 있다.</p>
+
+<p>Algorithms for the same problem can be based on very different ideas and can solve the problem with dramatically different speeds.</p>
+
+<p>같은 문제의 Algorithm은 매우 다른 아이디어에 기반될 수 있고 문제를 푸는 속도가 많이 차이날 수 있다.</p>
+
+<h2 id="algorithm의-성질">Algorithm의 성질</h2>
+<ul>
+  <li>Finiteness
+    <ul>
+      <li>terminates after a finite number of steps</li>
+      <li>유한한 개수의 명령 후에 끝이 나야한다.</li>
+    </ul>
+  </li>
+  <li>Definiteness
+    <ul>
+      <li>rigorously and unambiguously specified</li>
+      <li>엄격해야하고 중의적이지 않아야한다.</li>
+    </ul>
+  </li>
+  <li>Clearly specified input
+    <ul>
+      <li>valid inputs are clearly specified</li>
+      <li>입력이 명확하게 명시되어야한다.</li>
+    </ul>
+  </li>
+  <li>Clearly specified/expected output
+    <ul>
+      <li>can be proved to produce the correct output given a valid input</li>
+      <li>유효한 입력이 주어졌을 때 정확한 출력을 만들어 냈는지 증명할 수 있어야한다.</li>
+    </ul>
+  </li>
+  <li>Effectiveness
+    <ul>
+      <li>steps are sufficiently simple and basic</li>
+      <li>각 단계가 충분히 간단하고 기본적이어야한다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="최대공약수-구하기">최대공약수 구하기</h2>
+<h3 id="유클리드-algorithm">유클리드 Algorithm</h3>
+<p><strong>Eclid’s algorithm</strong> for computing <code class="language-plaintext highlighter-rouge">gcd(m,n)
+**Step 1** 만약 </code>n=0<code class="language-plaintext highlighter-rouge"> 이면 정답으로 </code>m<code class="language-plaintext highlighter-rouge">을 리턴하고 멈춘다.; 아니라면 **Step 2**를 진행한다.
+**Step 2** </code>m<code class="language-plaintext highlighter-rouge">을 </code>n<code class="language-plaintext highlighter-rouge">으로 나눈 나머지를 </code>r<code class="language-plaintext highlighter-rouge">에 할당한다.
+**Step 3** </code>n<code class="language-plaintext highlighter-rouge">을 </code>m<code class="language-plaintext highlighter-rouge">에 할당하고 </code>r<code class="language-plaintext highlighter-rouge">을 </code>n`에 할당한 뒤 <strong>Step 1</strong>로 돌아간다.</p>
+
+<p>pseudo code</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//Inputs: Two nonegative, not-both-zero integers m and n
+//OUtput: Greatest common divisor of m and n
+Euclid(m,n)
+  while n!=0 do
+    r = m mod n
+    m = n
+    n = r
+  return m
+</code></pre></div></div>
+
+<h3 id="consecutive-integer-checking-algorithm">Consecutive integer checking algorithm</h3>
+<p><strong>Step 1</strong> <code class="language-plaintext highlighter-rouge">t</code>에 <code class="language-plaintext highlighter-rouge">min(m.n)</code>을 할당한다 
+<strong>Step 2</strong> <code class="language-plaintext highlighter-rouge">m</code>을 <code class="language-plaintext highlighter-rouge">t</code>로 나누고 나머지가 <code class="language-plaintext highlighter-rouge">0</code>이라면 <strong>Step 3</strong>로 가고 아니면 <strong>Step 4</strong>로 간다.
+<strong>Step 3</strong> <code class="language-plaintext highlighter-rouge">n</code>을 <code class="language-plaintext highlighter-rouge">t</code>로 나누고 나머지가 <code class="language-plaintext highlighter-rouge">0</code>이라면 <code class="language-plaintext highlighter-rouge">t</code>를 정답으로 리턴하고 멈춘다. 아니라면 <strong>Step 4</strong>로 간다.
+<strong>Step 4</strong> <code class="language-plaintext highlighter-rouge">t</code>를 1 감소시키고 <strong>Step 2</strong>로 간다.</p>
+
+<p>이 Algorithm은 입력값이 0일 때 제대로 작동하지 않는다.</p>
+
+<h3 id="소인수-분해">소인수 분해</h3>
+<p><strong>Step 1</strong> <code class="language-plaintext highlighter-rouge">m</code>을 소인수를 찾아라
+<strong>Step 2</strong> <code class="language-plaintext highlighter-rouge">n</code>을 소인수를 찾아라
+<strong>Step 3</strong> <strong>Step 1</strong>과 <strong>Step 2</strong>에서 공통으로 나오는 소인수를 찾아라
+<strong>Step 4</strong> 모두 곱해라</p>
+
+<p>소인수 분해를 하는 방법이 unambiguously하게 정의되어 있지 않아 좋은 Algorithm 기술방법이 아니다.</p>
+
+<h3 id="understanding-the-problem">Understanding the problem</h3>
+<ul>
+  <li>Algorithm을 디자인하기 전 첫번째로 해야하는 것은 주어진 문제를 충분히 이해하는 것이다.
+    <ul>
+      <li>문제 설명을 조심스럽게 읽는다.</li>
+      <li>문제에 대해 조금이라도 의문이 있다면 질문한다.</li>
+      <li>손으로 몇가지 작은 예시들을 풀어본다</li>
+      <li>특이 케이스를 생각해본다.</li>
+      <li>필요하다면 다시 질문해본다.</li>
+    </ul>
+  </li>
+  <li>컴퓨터 응용프로그램에서 자주 발생하는 몇가지 문제들이 있다.
+    <ul>
+      <li>이런 문제라면 이미 알려진 Algorithm을 사용한다.</li>
+      <li>사용 가능한 Algorithm을 찾지 못하면 직접 디자인한다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>정확한 Algorithm은 대부분 잘 작동하는 것이 아닌 허용된 모든 입력에 대해 제대로 작동해야한다.
+이 단계를 건너 뛴다면 불필요한 작업을 다시해야할 위험이 있다.</p>
+  </li>
+  <li>디바이스의 능력을 확인해야한다.
+    <ul>
+      <li>많은 상황에서 작업이 느려지는 것에 대해 걱정하지 않아도 된다.</li>
+      <li>하지만 복잡한 문제이거나 거대한 양의 데이터를 작업해야하거나 시간이 큰 영향을 미치는 상황에선 이것은 중요한 문제이다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="choosing-between-exact-and-approximate-problem-solving">Choosing between Exact and Approximate Problem Solving</h3>
+<p>Approximation algorithm을 선택하는 경우</p>
+<ol>
+  <li>대부분의 경우에서 정확하게 해결할 수 없는 중요한 문제들이 있다.
+Ex) 제곱근 구하기, 비선형 방정식 해결 및 유한 적분 계산</li>
+  <li>문제를 정확하게 해결하기 위해 사용할 수 있는 Algorithm은 문제의 본질적인 복잡성 때문에 굉장히 느릴 수 있다.
+    <ul>
+      <li>이것은 특히, 매우 많은 수의 선택과 관련된 많은 문제들에서 발생한다.</li>
+    </ul>
+  </li>
+  <li>근사 Algorithm은 문제를 정확하게 해결하는 Algorithm보다 정교한 Algorithm의 일부가 될 수 있다.</li>
+</ol>
+
+<h3 id="algorithm-실계-전략">Algorithm 실계 전략</h3>
+<p>Algorithm 디자인 기술(전략)은 문제를 다양한 컴퓨팅 분야의 다양한 문제에 적용할 수 있는 Algorithm 방식으로 해결하기 위한 일반적인 접근이다.</p>
+
+<h3 id="algorithm과-자료-구조-디자인">Algorithm과 자료 구조 디자인</h3>
+<p>Algorithm 디자인 기술은 Algorithm 문제 해결에 대한 강력한 일반 접근 방식을 제공하지만,</p>
+<ul>
+  <li>특정 문제에 대한 Algorithm을 디자인하는 것은 여전히 ​​어려운 작업일 수 있다.</li>
+  <li>일부 디자인 기술은 해당 문제에 단순히 적용할 수 없다.</li>
+  <li>때로는 여러 기술을 결합해야 하며 알려진 디자인 기술의 적용으로 정확히 지적하기 어려운 Algorithm이 있다.</li>
+</ul>
+
+<p>Algorithm이 수행하는 작업에 적합한 데이터 구조를 선택하는 데 세심한 주의를 기울여야 한다.</p>
+<ul>
+  <li>Algorithm + 데이터 구조 = 프로그램 [Wir76]</li>
+</ul>
+
+<h3 id="algorithm을-표현하는-방법">Algorithm을 표현하는 방법</h3>
+<ul>
+  <li>natural language (자연어)</li>
+  <li>Pesudocode
+    <ul>
+      <li>자연어와 프로그래밍 언어를 섞은 형태</li>
+    </ul>
+  </li>
+  <li>Flowchart
+    <ul>
+      <li>복잡한 Algorithm엔 사용하기 어려워 잘 쓰이지 않는다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="algorithm-correctness-증명">Algorithm Correctness 증명</h3>
+<p>모든 허용된 입력에 대하여 제한된 시간안에 필요한 결과를 얻을 수 있는지 증명해야한다.
+이 증명은 쉬운 경우도 있고 복잡한 경우도 있다.</p>
+
+<h3 id="algorithm-분석">Algorithm 분석</h3>
+<ul>
+  <li>Efficiency
+    <ul>
+      <li>time : 얼마나 빠른지</li>
+      <li>space : 메모리를 얼마나 사용하는지</li>
+    </ul>
+  </li>
+  <li>Simplicity
+    <ul>
+      <li>더욱 간단한 Algorithm은 프로그램하기와 이해하기가 쉽고 가끔 더 효율적이다.</li>
+    </ul>
+  </li>
+  <li>Generality
+위의 것들을 만족하지 않으면 다시 디자인해야한다.</li>
+</ul>
+
+<h3 id="coding-an-algorithm">Coding an Algorithm</h3>
+<p>대부분의 알고리즘의 궁극적인 목적은 컴퓨터 프로그램으로 구현되는 것이다.
+알고리즘에서 프로그램으로 잘못 또는 매우 비효율적으로 변환될 위험성이 있다.
+실질적인 문제로서, 프로그램의 유효성은 여전히 테스트를 통해 확립된다.
+알고리즘을 구현할 때마다 프로그램을 철저히 테스트하고 디버깅해야한다.</p>
+
+<p>일반적으로, 좋은 알고리즘은 반복적인 노력과 재작업의 결과이다.</p>]]></content><author><name>Junhwan</name></author><category term="ComputerScience" /><category term="algorithm" /><category term="CSE214" /><summary type="html"><![CDATA[Algorithm을 공부해야하는 이유]]></summary></entry><entry><title type="html">[AL] 1. Intro</title><link href="http://localhost:4000/computerscience/AL-2-%EC%B5%9C%EB%8C%80%EA%B3%B5%EC%95%BD%EC%88%98-%EA%B5%AC%ED%95%98%EA%B8%B0/" rel="alternate" type="text/html" title="[AL] 1. Intro" /><published>2022-04-30T00:00:00+09:00</published><updated>2022-04-30T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/%5BAL%5D%202%20%EC%B5%9C%EB%8C%80%EA%B3%B5%EC%95%BD%EC%88%98%20%EA%B5%AC%ED%95%98%EA%B8%B0</id><content type="html" xml:base="http://localhost:4000/computerscience/AL-2-%EC%B5%9C%EB%8C%80%EA%B3%B5%EC%95%BD%EC%88%98-%EA%B5%AC%ED%95%98%EA%B8%B0/"><![CDATA[<h2 id="알고리즘을-공부해야하는-이유">알고리즘을 공부해야하는 이유</h2>
+
+<h3 id="컴퓨터-전문가가-되려고-하는-학생이라면">컴퓨터 전문가가 되려고 하는 학생이라면</h3>
+<ul>
+  <li>실용적인 이유
+    <ul>
+      <li>다양한 컴퓨팅 분야의 중요한 알고리즘의 표준적인 집합을 알아야한다.</li>
+      <li>새로운 알고리즘을 디자인하고 효율성을 분석할 수 있어야 한다.</li>
+    </ul>
+  </li>
+  <li>이론적인 이유
+    <ul>
+      <li>algorithmics은 컴퓨터 과학의 기반이다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="computing-related-학생이-아니라면">computing-related 학생이 아니라면</h3>
+<ul>
+  <li>알고리즘이 없는 컴퓨터 프로그램은 존재하지 않는다.</li>
+  <li>컴퓨터 어플리케이션이 우리의 직업적, 개인적인 삶의 거의 모든 면에서 필수불가결해지면서, 알고리즘을 공부하는 것은 점점 더 많은 사람들에게 필수가 됨</li>
+</ul>
+
+<p><strong>알고리즘을 공부하는 것은 분석 기술을 기르는데 유용하다.</strong></p>
+
+<h2 id="what-is-an-algorithm">What is an algorithm</h2>
+
+<p>An algorithm is a sequence of unambiguous instructions for solving a problem, i.e., for obtaining a required output for any legitimate input in a finite amount of time.</p>
+
+<p>알고리즘은 문제를 해결하기 위한 명확한 명령의 연속이다. 즉, 제한된 시간 내에 모든 허용된 입력에 필요한 출력을 얻기 위한 것이다.</p>
+
+<h2 id="알고리즘의-특징">알고리즘의 특징</h2>
+<p>The nonambiguity requirement for each step of an algorithm cannot be compromised.
+각 단계는 애매하지 않아야한다.</p>
+
+<p>The range of inputs for which an algorithm works has to be specified carefully.
+알고리즘이 작동하는 입력의 범위가 구체적으로 명시 되어야한다.</p>
+
+<p>The same algorithm can be represented in several different ways.
+같은 알고리즘은 여러 방법으로 표현될 수 있다.</p>
+
+<p>There may exist several algorithms for solving the same problem.
+같은 문제를 푸는 알고리즘은 다양하게 존재할 수 있다.</p>
+
+<p>Algorithms for the same problem can be based on very different ideas and can solve the problem with dramatically different speeds.
+같은 문제의 알고리즘은 매우 다른 아이디어에 기반될 수 있고 문제를 푸는 속도가 많이 차이날 수 있다.</p>
+
+<h2 id="알고리즘의-성질">알고리즘의 성질</h2>
+<ul>
+  <li>Finiteness
+    <ul>
+      <li>terminates after a finite number of steps</li>
+      <li>유한한 개수의 명령 후에 끝이 나야한다.</li>
+    </ul>
+  </li>
+  <li>Definiteness
+    <ul>
+      <li>rigorously and unambiguously specified</li>
+      <li>엄격해야하고 중의적이지 않아야한다.</li>
+    </ul>
+  </li>
+  <li>Clearly specified input
+    <ul>
+      <li>valid inputs are clearly specified</li>
+      <li>입력이 명확하게 명시되어야한다.</li>
+    </ul>
+  </li>
+  <li>Clearly specified/expected output
+    <ul>
+      <li>can be proved to produce the correct output given a valid input</li>
+      <li>유효한 입력이 주어졌을 때 정확한 출력을 만들어 냈는지 증명할 수 있어야한다.</li>
+    </ul>
+  </li>
+  <li>Effectiveness
+    <ul>
+      <li>steps are sufficiently simple and basic</li>
+      <li>각 단계가 충분히 간단하고 기본적이어야한다.</li>
+    </ul>
+  </li>
+</ul>]]></content><author><name>Junhwan</name></author><category term="ComputerScience" /><category term="algorithm" /><category term="CSE214" /><summary type="html"><![CDATA[알고리즘을 공부해야하는 이유]]></summary></entry><entry><title type="html">[AI] Uniformed Search</title><link href="http://localhost:4000/computerscience/1-Uniformed-Search/" rel="alternate" type="text/html" title="[AI] Uniformed Search" /><published>2022-04-24T00:00:00+09:00</published><updated>2022-04-24T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/1%20Uniformed%20Search</id><content type="html" xml:base="http://localhost:4000/computerscience/1-Uniformed-Search/"><![CDATA[<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>용어 정리
 strategy : 전략
 complete : solution이 하나 존재 할 때 그 solution을 찾는 것이 보장되어 있는가?
 optimal : 최단 경로(the least cost path)를 찾는 것이 보장되어 있는가?   
@@ -113,7 +412,7 @@ optimal : 최단 경로(the least cost path)를 찾는 것이 보장되어 있�
   </li>
   <li>Explores options in every “direction”</li>
   <li>No information about goal location</li>
-</ul>]]></content><author><name>Junhwan</name></author><category term="ComputerScience" /><category term="AI" /><category term="COSE361" /><summary type="html"><![CDATA[용어 정리 strategy : 전략 complete : solution이 하나 존재 할 때 그 solution을 찾는 것이 보장되어 있는가? optimal : 최단 경로(the least cost path)를 찾는 것이 보장되어 있는가?]]></summary></entry><entry><title type="html">[AL] 1. Intro</title><link href="http://localhost:4000/computerscience/Algorithm/" rel="alternate" type="text/html" title="[AL] 1. Intro" /><published>2022-04-24T00:00:00+09:00</published><updated>2022-04-24T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/Algorithm</id><content type="html" xml:base="http://localhost:4000/computerscience/Algorithm/"><![CDATA[<p>fsfd</p>]]></content><author><name>Junhwan</name></author><category term="ComputerScience" /><category term="algorithm" /><category term="CSE214" /><summary type="html"><![CDATA[고려대학교 이도길 교수님의 알고리즘(CSE214) 강의를 정리한 내용입니다.]]></summary></entry><entry><title type="html">[수리통계학] Multivariate Probability Distributions</title><link href="http://localhost:4000/statistics/5-Multivariate-Probability-Distributions/" rel="alternate" type="text/html" title="[수리통계학] Multivariate Probability Distributions" /><published>2022-03-07T00:00:00+09:00</published><updated>2022-03-07T00:00:00+09:00</updated><id>http://localhost:4000/statistics/5%20Multivariate%20Probability%20Distributions</id><content type="html" xml:base="http://localhost:4000/statistics/5-Multivariate-Probability-Distributions/"><![CDATA[<h1 id="5-multivariate-probability-distributions">5 Multivariate Probability Distributions</h1>
+</ul>]]></content><author><name>Junhwan</name></author><category term="ComputerScience" /><category term="AI" /><category term="COSE361" /><summary type="html"><![CDATA[용어 정리 strategy : 전략 complete : solution이 하나 존재 할 때 그 solution을 찾는 것이 보장되어 있는가? optimal : 최단 경로(the least cost path)를 찾는 것이 보장되어 있는가?]]></summary></entry><entry><title type="html">[수리통계학] Multivariate Probability Distributions</title><link href="http://localhost:4000/statistics/5-Multivariate-Probability-Distributions/" rel="alternate" type="text/html" title="[수리통계학] Multivariate Probability Distributions" /><published>2022-03-07T00:00:00+09:00</published><updated>2022-03-07T00:00:00+09:00</updated><id>http://localhost:4000/statistics/5%20Multivariate%20Probability%20Distributions</id><content type="html" xml:base="http://localhost:4000/statistics/5-Multivariate-Probability-Distributions/"><![CDATA[<h1 id="5-multivariate-probability-distributions">5 Multivariate Probability Distributions</h1>
 
 <hr />
 

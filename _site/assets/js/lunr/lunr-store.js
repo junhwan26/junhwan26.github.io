@@ -30,8 +30,14 @@ var store = [{
         "teaser": null
       },{
         "title": "[AL] 1. Intro",
-        "excerpt":"fsfd  ","categories": ["ComputerScience"],
+        "excerpt":"Algorithm을 공부해야하는 이유 컴퓨터 전문가가 되려고 하는 학생이라면 실용적인 이유 다양한 컴퓨팅 분야의 중요한 Algorithm의 표준적인 집합을 알아야한다. 새로운 Algorithm을 디자인하고 효율성을 분석할 수 있어야 한다. 이론적인 이유 algorithmics은 컴퓨터 과학의 기반이다. computing-related 학생이 아니라면 Algorithm이 없는 컴퓨터 프로그램은 존재하지 않는다. 컴퓨터 어플리케이션이 우리의 직업적, 개인적인 삶의 거의 모든 면에서...","categories": ["ComputerScience"],
         "tags": ["algorithm","CSE214"],
-        "url": "/computerscience/Algorithm/",
+        "url": "/computerscience/AL-1.-Intro/",
+        "teaser": null
+      },{
+        "title": "[AL] 1. Intro",
+        "excerpt":"알고리즘을 공부해야하는 이유 컴퓨터 전문가가 되려고 하는 학생이라면 실용적인 이유 다양한 컴퓨팅 분야의 중요한 알고리즘의 표준적인 집합을 알아야한다. 새로운 알고리즘을 디자인하고 효율성을 분석할 수 있어야 한다. 이론적인 이유 algorithmics은 컴퓨터 과학의 기반이다. computing-related 학생이 아니라면 알고리즘이 없는 컴퓨터 프로그램은 존재하지 않는다. 컴퓨터 어플리케이션이 우리의 직업적, 개인적인 삶의 거의 모든 면에서...","categories": ["ComputerScience"],
+        "tags": ["algorithm","CSE214"],
+        "url": "/computerscience/AL-2-%EC%B5%9C%EB%8C%80%EA%B3%B5%EC%95%BD%EC%88%98-%EA%B5%AC%ED%95%98%EA%B8%B0/",
         "teaser": null
       }]
