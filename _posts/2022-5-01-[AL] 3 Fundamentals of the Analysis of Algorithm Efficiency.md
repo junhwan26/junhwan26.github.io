@@ -75,9 +75,8 @@ Algorithm SequentialSearch(A[0..n-1], K)
 ### Asymptotic order of growth
 #### $O(g(n))$
 $g(n)$보다 작거나 같은 증가율 가진 함수들의 집합
-<p>
-	<img src="/assets/img/%5BAL%5D3/bigO.png" alt="kingdom" width="70%" height="70%"/>
-</p>
+![hanoi](/assets/img/%5BAL%5D3/bigO.png){: width="70%" height="70%"}
+
 
 
 $$t(n) \in O(g(n))$$
@@ -88,18 +87,16 @@ $$^\exists c>0 \quad s.t. \quad t(n) \le cg(n) \ for \ all \ n \ge n_0$$
 #### $\Omega(g(n))$
 $g(n)$보다 크거나 같은 증가율 합수들의 집합
 
-<p>
-	<img src="/assets/img/%5BAL%5D3/bigOmega.png" alt="kingdom" width="70%" height="70%"/>
-</p>
+![hanoi](/assets/img/%5BAL%5D3/bigOmega.png){: width="70%" height="70%"}
+
 $$t(n) \in \Omega(g(n))$$
 
 $$^\exists c >0 \quad s.t. \quad t(n) \ge cg(n) \quad for \ \  all \ \  n \ge n_0$$
 
 
 #### $\Theta(g(n))$
-<p>
-	<img src="/assets/img/%5BAL%5D3/bigTheta.png" alt="kingdom" width="70%" height="70%"/>
-</p>
+![hanoi](/assets/img/%5BAL%5D3/bigTheta.png){: width="70%" height="70%"}
+
 
 $g(n)$과 같은 증가율을 가진 함수들의 집합
 
