@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-05-02T04:00:20+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Slow and Steady</title><subtitle>Data Science, Computer Science, Statistics, AI.</subtitle><author><name>Junhwan</name></author><entry><title type="html">[AL] 3. Fundamentals of the Analysis of Algorithm Efficiency</title><link href="http://localhost:4000/computerscience/AL-3-Fundamentals-of-the-Analysis-of-Algorithm-Efficiency/" rel="alternate" type="text/html" title="[AL] 3. Fundamentals of the Analysis of Algorithm Efficiency" /><published>2022-05-01T00:00:00+09:00</published><updated>2022-05-01T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/%5BAL%5D%203%20Fundamentals%20of%20the%20Analysis%20of%20Algorithm%20Efficiency</id><content type="html" xml:base="http://localhost:4000/computerscience/AL-3-Fundamentals-of-the-Analysis-of-Algorithm-Efficiency/"><![CDATA[<h2 id="efficiency">Efficiency</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-05-02T04:04:34+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Slow and Steady</title><subtitle>Data Science, Computer Science, Statistics, AI.</subtitle><author><name>Junhwan</name></author><entry><title type="html">[AL] 3. Fundamentals of the Analysis of Algorithm Efficiency</title><link href="http://localhost:4000/computerscience/AL-3-Fundamentals-of-the-Analysis-of-Algorithm-Efficiency/" rel="alternate" type="text/html" title="[AL] 3. Fundamentals of the Analysis of Algorithm Efficiency" /><published>2022-05-01T00:00:00+09:00</published><updated>2022-05-01T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/%5BAL%5D%203%20Fundamentals%20of%20the%20Analysis%20of%20Algorithm%20Efficiency</id><content type="html" xml:base="http://localhost:4000/computerscience/AL-3-Fundamentals-of-the-Analysis-of-Algorithm-Efficiency/"><![CDATA[<h2 id="efficiency">Efficiency</h2>
 <ul>
   <li>시간 효율성 (시간 복잡도) : 문제에서 알고리즘이 얼마나 빨리 실행되를 의미한다.</li>
   <li>공간 효율성 (공간 복잡도) : 입출력에 필요한 공간 외에 알고리즘에 필요한 메모리 단위의 양을 의미한다.
@@ -89,10 +89,8 @@
 
 <h3 id="asymptotic-order-of-growth">Asymptotic order of growth</h3>
 <h4 id="ogn">$O(g(n))$</h4>
-<p>$g(n)$보다 작거나 같은 증가율 가진 함수들의 집합</p>
-<p>
-	<img src="/assets/img/%5BAL%5D3/bigO.png" alt="kingdom" width="70%" height="70%" />
-</p>
+<p>$g(n)$보다 작거나 같은 증가율 가진 함수들의 집합
+<img src="/assets/img/%5BAL%5D3/bigO.png" alt="bigO" width="70%" height="70%" /></p>
 
 \[t(n) \in O(g(n))\]
 
@@ -101,17 +99,14 @@
 <h4 id="omegagn">$\Omega(g(n))$</h4>
 <p>$g(n)$보다 크거나 같은 증가율 합수들의 집합</p>
 
-<p>
-	<img src="/assets/img/%5BAL%5D3/bigOmega.png" alt="kingdom" width="70%" height="70%" />
-</p>
-<p>\(t(n) \in \Omega(g(n))\)</p>
+<p><img src="/assets/img/%5BAL%5D3/bigOmega.png" alt="bigOmega" width="70%" height="70%" /></p>
+
+\[t(n) \in \Omega(g(n))\]
 
 \[^\exists c &gt;0 \quad s.t. \quad t(n) \ge cg(n) \quad for \ \  all \ \  n \ge n_0\]
 
 <h4 id="thetagn">$\Theta(g(n))$</h4>
-<p>
-	<img src="/assets/img/%5BAL%5D3/bigTheta.png" alt="kingdom" width="70%" height="70%" />
-</p>
+<p><img src="/assets/img/%5BAL%5D3/bigTheta.png" alt="bigTheta" width="70%" height="70%" /></p>
 
 <p>$g(n)$과 같은 증가율을 가진 함수들의 집합</p>
 
