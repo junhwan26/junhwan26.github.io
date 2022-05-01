@@ -1,4 +1,435 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-05-01T04:37:29+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Slow and Steady</title><subtitle>Data Science, Computer Science, Statistics, AI.</subtitle><author><name>Junhwan</name></author><entry><title type="html">[AL] 1. Intro</title><link href="http://localhost:4000/computerscience/AL-1.-Intro/" rel="alternate" type="text/html" title="[AL] 1. Intro" /><published>2022-04-30T00:00:00+09:00</published><updated>2022-04-30T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/%5BAL%5D%201.%20Intro</id><content type="html" xml:base="http://localhost:4000/computerscience/AL-1.-Intro/"><![CDATA[<h2 id="algorithm을-공부해야하는-이유">Algorithm을 공부해야하는 이유</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-05-02T04:00:20+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Slow and Steady</title><subtitle>Data Science, Computer Science, Statistics, AI.</subtitle><author><name>Junhwan</name></author><entry><title type="html">[AL] 3. Fundamentals of the Analysis of Algorithm Efficiency</title><link href="http://localhost:4000/computerscience/AL-3-Fundamentals-of-the-Analysis-of-Algorithm-Efficiency/" rel="alternate" type="text/html" title="[AL] 3. Fundamentals of the Analysis of Algorithm Efficiency" /><published>2022-05-01T00:00:00+09:00</published><updated>2022-05-01T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/%5BAL%5D%203%20Fundamentals%20of%20the%20Analysis%20of%20Algorithm%20Efficiency</id><content type="html" xml:base="http://localhost:4000/computerscience/AL-3-Fundamentals-of-the-Analysis-of-Algorithm-Efficiency/"><![CDATA[<h2 id="efficiency">Efficiency</h2>
+<ul>
+  <li>시간 효율성 (시간 복잡도) : 문제에서 알고리즘이 얼마나 빨리 실행되를 의미한다.</li>
+  <li>공간 효율성 (공간 복잡도) : 입출력에 필요한 공간 외에 알고리즘에 필요한 메모리 단위의 양을 의미한다.
+현재 일반적으로 알고리즘에 필요한 추가 공간의 양은 크게 중요하지 않다. 대부분의 문제에서 공간보다 속도에서 훨씬 더 눈부신 발전을 이룰 수 있다.</li>
+</ul>
+
+<h2 id="time-efficiency">Time efficiency</h2>
+
+<h3 id="measuring-an-algorithms-running-time">Measuring an algorithm’s running time</h3>
+<ul>
+  <li>프로그램의 실행시간 측정
+    <ul>
+      <li>특정 컴퓨터의 속도에 의존</li>
+      <li>알고리즘을 구현하는 프로그램의 성능과 기계 코드를 생성하는 데 사용되는 컴파일러의 성능에 의존된다.</li>
+      <li>프로그램의 실제 실행 시간을 측정하는 것은 어렵다.</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">basic operation</code>이 실행되는 횟수를 세는 방법
+    <ul>
+      <li>알고리즘의 <code class="language-plaintext highlighter-rouge">basic operation</code>을 확인하고 이것이 실행되는 횟수를 계산한다.</li>
+      <li><code class="language-plaintext highlighter-rouge">Basic operation</code> : 총 실행 시간에 가장 많이 기여하는 작업 (일반적으로 일고리즘의 가장 안쪽 루프에서 가장 시간이 많이 걸리는 작업)
+        <ul>
+          <li>Example
+            <ul>
+              <li>정렬 알고리즘에서의 <code class="language-plaintext highlighter-rouge">key comparision</code></li>
+              <li>수학적 문제에서의 사칙연산</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="tn">$T(n)$</h3>
+
+<p>$n$ : input size, $T(n)$ : running time,  $c_{op}$ : execution time for basic operation, $C(n)$ : Number of times basic operation is executed
+\(T(n) \approx c_{op}C(n)\)</p>
+
+<h3 id="efficiency-on-particular-input">Efficiency on particular input</h3>
+<ul>
+  <li>특정 입력에 따라 효율성이 달라지는 알고리즘이 있다.
+    <ul>
+      <li>Sequencial search</li>
+    </ul>
+  </li>
+  <li>The worst-case efficiency $C_{worst}(n)$
+    <ul>
+      <li>크기가 <code class="language-plaintext highlighter-rouge">n</code>인 모든 입력 중 가장 느리게 실행회는 worst-case의 efficiency.</li>
+      <li>크기가 <code class="language-plaintext highlighter-rouge">n</code>인 입력에 대해 실행시간이 $C_{worst}(n)$를 초과하지 않음을 보장한다.</li>
+    </ul>
+  </li>
+  <li>The best-case efficiency $C_{best}(n)$
+    <ul>
+      <li>크기가 <code class="language-plaintext highlighter-rouge">n</code>인 모든 입력 중 가장 빠르게 실행되는 best-case의 efficiency.</li>
+      <li>best-case efficiency에 대한 분석은 worst-case efficiency에 대한 분석만큼 중요하진 않지만 완전히 쓸모 없는 것은 아니다.</li>
+    </ul>
+  </li>
+  <li>The average-case efficiency $C_{avg}(n)$
+    <ul>
+      <li>average-case efficiency는 best-case 및 worst-case의 efficiency 조사보다 상당히 어렵다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="sequencial-search">Sequencial search</h4>
+<p>Pseudo code</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Algorithm SequentialSearch(A[0..n-1], K)
+    i &lt;- 0
+        while i&lt;n and A[i]!=K do
+            i &lt;- i+1
+    if i &lt; n return i
+    else return -1
+
+</code></pre></div></div>
+
+<ul>
+  <li>$C_{worst}(n) = n$</li>
+  <li>$C_{best}(n) = 1$</li>
+  <li>$C_{avg}(n)$
+    <ul>
+      <li>$\sum_{i=1}^{n}({p \over n}i)+n(1-p) =  {p(n+1) \over 2}+n(1-p)$</li>
+      <li>if $p=1$, $C_{avg}(n) = {n+1 \over 2}$</li>
+      <li>if $p=0$, $C_{avg}(n) = n$</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="asymptotic-order-of-growth">Asymptotic order of growth</h3>
+<h4 id="ogn">$O(g(n))$</h4>
+<p>$g(n)$보다 작거나 같은 증가율 가진 함수들의 집합</p>
+<p>
+	<img src="/assets/img/%5BAL%5D3/bigO.png" alt="kingdom" width="70%" height="70%" />
+</p>
+
+\[t(n) \in O(g(n))\]
+
+\[^\exists c&gt;0 \quad s.t. \quad t(n) \le cg(n) \ for \ all \ n \ge n_0\]
+
+<h4 id="omegagn">$\Omega(g(n))$</h4>
+<p>$g(n)$보다 크거나 같은 증가율 합수들의 집합</p>
+
+<p>
+	<img src="/assets/img/%5BAL%5D3/bigOmega.png" alt="kingdom" width="70%" height="70%" />
+</p>
+<p>\(t(n) \in \Omega(g(n))\)</p>
+
+\[^\exists c &gt;0 \quad s.t. \quad t(n) \ge cg(n) \quad for \ \  all \ \  n \ge n_0\]
+
+<h4 id="thetagn">$\Theta(g(n))$</h4>
+<p>
+	<img src="/assets/img/%5BAL%5D3/bigTheta.png" alt="kingdom" width="70%" height="70%" />
+</p>
+
+<p>$g(n)$과 같은 증가율을 가진 함수들의 집합</p>
+
+\[t(n) \in \Theta(g(n))\]
+
+\[^\exists c_1, \ c_2&gt;0 \quad s.t. \quad  c_1g(n) \le t(n) \le c_2g(n) \quad for \ \  all \ \  n \ge n_0\]
+
+<h4 id="using-limits-for-comparing-orders-of-grouth">Using limits for comparing orders of grouth</h4>
+
+\[\lim_{n\rightarrow \infty}=\begin{cases}0\quad implies\ that\ t(n)\ has \ a\ smaller\ order\ of\ growth\ than\ g(n)\\c \quad implies\ that\ t(n)\ has \ the\ same\ order\ of\ growth\ as\ g(n) \\\infty \quad implies\ that\ t(n)\ has \ a\ larger\ order\ of\ growth\ as\ g(n) \end{cases}\]
+
+<ul>
+  <li>첫번째 두 경우는 $t(n) \in O(g(n))$을 의미한다</li>
+  <li>마지막 두 경우는  $t(n) \in \Omega(g(n))$을 의미한다</li>
+  <li>두번째 경우는  $t(n) \in \Theta(g(n))$을 의미한다</li>
+</ul>
+
+<h3 id="nonrecursive-algorithms">Nonrecursive algorithms</h3>
+
+<h4 id="example-1-maximum-element">Example 1: Maximum element</h4>
+<ul>
+  <li>Pseudo code
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ALGORITHM MaxElement(A[0...n-1])
+      maxval &lt;- A[0]
+      for i &lt;- 1 to n-1 do
+          maxval &lt;- A[i]
+      return maxval
+</code></pre></div>    </div>
+  </li>
+  <li>Input size : the numver of elements in the array, n</li>
+  <li>Basic operation : comparison</li>
+  <li>
+\[C(n) = \sum^{n-1}_{i=1}1=n-1\in\Theta(n)\]
+  </li>
+</ul>
+
+<h4 id="example-2-element-uniqueness-problem">Example 2: Element uniqueness problem</h4>
+<ul>
+  <li>Pseudo code
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ALGORITHM UniqueElements(A[0...n-1])
+      for i &lt;- 0 to n-2 do
+          for j &lt;- i+1 to n-1 do
+              if A[i] = A[j] return false
+      return true
+</code></pre></div>    </div>
+  </li>
+  <li>Input size : the numver of elements in the array, n</li>
+  <li>Basic operation : comparison</li>
+  <li>The worst cases:
+    <ul>
+      <li>배열에 같은 원소가 없는 경우</li>
+      <li>마지막 두 원소가 같은 경우
+\(C_{worst}(n) = \sum^{n-2}_{i=0}\sum_{j=i+1}^{n-1}1=\sum^{n-2}_{i=0}(n-i-1)={n(n-1)\over2}\approx{1\over2}n^2\in\Theta(n^2)\)</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="example-3-matrix-multiplication">Example 3: Matrix multiplication</h4>
+<p align="center">
+	<img src="/assets/img/%5BAL%5D3/matrix.png" alt="kingdom" width="70%" height="70%" />
+</p>
+<ul>
+  <li>Pseudo code
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ALGORITHM MatrixMultiblication(A[0...n-1])
+      for i &lt;- 0 to n-1 do
+          for j &lt;- 0 to n-1 do
+              C[i,j] &lt;- 0.0
+              for k &lt;- 0 to n-1 do
+                  C[i,j] &lt;- C[i,j] + A[i,k]*B[k,j]
+      return C
+</code></pre></div>    </div>
+  </li>
+  <li>Input size : the numver of elements in the array, n</li>
+  <li>Basic operation : multiplication and addition</li>
+</ul>
+
+<center>$$M(n) = \sum^{n-1}_{i=0}\sum^{n-1}_{j=0}\sum^{n-1}_{k=0}= \sum^{n-1}_{i=0}\sum^{n-1}_{j=0}n=\sum^{n-1}_{i=0}n^2=n^3$$
+$$T(n) \approx c_mM(n)+c_aM(n)=(c_m+c_a)n^3$$</center>
+
+<h4 id="example-4-counting-binary-digits">Example 4: Counting binary digits</h4>
+<ul>
+  <li>Pseudo code
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ALGORITHM Binary(n)
+      count &lt;- 1
+      while n&gt;1 do
+          count &lt;- count+1
+          n &lt;- ⌊n/2⌋
+      return count
+</code></pre></div>    </div>
+  </li>
+  <li>Basic operation : comparison</li>
+  <li>The total number of comparison : $\lfloor \log_2n\rfloor+1$</li>
+</ul>
+
+<h3 id="recursive-algorithms">Recursive algorithms</h3>
+
+<h4 id="example-1-maximum-element-1">Example 1: Maximum element</h4>
+<ul>
+  <li>Pseudo code
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ALGORITHM F(n)
+      if n=0 return 1
+      else return F(n-1) * n
+</code></pre></div>    </div>
+  </li>
+  <li>Input size : n</li>
+  <li>Basic operation : multiplication
+\(M(n) = M(n-1) + 1 \quad  for \quad n&gt;0,\quad M(0) =0\)
+\(M(n) = M(n-1) + 1 =\ \cdots\ = M(n-n)+n=n\)</li>
+</ul>
+
+<h4 id="example-2-tower-of-hanoi-puzzle">Example 2: Tower of Hanoi puzzle</h4>
+<p><img src="/assets/img/%5BAL%5D3/hanoi.png" alt="hanoi" width="70%" height="70%" /></p>
+<ul>
+  <li>Input size : the number of disks, n</li>
+  <li>Basic operation : moving one disk</li>
+</ul>
+
+<p>\(M(n) = 2M(n-1) + 1 \quad  for \quad n&gt;1, \quad M(1)=1\)
+\(M(n) = 2M(n-1) + 1 = 2[2M(n-2) + 1]+1 =\ \cdots\ = 2^{n-1}M(n-(n-1))+2^{n-1}-1=2^n-1\)</p>
+
+<h4 id="example-3-counting-binary-digits-recursion">Example 3: Counting binary digits (recursion)</h4>
+<ul>
+  <li>Pseudo code
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ALGORITHM BinRec(n)
+      if n=1 return 1
+      else return BinRec(⌊n/2⌋)+1
+</code></pre></div>    </div>
+  </li>
+  <li>The total number of additions : $A(n)$</li>
+  <li>Recurrence : $A(n) = A(\lfloor {n\over2} \rfloor ) + 1$ for $n&gt;1$</li>
+  <li>Initial condition: $A(1)=0$</li>
+  <li>Smoothness rule</li>
+</ul>
+
+\[n=2^k\quad\quad\]
+
+\[A(2^k)=A(2^{k-1})+1\quad for\quad k&gt;0,\quad A(2^0)=0\]
+
+\[A(2^k) = A(2^{k-k})+k = A(1) + k = k\]
+
+\[n=2^k,\quad k=\log_2n\]
+
+\[A(n) = \log_2n\in\Theta(\log n)\]
+
+<h4 id="example-4-computing-the-nth-fibonacci-number">Example 4: Computing the nth Fibonacci number</h4>
+<ul>
+  <li>Pseudo code
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ALGORITHM F(n)
+      if n&lt;=1 return n
+      else return F(n-1) + F(n-2)
+</code></pre></div>    </div>
+  </li>
+  <li>Basic operation : addition</li>
+  <li>The total number of additions : $A(n)$
+    <ul>
+      <li>
+        <p>$A(2^k)=A(n-1)+A(n-2)+1\quad for\quad n&gt;1$</p>
+
+        <p>$A(0)=0,\quad A(1)=0$</p>
+
+        <p>$A(n) - A(n-1)-A(n-2)=1$</p>
+
+        <p>$[A(n)+1]-[A(n-1)+1]-[A(n-2)+1]=0$</p>
+
+        <p>$B(n) = A(n)+1$</p>
+
+        <p>$B(n) - B(n-1)-B(n-2)=0,\quad B(0)=1,\quad B(1)=1$</p>
+
+        <p>$B(n)={1\over \sqrt5}(\phi ^{n+1} - \hat\phi^{n+1} )$</p>
+
+        <p>$A(n)={1\over \sqrt5}(\phi ^{n+1} - \hat\phi^{n+1} )-1 \in\Theta(\phi^n)$</p>
+      </li>
+    </ul>
+  </li>
+  <li>$\Theta(\log n)$ algorithm
+    <ul>
+      <li>\(\left[\begin{matrix}F(n-1) &amp; F(n) \\ F(n) &amp; F(n+1)\end{matrix}\right] = \left[ \begin{matrix}0&amp;1\\1&amp;1\end{matrix}\right]^n\)
+for $n\ge1$</li>
+    </ul>
+  </li>
+</ul>]]></content><author><name>Junhwan</name></author><category term="ComputerScience" /><category term="algorithm" /><category term="CSE214" /><summary type="html"><![CDATA[Efficiency 시간 효율성 (시간 복잡도) : 문제에서 알고리즘이 얼마나 빨리 실행되를 의미한다. 공간 효율성 (공간 복잡도) : 입출력에 필요한 공간 외에 알고리즘에 필요한 메모리 단위의 양을 의미한다. 현재 일반적으로 알고리즘에 필요한 추가 공간의 양은 크게 중요하지 않다. 대부분의 문제에서 공간보다 속도에서 훨씬 더 눈부신 발전을 이룰 수 있다.]]></summary></entry><entry><title type="html">[AL] 2. Important problem types</title><link href="http://localhost:4000/computerscience/AL-2-Important-problem-types/" rel="alternate" type="text/html" title="[AL] 2. Important problem types" /><published>2022-04-30T00:00:00+09:00</published><updated>2022-04-30T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/%5BAL%5D%202%20Important%20problem%20types</id><content type="html" xml:base="http://localhost:4000/computerscience/AL-2-Important-problem-types/"><![CDATA[<h2 id="sorting">Sorting</h2>
+<h3 id="sorting을--하는-이유">Sorting을  하는 이유</h3>
+<ul>
+  <li>정렬이 출력으로 요구되는 작업이 있다.
+    <ul>
+      <li>ex) ranking</li>
+    </ul>
+  </li>
+  <li>정렬은 리스트에 대한 질문에 쉽게 대답할 수 있게 해준다
+    <ul>
+      <li>ex) searching</li>
+    </ul>
+  </li>
+  <li>정렬은 다른 분야의 중요한 알고리즘의 보조 단계로 사용된다.
+    <ul>
+      <li>ex) geometric algorithms and data compression</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="sorting-알고리즘의-예">Sorting 알고리즘의 예</h3>
+<ul>
+  <li>Selection sort</li>
+  <li>Bubble sort</li>
+  <li>Insertion sort</li>
+  <li>Merge sort</li>
+  <li>Heap sort</li>
+  <li>…
+Sorting 알고리즘의 복잡성은 key의 비교 횟수로 평가한다.</li>
+</ul>
+
+<h3 id="sorting-알고리즘의-속성">Sorting 알고리즘의 속성</h3>
+<p><code class="language-plaintext highlighter-rouge">stable</code> : 입력에서의 동일한 두 요소의 상대적인 순서가 바뀌지 않는 경우
+<code class="language-plaintext highlighter-rouge">in place</code> : 적은 메모리 단위를 제외한 추가 메모리를 사용하지 않는 경우</p>
+
+<h3 id="selection-sort">Selection Sort</h3>
+<p>Input : array <code class="language-plaintext highlighter-rouge">a[1]</code>,…,<code class="language-plaintext highlighter-rouge">a[n]</code></p>
+
+<p>Output :  array a sorted in non-decreasing order</p>
+
+<p>Algorithm:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for i=1 to n 
+    swap a[i] with smallest of a[i],…,a[n] 
+</code></pre></div></div>
+<p>Pseudocode</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Algorithm SelectionSort(A[0..n-1])
+//The algorithm sorts a given array by selection sort
+//Input: An array A[0..n-1] of orderable elements
+//Output: Array A[0..n-1] sorted in ascending order
+for i  0 to n – 2 do
+	min  i
+	for j  i + 1 to n – 1 do
+		if A[j] &lt; A[min] 	
+			min  j
+	swap A[i] and A[min]
+</code></pre></div></div>
+
+<h2 id="searching">Searching</h2>
+<ul>
+  <li>
+    <p>주어진 집합(또는 여러 요소가 동일한 값을 가질 수 있도록 허용된 다중 집합)에서 주어진 <code class="language-plaintext highlighter-rouge">search key</code>를 찾는다.</p>
+  </li>
+  <li>
+    <p>Example</p>
+    <ul>
+      <li>Sequentail search</li>
+      <li>Binary search</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="string-processing">String processing</h2>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">string</code>: character 배열</li>
+  <li><code class="language-plaintext highlighter-rouge">Text strings</code>: letters, numbers, and special characters.</li>
+  <li><code class="language-plaintext highlighter-rouge">String matching</code>: 글에서 주어진 단어나 패턴을 검색</li>
+</ul>
+
+<h2 id="graph-problems">Graph problems</h2>
+<ul>
+  <li>실제 문제 모델링
+    <ul>
+      <li>World Wide Web(WWW) 모델링</li>
+      <li>통신망 모델링</li>
+      <li>프로젝트 스케줄링</li>
+    </ul>
+  </li>
+  <li>기본적인 그래프 알고리즘
+    <ul>
+      <li>그래프 순회 알고리즘</li>
+      <li>최단거리 알고리즘</li>
+      <li>위상정렬</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="combinational-problems">Combinational problems</h2>
+<ul>
+  <li>명시적으로나 암묵적으로 순열, 조합, 부분집합과 같은 <code class="language-plaintext highlighter-rouge">combinatorial object</code>를 찾는것을 요청</li>
+  <li>ex) traveling salesman problem (TSP)
+    <ul>
+      <li>N개 도시를 모두 정확히 한 번 방문하는 최단 기간 찾기</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">Combinational</code> 문제는 이론적 및 실제적 관점에서 컴퓨팅에서 가장 어려운 문제이다.</li>
+  <li><code class="language-plaintext highlighter-rouge">combinatorial object</code>의 수는 일반적으로 문제의 크기에 따라 매우 빠르게 증가한다.</li>
+  <li>제한된 시간안에 정확하게 푸는 알려진 알고리즘이 없다.</li>
+</ul>
+
+<h2 id="geometric-problems">Geometric problems</h2>
+<ul>
+  <li>점, 선, 다각형과 같은 <code class="language-plaintext highlighter-rouge">geometric object</code>를 다룬다.
+    <ul>
+      <li>응용 : 컴퓨터 그래픽, 로보틱스, 단층 촬영</li>
+    </ul>
+  </li>
+  <li>Example
+    <ul>
+      <li>The closest-pair problem</li>
+      <li>The convex-hull problem</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="numerical-problems">Numerical problems</h2>
+<ul>
+  <li>연속적인 <code class="language-plaintext highlighter-rouge">mathematical objects</code>를 포함하는 문제이다.</li>
+  <li>이러한 대부분의 수학적 문제들은 근사적으로만 풀 수 있다.</li>
+  <li>근사된 숫자에 대해 산술 연산을 많이 수행하면 반올림 오차가 누적되어 크게 왜곡될 수 있다.</li>
+  <li>Example
+    <ul>
+      <li>방정식</li>
+      <li>연립방적식</li>
+      <li>정적분</li>
+      <li>함수값 계산</li>
+    </ul>
+  </li>
+</ul>]]></content><author><name>Junhwan</name></author><category term="ComputerScience" /><category term="algorithm" /><category term="CSE214" /><summary type="html"><![CDATA[Sorting Sorting을 하는 이유 정렬이 출력으로 요구되는 작업이 있다. ex) ranking 정렬은 리스트에 대한 질문에 쉽게 대답할 수 있게 해준다 ex) searching 정렬은 다른 분야의 중요한 알고리즘의 보조 단계로 사용된다. ex) geometric algorithms and data compression]]></summary></entry><entry><title type="html">[AL] 1. Intro</title><link href="http://localhost:4000/computerscience/AL-1.-Intro/" rel="alternate" type="text/html" title="[AL] 1. Intro" /><published>2022-04-30T00:00:00+09:00</published><updated>2022-04-30T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/%5BAL%5D%201.%20Intro</id><content type="html" xml:base="http://localhost:4000/computerscience/AL-1.-Intro/"><![CDATA[<h2 id="algorithm을-공부해야하는-이유">Algorithm을 공부해야하는 이유</h2>
 
 <h3 id="컴퓨터-전문가가-되려고-하는-학생이라면">컴퓨터 전문가가 되려고 하는 학생이라면</h3>
 <ul>
@@ -218,86 +649,7 @@ Ex) 제곱근 구하기, 비선형 방정식 해결 및 유한 적분 계산</li
 실질적인 문제로서, 프로그램의 유효성은 여전히 테스트를 통해 확립된다.
 알고리즘을 구현할 때마다 프로그램을 철저히 테스트하고 디버깅해야한다.</p>
 
-<p>일반적으로, 좋은 알고리즘은 반복적인 노력과 재작업의 결과이다.</p>]]></content><author><name>Junhwan</name></author><category term="ComputerScience" /><category term="algorithm" /><category term="CSE214" /><summary type="html"><![CDATA[Algorithm을 공부해야하는 이유]]></summary></entry><entry><title type="html">[AL] 1. Intro</title><link href="http://localhost:4000/computerscience/AL-2-%EC%B5%9C%EB%8C%80%EA%B3%B5%EC%95%BD%EC%88%98-%EA%B5%AC%ED%95%98%EA%B8%B0/" rel="alternate" type="text/html" title="[AL] 1. Intro" /><published>2022-04-30T00:00:00+09:00</published><updated>2022-04-30T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/%5BAL%5D%202%20%EC%B5%9C%EB%8C%80%EA%B3%B5%EC%95%BD%EC%88%98%20%EA%B5%AC%ED%95%98%EA%B8%B0</id><content type="html" xml:base="http://localhost:4000/computerscience/AL-2-%EC%B5%9C%EB%8C%80%EA%B3%B5%EC%95%BD%EC%88%98-%EA%B5%AC%ED%95%98%EA%B8%B0/"><![CDATA[<h2 id="알고리즘을-공부해야하는-이유">알고리즘을 공부해야하는 이유</h2>
-
-<h3 id="컴퓨터-전문가가-되려고-하는-학생이라면">컴퓨터 전문가가 되려고 하는 학생이라면</h3>
-<ul>
-  <li>실용적인 이유
-    <ul>
-      <li>다양한 컴퓨팅 분야의 중요한 알고리즘의 표준적인 집합을 알아야한다.</li>
-      <li>새로운 알고리즘을 디자인하고 효율성을 분석할 수 있어야 한다.</li>
-    </ul>
-  </li>
-  <li>이론적인 이유
-    <ul>
-      <li>algorithmics은 컴퓨터 과학의 기반이다.</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="computing-related-학생이-아니라면">computing-related 학생이 아니라면</h3>
-<ul>
-  <li>알고리즘이 없는 컴퓨터 프로그램은 존재하지 않는다.</li>
-  <li>컴퓨터 어플리케이션이 우리의 직업적, 개인적인 삶의 거의 모든 면에서 필수불가결해지면서, 알고리즘을 공부하는 것은 점점 더 많은 사람들에게 필수가 됨</li>
-</ul>
-
-<p><strong>알고리즘을 공부하는 것은 분석 기술을 기르는데 유용하다.</strong></p>
-
-<h2 id="what-is-an-algorithm">What is an algorithm</h2>
-
-<p>An algorithm is a sequence of unambiguous instructions for solving a problem, i.e., for obtaining a required output for any legitimate input in a finite amount of time.</p>
-
-<p>알고리즘은 문제를 해결하기 위한 명확한 명령의 연속이다. 즉, 제한된 시간 내에 모든 허용된 입력에 필요한 출력을 얻기 위한 것이다.</p>
-
-<h2 id="알고리즘의-특징">알고리즘의 특징</h2>
-<p>The nonambiguity requirement for each step of an algorithm cannot be compromised.
-각 단계는 애매하지 않아야한다.</p>
-
-<p>The range of inputs for which an algorithm works has to be specified carefully.
-알고리즘이 작동하는 입력의 범위가 구체적으로 명시 되어야한다.</p>
-
-<p>The same algorithm can be represented in several different ways.
-같은 알고리즘은 여러 방법으로 표현될 수 있다.</p>
-
-<p>There may exist several algorithms for solving the same problem.
-같은 문제를 푸는 알고리즘은 다양하게 존재할 수 있다.</p>
-
-<p>Algorithms for the same problem can be based on very different ideas and can solve the problem with dramatically different speeds.
-같은 문제의 알고리즘은 매우 다른 아이디어에 기반될 수 있고 문제를 푸는 속도가 많이 차이날 수 있다.</p>
-
-<h2 id="알고리즘의-성질">알고리즘의 성질</h2>
-<ul>
-  <li>Finiteness
-    <ul>
-      <li>terminates after a finite number of steps</li>
-      <li>유한한 개수의 명령 후에 끝이 나야한다.</li>
-    </ul>
-  </li>
-  <li>Definiteness
-    <ul>
-      <li>rigorously and unambiguously specified</li>
-      <li>엄격해야하고 중의적이지 않아야한다.</li>
-    </ul>
-  </li>
-  <li>Clearly specified input
-    <ul>
-      <li>valid inputs are clearly specified</li>
-      <li>입력이 명확하게 명시되어야한다.</li>
-    </ul>
-  </li>
-  <li>Clearly specified/expected output
-    <ul>
-      <li>can be proved to produce the correct output given a valid input</li>
-      <li>유효한 입력이 주어졌을 때 정확한 출력을 만들어 냈는지 증명할 수 있어야한다.</li>
-    </ul>
-  </li>
-  <li>Effectiveness
-    <ul>
-      <li>steps are sufficiently simple and basic</li>
-      <li>각 단계가 충분히 간단하고 기본적이어야한다.</li>
-    </ul>
-  </li>
-</ul>]]></content><author><name>Junhwan</name></author><category term="ComputerScience" /><category term="algorithm" /><category term="CSE214" /><summary type="html"><![CDATA[알고리즘을 공부해야하는 이유]]></summary></entry><entry><title type="html">[AI] Uniformed Search</title><link href="http://localhost:4000/computerscience/1-Uniformed-Search/" rel="alternate" type="text/html" title="[AI] Uniformed Search" /><published>2022-04-24T00:00:00+09:00</published><updated>2022-04-24T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/1%20Uniformed%20Search</id><content type="html" xml:base="http://localhost:4000/computerscience/1-Uniformed-Search/"><![CDATA[<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>용어 정리
+<p>일반적으로, 좋은 알고리즘은 반복적인 노력과 재작업의 결과이다.</p>]]></content><author><name>Junhwan</name></author><category term="ComputerScience" /><category term="algorithm" /><category term="CSE214" /><summary type="html"><![CDATA[Algorithm을 공부해야하는 이유]]></summary></entry><entry><title type="html">[AI] Uniformed Search</title><link href="http://localhost:4000/computerscience/1-Uniformed-Search/" rel="alternate" type="text/html" title="[AI] Uniformed Search" /><published>2022-04-24T00:00:00+09:00</published><updated>2022-04-24T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/1%20Uniformed%20Search</id><content type="html" xml:base="http://localhost:4000/computerscience/1-Uniformed-Search/"><![CDATA[<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>용어 정리
 strategy : 전략
 complete : solution이 하나 존재 할 때 그 solution을 찾는 것이 보장되어 있는가?
 optimal : 최단 경로(the least cost path)를 찾는 것이 보장되어 있는가?   
