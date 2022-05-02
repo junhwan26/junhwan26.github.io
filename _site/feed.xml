@@ -1,6 +1,434 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-05-02T04:04:34+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Slow and Steady</title><subtitle>Data Science, Computer Science, Statistics, AI.</subtitle><author><name>Junhwan</name></author><entry><title type="html">[AL] 3. Fundamentals of the Analysis of Algorithm Efficiency</title><link href="http://localhost:4000/computerscience/AL-3-Fundamentals-of-the-Analysis-of-Algorithm-Efficiency/" rel="alternate" type="text/html" title="[AL] 3. Fundamentals of the Analysis of Algorithm Efficiency" /><published>2022-05-01T00:00:00+09:00</published><updated>2022-05-01T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/%5BAL%5D%203%20Fundamentals%20of%20the%20Analysis%20of%20Algorithm%20Efficiency</id><content type="html" xml:base="http://localhost:4000/computerscience/AL-3-Fundamentals-of-the-Analysis-of-Algorithm-Efficiency/"><![CDATA[<h2 id="efficiency">Efficiency</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-05-02T12:59:04+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Slow and Steady</title><subtitle>Data Science, Computer Science, Statistics, AI.</subtitle><author><name>Junhwan</name></author><entry><title type="html">[AL] 5. Decrease-and-Conquer</title><link href="http://localhost:4000/computerscience/AL-5-Decrease-and-Conquer/" rel="alternate" type="text/html" title="[AL] 5. Decrease-and-Conquer" /><published>2022-05-02T00:00:00+09:00</published><updated>2022-05-02T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/%5BAL%5D%205%20Decrease-and-Conquer</id><content type="html" xml:base="http://localhost:4000/computerscience/AL-5-Decrease-and-Conquer/"><![CDATA[<blockquote>
+  <p>Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin</p>
+</blockquote>
+
+<h1 id="decrease-and-conquer">Decrease-and-Conquer</h1>
+
+<h2 id="decrease-and-conquer-technique">Decrease-and-conquer technique</h2>
+<p>문제에서 주어진 인스턴스에 대한 솔루션과 더 작은 인스턴스에 대한 솔루션 사이의 관계를 기반으로 문제를 푼다.</p>
 <ul>
-  <li>시간 효율성 (시간 복잡도) : 문제에서 알고리즘이 얼마나 빨리 실행되를 의미한다.</li>
+  <li>하향식(Top down) → 재귀적으로 구현(최종 구현은 비재귀적일 수 있음)</li>
+  <li>상향식(Bottom up) → 반복적 구현
+    <ul>
+      <li>문제의 가장 작은 사례에 대한 해결책부터 시작하여 점진적dmfh 접근</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="decrease-by-a-constant">Decrease by a constant</h2>
+<p>알고리즘이 반복될 때 마다 인스턴스의 크기를 같은 상수만큼 줄인다. (보통 $1$)
+<img src="/assets/img/%5BAL%5D5/decreasebyconstant.png" alt="decreasebyconstant" width="50%" height="50%" /></p>
+
+<h3 id="the-exponentiation-problem">The exponentiation problem</h3>
+<p>cmputing $a^n$</p>
+<ul>
+  <li>Top down
+    <ul>
+      <li>
+\[f(n)=\begin{cases}
+f(n-1) \cdot a \quad if\ n&gt;0 \\
+1 \qquad\quad\quad\quad\ \ if\ n=0
+        
+\end{cases}\]
+      </li>
+    </ul>
+  </li>
+  <li>Botoom up
+    <ul>
+      <li>1에서부터 $a$를 $n$번 곱한다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="insertion-sort">Insertion sort</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM InsertionSort(A[0..n-1])
+    //Input: An array A[0..n-1] of n orderalbe elements
+    //Output: Array A[0..n-1] sorted in nondecreasing order
+    for i &lt;- 1 to n-1 do
+        v &lt;- A[i]
+        j &lt;- i-1
+        while j&gt;=0 and A[j]&gt;v do
+            A[j+1] &lt;- A[j]
+            j &lt;- j-1
+        A[j+1] &lt;- v
+</code></pre></div></div>
+
+<p>\(A[0]\le\cdots\le A[j]&lt;A[j+1]\le \cdots \le A[i-1] \ \vert\ A[i]\  \cdots \ A[n-1]\)</p>
+<ul>
+  <li>basic operation : key comparison <code class="language-plaintext highlighter-rouge">A[j] &gt; v</code></li>
+  <li>the worst-case
+    <ul>
+      <li>
+\[C_{worst}(n)=\sum^{n-1}_{i=1}\sum^{i-1}_{j=0}1=\sum^{n-1}_{i=1}i={n(n-1)\over2}\in\Theta(n^2)\]
+      </li>
+    </ul>
+  </li>
+  <li>the best-case
+    <ul>
+      <li>
+\[C_{best}(n)=\sum^{n-1}_{i=1}1=n-1\in\Theta(n)\]
+      </li>
+    </ul>
+  </li>
+  <li>the average-case
+    <ul>
+      <li>$$C_{avg}(n)\approx{n^2\over4}\in\Theta(n^2)</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="topological-sorting">Topological sorting</h3>
+<p><code class="language-plaintext highlighter-rouge">Dag</code> : directed acyclic graph
+<code class="language-plaintext highlighter-rouge">Topological sorting</code> : dag의 정점들에 대해 모든 starting 정점이 ending 정점보다 앞에 위치하는 선형적인 순서에 따라 정렬하며 dag에서만 가능하다</p>
+
+<ul>
+  <li>Source-removal algorithm : 들어오는 간선이 없는 정점들과 그 정점에서 나가는 간선들을 지워가면서 정렬한다</li>
+</ul>
+
+<h2 id="decrease-by-a-constant-factor">Decrease by a constant factor</h2>
+<p>알고리즘이 반복될 때 마다 인스턴스의 크기를 같은 상수 factor 만큼 줄인다. (보통 $1/2$)</p>
+
+<p><img src="/assets/img/%5BAL%5D5/decreasebyconstantfactor.png" alt="decreasebyconstantfactor" width="48%" height="48%" /></p>
+
+<h3 id="the-exponentiation-problem-1">The exponentiation problem</h3>
+<p>\(a^n= \begin{cases}
+    (a^{n/2})^2 \qquad \quad\ \  if\ n\ is\ even\ and\ positive, \\
+    (a^{(n-1)/2})^2\cdot a \quad if\ n\ is\ odd\,\\
+    1 \qquad\qquad \quad \ \ \ \ if\ n=0
+\end{cases}\)</p>
+
+<h3 id="binary-search">Binary search</h3>
+
+<p align="center"><img src="/assets/img/%5BAL%5D5/bs1.png" width="50%" height="50%" /></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM BinarySearch(A[0..n-1], K)
+    //Input: An array A[0..n-1] sorted in ascending order and a search key K
+    //Output: An index of the array's element that is equal to k or -1 if there is no such element
+    l &lt;- 0; r &lt;- n-1
+    while l &lt;= r do
+        m &lt;- ⌊(l+r)/2⌋
+        if K = A[m] return m
+        else if K &lt; A[M] r &lt;- m-1
+        else l &lt;- m+1
+    return -1 
+</code></pre></div></div>
+
+<p>For $K=70$</p>
+<p align="center"><img src="/assets/img/%5BAL%5D5/bs2.png" width="60%" height="60%" /></p>
+
+<h3 id="fake-coin-problem">Fake-Coin Problem</h3>
+
+<h3 id="russian-peasant-multiplication">Russian Peasant Multiplication</h3>
+<p>두 양수의 곱을 구하는 문제</p>
+
+<p><img src="/assets/img/%5BAL%5D5/RPM.png" width="50%" height="50%" /></p>
+<ul>
+  <li>$n\cdot m =\begin{cases} {n\over2}\cdot 2m \ {n-1\over2}\cdot 2m + m \end{cases}$</li>
+  <li>$1\cdot m = m$ to stop</li>
+</ul>
+
+<h2 id="variable-size-decrease">Variable-size decrease</h2>
+
+<h3 id="euclids-algorithm">Euclid’s algorithm</h3>
+<p>\(gcd(n,\ m) = gcd(n,\ m\ mod \ n)\)</p>
+
+<h3 id="selection-problem">Selection problem</h3>
+<p>$n$개의 원소 중 $k$번째로 작은 수를 찾는 문제</p>
+<ul>
+  <li>정렬 기반 알고리즘
+    <ul>
+      <li>Efficiency : $O(n\log n)$</li>
+    </ul>
+  </li>
+  <li>partitioning
+    <ul>
+      <li><img src="/assets/img/%5BAL%5D5/partitioning.png" width="70%" height="70%" /></li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="lomuto-partitioning">Lomuto partitioning</h4>
+<p><img src="/assets/img/%5BAL%5D5/lomuto.png" width="70%" height="70%" /></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM LomutoPartition(A[l..r])
+    //Input: A subarray A[1..r] of array A[0..n-1], defined by its left and right indices l and r (l&lt;=r)
+    //Output: Partition of A[l..r] and the new position of the pivot
+    p &lt;- A[l]
+    s &lt;- l
+    for i &lt;- l to r do
+        if A[i] &lt; p
+            s &lt;- s+1; swap(A[s], A[i])
+    swap(A[l], A[s])
+    return s
+</code></pre></div></div>
+
+<ul>
+  <li>$s=k-1$ 이라면 문제 해결</li>
+  <li>$s&gt;k-1$ 왼쪽에서 $k$번째로 작은 원소 다시 탐색</li>
+  <li>$s&lt;k-1$ 오른쪽에서 $(k-s)$번째로 작은 원소 다시 탐색</li>
+</ul>
+
+<h4 id="quickselect-algorithm">Quickselect algorithm</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM Quickselect(A[l..r], k)
+    //Input: Subarray A[1..r] of array A[0..n-1] of orderable elements and iteger k(1&lt;=k&lt;=r-l+1) 
+    //Output: The value of the kth smallest element in A[l..r]
+    s &lt;- LomutoPartition(A[l..r]) //or another partition algorithm
+    if s=l+k-1 return A[s]
+    else if s&gt;l+k-1 Quickselect(A[l..s-1], k)
+    else Quickselect(A[s+1..r], l+k-1-s)
+</code></pre></div></div>
+<ul>
+  <li>$C_{best}(n) = n-1 \in \Theta(n).$</li>
+  <li>$C_{worst}(n) = (n-1) + (n-2) + \ \cdots\ + 1 = (n-1)n/2 \in \Theta(n^2)$</li>
+  <li>$C_{avg}(n) \rightarrow linear$</li>
+</ul>
+
+<h3 id="interpolation-search">Interpolation search</h3>
+<ul>
+  <li>binary search : search key를 항상 정렬된 배열의 중앙값과 비교</li>
+  <li>Interpolation search : search key의 값을 고려하여 비교할 값을 정함
+    <p align="center"><img src="/assets/img/%5BAL%5D5/interpolation.png" width="70%" height="70%" /></p>
+  </li>
+</ul>
+
+\[x=l+\lfloor{(v-A[l])(r-l)\over A[r]-A[l]}\rfloor\]
+
+<ul>
+  <li>Efficiency
+    <ul>
+      <li>Basic operation: key comparison</li>
+      <li>average case: $C(n)&lt;\log_2\log_2 n +1$</li>
+      <li>worst case: $C(n)=n$</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="binary-search-tree">Binary Search Tree</h3>
+<ul>
+  <li>Efficiency
+    <ul>
+      <li>$C_{worst}(n) = \Theta(n)$</li>
+      <li>$C_{avg}(n) = \Theta(\log n)$</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="generating-combinatorial-objects">Generating Combinatorial Objects</h2>
+<p>Minimal-change requirement</p>
+<ul>
+  <li>Advantage of this order in TSP</li>
+</ul>
+
+<h4 id="johnson-trotter-algorithm">Johnson-Trotter algorithm</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM JohnsonTrotter(n)
+    //Input: A positive integer n
+    //Output: A list of all permutations of {1,...,n}
+    initialize the first permutation with 1(&lt;-)2(&lt;-)...n(&lt;-)
+    while the last permutation has a mobile element do
+        find its largest mobile element k
+        swap k with the adjacent element k's arrow points to
+        reverse the direction of all the elements that are larger than k
+        add the new permutation to the lis
+</code></pre></div></div>
+<ul>
+  <li>An application of Johnson-Trotter algorithm $(n=3)$
+    <p align="center"><img src="/assets/img/%5BAL%5D5/J-T.png" width="70%" height="70%" /></p>
+  </li>
+  <li>가장 효율적인 generating permutations 알고리즘 중 하나이다.</li>
+  <li>Time efficiency: Θ(𝑛!)</li>
+</ul>
+
+<h2 id="generating-subsets">Generating Subsets</h2>
+<p>Minimal change algorithm</p>
+
+<h3 id="binary-reflected-gray-code-brgc">Binary Reflected Gray Code (BRGC)</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM BRGC(n)
+    //Input: A positive integer n
+    //Output: A list of all bit strings of length n composing the Gray code
+    if n=1 make list L containing bit string 0 and 1 in this order
+    else generate list L1 of bit strings of size n-1 by calling BRGC(n-1)
+        copy list L1 to list L2 in reversed order
+        add 0 in front of each bit string in list L1
+        add 1 in front of each bit string in list L2
+        append L2 to L1 to get list L
+    return L
+</code></pre></div></div>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">L</code>의 첫번째 원소와 마지막 원소도 1 비트 차이나기 때문에 <code class="language-plaintext highlighter-rouge">cyclic</code>이라고 한다.</li>
+</ul>]]></content><author><name>Junhwan</name></author><category term="ComputerScience" /><category term="algorithm" /><category term="CSE214" /><summary type="html"><![CDATA[Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin]]></summary></entry><entry><title type="html">[AL] 4. Brute Force and Exhaustive Search</title><link href="http://localhost:4000/computerscience/AL-4-Brute-Force-and-Exhaustive-Search-copy/" rel="alternate" type="text/html" title="[AL] 4. Brute Force and Exhaustive Search" /><published>2022-05-01T00:00:00+09:00</published><updated>2022-05-01T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/%5BAL%5D%204%20Brute%20Force%20and%20Exhaustive%20Search%20copy</id><content type="html" xml:base="http://localhost:4000/computerscience/AL-4-Brute-Force-and-Exhaustive-Search-copy/"><![CDATA[<blockquote>
+  <p>Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin</p>
+</blockquote>
+
+<h1 id="brute-force">Brute Force</h1>
+<p>문제를 해결하기 위한 간단한 접근 방식이며, 보통 문제의 문장과 관련된 개념의 정의에 직접적으로 기초한다.</p>
+
+<p>영리하거나 효율적인 알고리즘의 소스가 되는 경우는 드물지만 Brute force는 중요한 알고리즘 디자인 전략으로써 간과해선 안된다.</p>
+<ol>
+  <li>매우 다양한 문제에 적용될 수 있다.</li>
+  <li>어떤 중요한 문제에 대해 적어도 입력의 크기에 제한 없는 실제적인 값에 의미있는 알고리즘이 된다.
+    <ul>
+      <li>ex) sorting, searching, matrix multiplication, string matching</li>
+    </ul>
+  </li>
+  <li>적은 수의 입력만 해결할 필요가 있고 허용할만한 속도로 해결할 수 있다면 더 효율적인 알고리즘을 만들기 위해 비용을 들이지 않아도 된다.</li>
+  <li>일반적으로 매우 비효율적이더라도 작은 크기의 입력을 가진 문제를 푸는데 있어서 유용할 수 있다.</li>
+  <li>더욱 효율적인 대안을 판단하는 기준으로 이론적, 교육적 목적을 제공한다.</li>
+</ol>
+
+<h2 id="sorting">Sorting</h2>
+
+<h3 id="selection-sort">Selection sort</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM SelectionSort(A[0..n-1])
+    //Input: An array A[0..n-1] of orderable elements
+    //Output: Array A[0..n-1] sorted in nondecreasing order
+    for i &lt;- 0 to n-2 do
+        min &lt;- i
+        for j &lt;- i+1 to n-1 do
+            if A[j] &lt; A[min] min &lt;- j
+        swap A[i] and A[min]
+</code></pre></div></div>
+<ul>
+  <li>Input Size: The number of elements, n</li>
+  <li>Basic operation: The key comparison
+  \(C(n)=\sum^{n-2}_{i=0}\sum^{n-1}_{j=i+1}1==\sum^{n-2}_{i=0}(n-1-i)={(n-1)n\over 2}\)</li>
+  <li>모든 입력에서 $\Theta(n^2)$</li>
+  <li>key의 swap은 $n-1$번만 일어난다. 이것은 다른 정렬 알고리즘과 비교하였을 때 좋은 점이다.</li>
+</ul>
+
+<h3 id="bubble-sort">Bubble sort</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM BubbleSort(A[0..n-1])
+    //Input: An array A[0..n-1] of orderable elements
+    //Output: Array A[0..n-1] sorted in nondecreasing order
+    for i &lt;- 0 to n-2 do
+        for j &lt;- n-2-i to n-1 do
+            if A[j+1] &lt; A[j] swap A[j] and A[j+1]
+</code></pre></div></div>
+<ul>
+  <li>key comparison 횟수는 모든 입력에 대해 동일하나 swap 횟수는 입력에 따라 달라진다.</li>
+  <li>worst case에서 swap 횟수와 comparison 횟수가 같다</li>
+  <li>각 반복에서 교환이 한번도 일어나지 않았다면 알고리즘을 멈추는것으로 개선할 수 있다.</li>
+</ul>
+
+<h2 id="search">Search</h2>
+
+<h3 id="sequential-search">Sequential Search</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM SequentialSearch2(A[0..n],K)
+    //Input: An Array A of n elements and a search key K
+    //Output: The index of the first element in A[0..n-1] whose value is equal to K or -1 if no such element is found
+    A[n] &lt;- K
+    i &lt;- 0
+    while A[i] != K do
+        i &lt;- i+1
+    if i &lt; n return i
+    else return -1 
+</code></pre></div></div>
+<ul>
+  <li>배열이 정렬되어 있다면 요소가 search key보다 크거나 같아진다면 알고리즘을 멈추는 것으로 개선할 수 있다.</li>
+</ul>
+
+<h3 id="string-matching">String matching</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM BruteForceStringMatch(T[0..n-1], P[0..m-1])
+    //Input: An array T[0..n-1] of n characters representing a text and
+             An array P[0..m-1] of m characters representing a pattern
+    //Output: The index of the first character in the text that starts a matching substring or -1 if the search is unsuccessful
+    for i &lt;- 0 to n-m do
+        j &lt;- 0
+        while j &lt; m and P[j] = T[i+j] do
+            j &lt;- j+1
+        if j = m return i
+    return -1    
+</code></pre></div></div>
+<ul>
+  <li>최악의 경우 이 알고리즘은 $m(n-m+1)$개의 character를 비교해야하고 이것은 $O(nm)이다.</li>
+  <li>그러나 일반적인 자연어 텍스트의 경우 대부분 매우 적은 비교 이후 <code class="language-plaintext highlighter-rouge">i</code>의 이동이 일어날 것으로 기대해야한다.</li>
+  <li>랜덤 텍스트에서 검색할 경우 $\Theta(n)$로 보였다.</li>
+</ul>
+
+<h2 id="geometric-problems">Geometric problems</h2>
+
+<h3 id="closest-pair-problem">Closest-Pair Problem</h3>
+<p>점들의 집합에서 가장 가까운 두 점을 찾기.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM BruteForceClosestPair(P)
+    //Input: A list P of n (n&gt;=2) points p1(x1,y1),...,pn(xn,yn)
+    //Output: The distance between the closest pair of points
+    d &lt;- ∞
+    for i &lt;- 1 to n-1 do
+        for j &lt;- i+1 to n do
+            d &lt;- min(d, sqrt((xi-xj)^2 + (yi-yj)^2))
+    return d
+</code></pre></div></div>
+<ul>
+  <li>Basic operation: computing the sqrt -&gt; squaring a number
+  \(C(n)=\sum^{n-1}_{i=1}\sum^{n}_{j=i+1}2 = 2\sum^{n-1}_{i=1}(n-i)=n(n-1)\in\Theta(n^2)\)</li>
+</ul>
+
+<h3 id="convex-hull-problem">Convex-Hull Problem</h3>
+<p>평면 또는 고차워너 공간의 특정 점 집합에서 볼록 껍질 찾기.</p>
+<ul>
+  <li>컴퓨터 기하학에서 가장 중요한 문제들 중 하나이다.</li>
+  <li>볼록 껍질은 주어진 물체의 모양과 데이터 셋에 가까운 근사치를 제공한다.</li>
+  <li>정의
+    <ul>
+      <li>공간상에서 점들의 집합(유한 or 무한)의 어느 두 점 $p$와 $q$에 대해 $p$와 $q$의 끝점을 연결한 선분들이 모두 집합에 속한다면 Convex한다고 한다.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/assets/img/%5BAL%5D4/convexhull.png" alt="convexhull" width="70%" height="70%" /></p>
+
+<ul>
+  <li>Algorithm
+    <ul>
+      <li>두 점 $(x_1,\ y_1),\ (x_2,\ y_2)$을 지나는 직선은 다음과 같이 정의된다
+\(ax+by=c\)
+\(a=y_2-y_1,\ b=x_1=x_2,\ c=x_1y_2-y_1x_2\)</li>
+      <li>이 직선의 방정식은 평면을 $ax+by&gt;c$ 와 $ax+by&lt;c$ 두개의 평면으로 나눈다.</li>
+      <li>모든 점들이 같은 평면에 있다면 그 직선을 선택한다.
+        <ul>
+          <li>$ax+by-c$의 부호를 확인하는 방법을 사용한다.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Time efficiency : $O(n^3)$</li>
+</ul>
+
+<h1 id="exhaustive-search">Exhaustive Search</h1>
+<h2 id="combinational-problems">Combinational problems</h2>
+
+<h3 id="tsp">TSP</h3>
+<p>최소비용으로 모든 도시를 여행하는 방법을 찾는 문제
+<img src="/assets/img/%5BAL%5D4/TSP.png" alt="TSP" width="70%" height="70%" /></p>
+<ul>
+  <li>The total number of permutations : ${1\over2}(n-1)!$</li>
+</ul>
+
+<h3 id="knapsack-problem">Knapsack problem</h3>
+<p>weight $w_i$, value $v_i$를 가진 $n$개의 아이템의 부분집합 중 가방에 담을 수 있는 가장 비싼 집합을 찾는 문제
+<img src="/assets/img/%5BAL%5D4/knapsack1.png" alt="knapack" width="50%" height="50%" /> 
+<img src="/assets/img/%5BAL%5D4/knapsack2.png" alt="knapack" width="40%" height="40%" /></p>
+<ul>
+  <li>모든 부분집합을 만들고 가방에 담을 수 있는 부분 집합 중 가장 비싼 부분집합을 선택한다.</li>
+  <li>The number of subsets of an n-element set is $2^n$
+    <ul>
+      <li>$\Omega(2^n)$ algorithm</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="assigntment-problem">Assigntment problem</h3>
+<p>$n$명의 사람에게 $n$개의 일을 한 사람 당 하나씩 최소 비용으로 부여하는 문제
+<img src="/assets/img/%5BAL%5D4/assign.png" alt="assign" width="100%" height="100%" /></p>
+
+<p><img src="/assets/img/%5BAL%5D4/assign2.png" alt="assign2" height="100%" /></p>
+<ul>
+  <li>가능한 모든 순열을 구한 뒤 각 순열마다 비용을 구해 최소값을 갖는 순열을 찾는다.</li>
+</ul>]]></content><author><name>Junhwan</name></author><category term="ComputerScience" /><category term="algorithm" /><category term="CSE214" /><summary type="html"><![CDATA[Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin]]></summary></entry><entry><title type="html">[AL] 3. Fundamentals of the Analysis of Algorithm Efficiency</title><link href="http://localhost:4000/computerscience/AL-3-Fundamentals-of-the-Analysis-of-Algorithm-Efficiency/" rel="alternate" type="text/html" title="[AL] 3. Fundamentals of the Analysis of Algorithm Efficiency" /><published>2022-05-01T00:00:00+09:00</published><updated>2022-05-01T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/%5BAL%5D%203%20Fundamentals%20of%20the%20Analysis%20of%20Algorithm%20Efficiency</id><content type="html" xml:base="http://localhost:4000/computerscience/AL-3-Fundamentals-of-the-Analysis-of-Algorithm-Efficiency/"><![CDATA[<blockquote>
+  <p>Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin</p>
+</blockquote>
+
+<h2 id="efficiency">Efficiency</h2>
+<ul>
+  <li>시간 효율성 (시간 복잡도) : 문제에서 알고리즘이 얼마나 빨리 실행되는지를 의미한다.</li>
   <li>공간 효율성 (공간 복잡도) : 입출력에 필요한 공간 외에 알고리즘에 필요한 메모리 단위의 양을 의미한다.
 현재 일반적으로 알고리즘에 필요한 추가 공간의 양은 크게 중요하지 않다. 대부분의 문제에서 공간보다 속도에서 훨씬 더 눈부신 발전을 이룰 수 있다.</li>
 </ul>
@@ -90,7 +518,7 @@
 <h3 id="asymptotic-order-of-growth">Asymptotic order of growth</h3>
 <h4 id="ogn">$O(g(n))$</h4>
 <p>$g(n)$보다 작거나 같은 증가율 가진 함수들의 집합
-<img src="/assets/img/%5BAL%5D3/bigO.png" alt="bigO" width="70%" height="70%" /></p>
+<img src="/assets/img/%5BAL%5D3/BigO.png" alt="bigO" width="70%" height="70%" /></p>
 
 \[t(n) \in O(g(n))\]
 
@@ -99,14 +527,14 @@
 <h4 id="omegagn">$\Omega(g(n))$</h4>
 <p>$g(n)$보다 크거나 같은 증가율 합수들의 집합</p>
 
-<p><img src="/assets/img/%5BAL%5D3/bigOmega.png" alt="bigOmega" width="70%" height="70%" /></p>
+<p><img src="/assets/img/%5BAL%5D3/BigOmega.png" alt="bigOmega" width="70%" height="70%" /></p>
 
 \[t(n) \in \Omega(g(n))\]
 
 \[^\exists c &gt;0 \quad s.t. \quad t(n) \ge cg(n) \quad for \ \  all \ \  n \ge n_0\]
 
 <h4 id="thetagn">$\Theta(g(n))$</h4>
-<p><img src="/assets/img/%5BAL%5D3/bigTheta.png" alt="bigTheta" width="70%" height="70%" /></p>
+<p><img src="/assets/img/%5BAL%5D3/BigTheta.png" alt="bigTheta" width="70%" height="70%" /></p>
 
 <p>$g(n)$과 같은 증가율을 가진 함수들의 집합</p>
 
@@ -287,7 +715,11 @@ $$T(n) \approx c_mM(n)+c_aM(n)=(c_m+c_a)n^3$$</center>
 for $n\ge1$</li>
     </ul>
   </li>
-</ul>]]></content><author><name>Junhwan</name></author><category term="ComputerScience" /><category term="algorithm" /><category term="CSE214" /><summary type="html"><![CDATA[Efficiency 시간 효율성 (시간 복잡도) : 문제에서 알고리즘이 얼마나 빨리 실행되를 의미한다. 공간 효율성 (공간 복잡도) : 입출력에 필요한 공간 외에 알고리즘에 필요한 메모리 단위의 양을 의미한다. 현재 일반적으로 알고리즘에 필요한 추가 공간의 양은 크게 중요하지 않다. 대부분의 문제에서 공간보다 속도에서 훨씬 더 눈부신 발전을 이룰 수 있다.]]></summary></entry><entry><title type="html">[AL] 2. Important problem types</title><link href="http://localhost:4000/computerscience/AL-2-Important-problem-types/" rel="alternate" type="text/html" title="[AL] 2. Important problem types" /><published>2022-04-30T00:00:00+09:00</published><updated>2022-04-30T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/%5BAL%5D%202%20Important%20problem%20types</id><content type="html" xml:base="http://localhost:4000/computerscience/AL-2-Important-problem-types/"><![CDATA[<h2 id="sorting">Sorting</h2>
+</ul>]]></content><author><name>Junhwan</name></author><category term="ComputerScience" /><category term="algorithm" /><category term="CSE214" /><summary type="html"><![CDATA[Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin]]></summary></entry><entry><title type="html">[AL] 2. Important problem types</title><link href="http://localhost:4000/computerscience/AL-2-Important-problem-types/" rel="alternate" type="text/html" title="[AL] 2. Important problem types" /><published>2022-04-30T00:00:00+09:00</published><updated>2022-04-30T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/%5BAL%5D%202%20Important%20problem%20types</id><content type="html" xml:base="http://localhost:4000/computerscience/AL-2-Important-problem-types/"><![CDATA[<blockquote>
+  <p>Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin</p>
+</blockquote>
+
+<h2 id="sorting">Sorting</h2>
 <h3 id="sorting을--하는-이유">Sorting을  하는 이유</h3>
 <ul>
   <li>정렬이 출력으로 요구되는 작업이 있다.
@@ -424,7 +856,11 @@ for i  0 to n – 2 do
       <li>함수값 계산</li>
     </ul>
   </li>
-</ul>]]></content><author><name>Junhwan</name></author><category term="ComputerScience" /><category term="algorithm" /><category term="CSE214" /><summary type="html"><![CDATA[Sorting Sorting을 하는 이유 정렬이 출력으로 요구되는 작업이 있다. ex) ranking 정렬은 리스트에 대한 질문에 쉽게 대답할 수 있게 해준다 ex) searching 정렬은 다른 분야의 중요한 알고리즘의 보조 단계로 사용된다. ex) geometric algorithms and data compression]]></summary></entry><entry><title type="html">[AL] 1. Intro</title><link href="http://localhost:4000/computerscience/AL-1.-Intro/" rel="alternate" type="text/html" title="[AL] 1. Intro" /><published>2022-04-30T00:00:00+09:00</published><updated>2022-04-30T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/%5BAL%5D%201.%20Intro</id><content type="html" xml:base="http://localhost:4000/computerscience/AL-1.-Intro/"><![CDATA[<h2 id="algorithm을-공부해야하는-이유">Algorithm을 공부해야하는 이유</h2>
+</ul>]]></content><author><name>Junhwan</name></author><category term="ComputerScience" /><category term="algorithm" /><category term="CSE214" /><summary type="html"><![CDATA[Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin]]></summary></entry><entry><title type="html">[AL] 1. Intro</title><link href="http://localhost:4000/computerscience/AL-1.-Intro/" rel="alternate" type="text/html" title="[AL] 1. Intro" /><published>2022-04-30T00:00:00+09:00</published><updated>2022-04-30T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/%5BAL%5D%201.%20Intro</id><content type="html" xml:base="http://localhost:4000/computerscience/AL-1.-Intro/"><![CDATA[<blockquote>
+  <p>Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin</p>
+</blockquote>
+
+<h2 id="algorithm을-공부해야하는-이유">Algorithm을 공부해야하는 이유</h2>
 
 <h3 id="컴퓨터-전문가가-되려고-하는-학생이라면">컴퓨터 전문가가 되려고 하는 학생이라면</h3>
 <ul>
@@ -586,7 +1022,7 @@ Ex) 제곱근 구하기, 비선형 방정식 해결 및 유한 적분 계산</li
   <li>근사 Algorithm은 문제를 정확하게 해결하는 Algorithm보다 정교한 Algorithm의 일부가 될 수 있다.</li>
 </ol>
 
-<h3 id="algorithm-실계-전략">Algorithm 실계 전략</h3>
+<h3 id="algorithm-설계-전략">Algorithm 설계 전략</h3>
 <p>Algorithm 디자인 기술(전략)은 문제를 다양한 컴퓨팅 분야의 다양한 문제에 적용할 수 있는 Algorithm 방식으로 해결하기 위한 일반적인 접근이다.</p>
 
 <h3 id="algorithm과-자료-구조-디자인">Algorithm과 자료 구조 디자인</h3>
@@ -644,7 +1080,7 @@ Ex) 제곱근 구하기, 비선형 방정식 해결 및 유한 적분 계산</li
 실질적인 문제로서, 프로그램의 유효성은 여전히 테스트를 통해 확립된다.
 알고리즘을 구현할 때마다 프로그램을 철저히 테스트하고 디버깅해야한다.</p>
 
-<p>일반적으로, 좋은 알고리즘은 반복적인 노력과 재작업의 결과이다.</p>]]></content><author><name>Junhwan</name></author><category term="ComputerScience" /><category term="algorithm" /><category term="CSE214" /><summary type="html"><![CDATA[Algorithm을 공부해야하는 이유]]></summary></entry><entry><title type="html">[AI] Uniformed Search</title><link href="http://localhost:4000/computerscience/1-Uniformed-Search/" rel="alternate" type="text/html" title="[AI] Uniformed Search" /><published>2022-04-24T00:00:00+09:00</published><updated>2022-04-24T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/1%20Uniformed%20Search</id><content type="html" xml:base="http://localhost:4000/computerscience/1-Uniformed-Search/"><![CDATA[<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>용어 정리
+<p>일반적으로, 좋은 알고리즘은 반복적인 노력과 재작업의 결과이다.</p>]]></content><author><name>Junhwan</name></author><category term="ComputerScience" /><category term="algorithm" /><category term="CSE214" /><summary type="html"><![CDATA[Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin]]></summary></entry><entry><title type="html">[AI] Uniformed Search</title><link href="http://localhost:4000/computerscience/1-Uniformed-Search/" rel="alternate" type="text/html" title="[AI] Uniformed Search" /><published>2022-04-24T00:00:00+09:00</published><updated>2022-04-24T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/1%20Uniformed%20Search</id><content type="html" xml:base="http://localhost:4000/computerscience/1-Uniformed-Search/"><![CDATA[<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>용어 정리
 strategy : 전략
 complete : solution이 하나 존재 할 때 그 solution을 찾는 것이 보장되어 있는가?
 optimal : 최단 경로(the least cost path)를 찾는 것이 보장되어 있는가?   

@@ -9,7 +9,7 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>[AL] 2. Important problem types - Slow and Steady</title>
+<!-- begin _includes/seo.html --><title>[AL] 5. Decrease-and-Conquer - Slow and Steady</title>
 <meta name="description" content="Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin">
 
 
@@ -22,8 +22,8 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="Slow and Steady">
-<meta property="og:title" content="[AL] 2. Important problem types">
-<meta property="og:url" content="http://localhost:4000/computerscience/AL-2-Important-problem-types/">
+<meta property="og:title" content="[AL] 5. Decrease-and-Conquer">
+<meta property="og:url" content="http://localhost:4000/computerscience/AL-5-Decrease-and-Conquer/">
 
 
   <meta property="og:description" content="Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin">
@@ -34,7 +34,7 @@
 
 
 
-  <meta property="article:published_time" content="2022-04-30T00:00:00+09:00">
+  <meta property="article:published_time" content="2022-05-02T00:00:00+09:00">
 
 
 
@@ -45,7 +45,7 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/computerscience/AL-2-Important-problem-types/">
+<link rel="canonical" href="http://localhost:4000/computerscience/AL-5-Decrease-and-Conquer/">
 
 
 
@@ -272,16 +272,16 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="[AL] 2. Important problem types">
+    <meta itemprop="headline" content="[AL] 5. Decrease-and-Conquer">
     <meta itemprop="description" content="  Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin">
-    <meta itemprop="datePublished" content="2022-04-30T00:00:00+09:00">
+    <meta itemprop="datePublished" content="2022-05-02T00:00:00+09:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/computerscience/AL-2-Important-problem-types/" class="u-url" itemprop="url">[AL] 2. Important problem types
+            <a href="http://localhost:4000/computerscience/AL-5-Decrease-and-Conquer/" class="u-url" itemprop="url">[AL] 5. Decrease-and-Conquer
 </a>
           </h1>
           
@@ -298,7 +298,7 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          1 분 소요
+          3 분 소요
         
       </span>
     
@@ -313,7 +313,7 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-pen"></i> CSE214</h4></header>
-              <ul class="toc__menu"><li><a href="#sorting">Sorting</a><ul><li><a href="#sorting을--하는-이유">Sorting을  하는 이유</a></li><li><a href="#sorting-알고리즘의-예">Sorting 알고리즘의 예</a></li><li><a href="#sorting-알고리즘의-속성">Sorting 알고리즘의 속성</a></li><li><a href="#selection-sort">Selection Sort</a></li></ul></li><li><a href="#searching">Searching</a></li><li><a href="#string-processing">String processing</a></li><li><a href="#graph-problems">Graph problems</a></li><li><a href="#combinational-problems">Combinational problems</a></li><li><a href="#geometric-problems">Geometric problems</a></li><li><a href="#numerical-problems">Numerical problems</a></li></ul>
+              <ul class="toc__menu"><li><a href="#decrease-and-conquer">Decrease-and-Conquer</a><ul><li><a href="#decrease-and-conquer-technique">Decrease-and-conquer technique</a></li><li><a href="#decrease-by-a-constant">Decrease by a constant</a><ul><li><a href="#the-exponentiation-problem">The exponentiation problem</a></li><li><a href="#insertion-sort">Insertion sort</a></li><li><a href="#topological-sorting">Topological sorting</a></li></ul></li><li><a href="#decrease-by-a-constant-factor">Decrease by a constant factor</a><ul><li><a href="#the-exponentiation-problem-1">The exponentiation problem</a></li><li><a href="#binary-search">Binary search</a></li><li><a href="#fake-coin-problem">Fake-Coin Problem</a></li><li><a href="#russian-peasant-multiplication">Russian Peasant Multiplication</a></li></ul></li><li><a href="#variable-size-decrease">Variable-size decrease</a><ul><li><a href="#euclids-algorithm">Euclid’s algorithm</a></li><li><a href="#selection-problem">Selection problem</a><ul><li><a href="#lomuto-partitioning">Lomuto partitioning</a></li><li><a href="#quickselect-algorithm">Quickselect algorithm</a></li></ul></li><li><a href="#interpolation-search">Interpolation search</a></li><li><a href="#binary-search-tree">Binary Search Tree</a></li></ul></li><li><a href="#generating-combinatorial-objects">Generating Combinatorial Objects</a><ul><li><a href="#johnson-trotter-algorithm">Johnson-Trotter algorithm</a></li></ul></li></ul></li><li><a href="#generating-subsets">Generating Subsets</a><ul><li><a href="#binary-reflected-gray-code-brgc">Binary Reflected Gray Code (BRGC)</a></li></ul></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -322,143 +322,258 @@
   <p>Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin</p>
 </blockquote>
 
-<h2 id="sorting">Sorting</h2>
-<h3 id="sorting을--하는-이유">Sorting을  하는 이유</h3>
+<h1 id="decrease-and-conquer">Decrease-and-Conquer</h1>
+
+<h2 id="decrease-and-conquer-technique">Decrease-and-conquer technique</h2>
+<p>문제에서 주어진 인스턴스에 대한 솔루션과 더 작은 인스턴스에 대한 솔루션 사이의 관계를 기반으로 문제를 푼다.</p>
 <ul>
-  <li>정렬이 출력으로 요구되는 작업이 있다.
+  <li>하향식(Top down) → 재귀적으로 구현(최종 구현은 비재귀적일 수 있음)</li>
+  <li>상향식(Bottom up) → 반복적 구현
     <ul>
-      <li>ex) ranking</li>
-    </ul>
-  </li>
-  <li>정렬은 리스트에 대한 질문에 쉽게 대답할 수 있게 해준다
-    <ul>
-      <li>ex) searching</li>
-    </ul>
-  </li>
-  <li>정렬은 다른 분야의 중요한 알고리즘의 보조 단계로 사용된다.
-    <ul>
-      <li>ex) geometric algorithms and data compression</li>
+      <li>문제의 가장 작은 사례에 대한 해결책부터 시작하여 점진적dmfh 접근</li>
     </ul>
   </li>
 </ul>
 
-<h3 id="sorting-알고리즘의-예">Sorting 알고리즘의 예</h3>
+<h2 id="decrease-by-a-constant">Decrease by a constant</h2>
+<p>알고리즘이 반복될 때 마다 인스턴스의 크기를 같은 상수만큼 줄인다. (보통 $1$)
+<img src="/assets/img/%5BAL%5D5/decreasebyconstant.png" alt="decreasebyconstant" width="50%" height="50%" /></p>
+
+<h3 id="the-exponentiation-problem">The exponentiation problem</h3>
+<p>cmputing $a^n$</p>
 <ul>
-  <li>Selection sort</li>
-  <li>Bubble sort</li>
-  <li>Insertion sort</li>
-  <li>Merge sort</li>
-  <li>Heap sort</li>
-  <li>…
-Sorting 알고리즘의 복잡성은 key의 비교 횟수로 평가한다.</li>
+  <li>Top down
+    <ul>
+      <li>
+\[f(n)=\begin{cases}
+f(n-1) \cdot a \quad if\ n&gt;0 \\
+1 \qquad\quad\quad\quad\ \ if\ n=0
+        
+\end{cases}\]
+      </li>
+    </ul>
+  </li>
+  <li>Botoom up
+    <ul>
+      <li>1에서부터 $a$를 $n$번 곱한다.</li>
+    </ul>
+  </li>
 </ul>
 
-<h3 id="sorting-알고리즘의-속성">Sorting 알고리즘의 속성</h3>
-<p><code class="language-plaintext highlighter-rouge">stable</code> : 입력에서의 동일한 두 요소의 상대적인 순서가 바뀌지 않는 경우
-<code class="language-plaintext highlighter-rouge">in place</code> : 적은 메모리 단위를 제외한 추가 메모리를 사용하지 않는 경우</p>
-
-<h3 id="selection-sort">Selection Sort</h3>
-<p>Input : array <code class="language-plaintext highlighter-rouge">a[1]</code>,…,<code class="language-plaintext highlighter-rouge">a[n]</code></p>
-
-<p>Output :  array a sorted in non-decreasing order</p>
-
-<p>Algorithm:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for i=1 to n 
-    swap a[i] with smallest of a[i],…,a[n] 
-</code></pre></div></div>
-<p>Pseudocode</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Algorithm SelectionSort(A[0..n-1])
-//The algorithm sorts a given array by selection sort
-//Input: An array A[0..n-1] of orderable elements
-//Output: Array A[0..n-1] sorted in ascending order
-for i  0 to n – 2 do
-	min  i
-	for j  i + 1 to n – 1 do
-		if A[j] &lt; A[min] 	
-			min  j
-	swap A[i] and A[min]
+<h3 id="insertion-sort">Insertion sort</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM InsertionSort(A[0..n-1])
+    //Input: An array A[0..n-1] of n orderalbe elements
+    //Output: Array A[0..n-1] sorted in nondecreasing order
+    for i &lt;- 1 to n-1 do
+        v &lt;- A[i]
+        j &lt;- i-1
+        while j&gt;=0 and A[j]&gt;v do
+            A[j+1] &lt;- A[j]
+            j &lt;- j-1
+        A[j+1] &lt;- v
 </code></pre></div></div>
 
-<h2 id="searching">Searching</h2>
+<p>\(A[0]\le\cdots\le A[j]&lt;A[j+1]\le \cdots \le A[i-1] \ \vert\ A[i]\  \cdots \ A[n-1]\)</p>
 <ul>
-  <li>
-    <p>주어진 집합(또는 여러 요소가 동일한 값을 가질 수 있도록 허용된 다중 집합)에서 주어진 <code class="language-plaintext highlighter-rouge">search key</code>를 찾는다.</p>
-  </li>
-  <li>
-    <p>Example</p>
+  <li>basic operation : key comparison <code class="language-plaintext highlighter-rouge">A[j] &gt; v</code></li>
+  <li>the worst-case
     <ul>
-      <li>Sequentail search</li>
-      <li>Binary search</li>
+      <li>
+\[C_{worst}(n)=\sum^{n-1}_{i=1}\sum^{i-1}_{j=0}1=\sum^{n-1}_{i=1}i={n(n-1)\over2}\in\Theta(n^2)\]
+      </li>
+    </ul>
+  </li>
+  <li>the best-case
+    <ul>
+      <li>
+\[C_{best}(n)=\sum^{n-1}_{i=1}1=n-1\in\Theta(n)\]
+      </li>
+    </ul>
+  </li>
+  <li>the average-case
+    <ul>
+      <li>$$C_{avg}(n)\approx{n^2\over4}\in\Theta(n^2)</li>
     </ul>
   </li>
 </ul>
 
-<h2 id="string-processing">String processing</h2>
+<h3 id="topological-sorting">Topological sorting</h3>
+<p><code class="language-plaintext highlighter-rouge">Dag</code> : directed acyclic graph
+<code class="language-plaintext highlighter-rouge">Topological sorting</code> : dag의 정점들에 대해 모든 starting 정점이 ending 정점보다 앞에 위치하는 선형적인 순서에 따라 정렬하며 dag에서만 가능하다</p>
+
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">string</code>: character 배열</li>
-  <li><code class="language-plaintext highlighter-rouge">Text strings</code>: letters, numbers, and special characters.</li>
-  <li><code class="language-plaintext highlighter-rouge">String matching</code>: 글에서 주어진 단어나 패턴을 검색</li>
+  <li>Source-removal algorithm : 들어오는 간선이 없는 정점들과 그 정점에서 나가는 간선들을 지워가면서 정렬한다</li>
 </ul>
 
-<h2 id="graph-problems">Graph problems</h2>
+<h2 id="decrease-by-a-constant-factor">Decrease by a constant factor</h2>
+<p>알고리즘이 반복될 때 마다 인스턴스의 크기를 같은 상수 factor 만큼 줄인다. (보통 $1/2$)</p>
+
+<p><img src="/assets/img/%5BAL%5D5/decreasebyconstantfactor.png" alt="decreasebyconstantfactor" width="48%" height="48%" /></p>
+
+<h3 id="the-exponentiation-problem-1">The exponentiation problem</h3>
+<p>\(a^n= \begin{cases}
+    (a^{n/2})^2 \qquad \quad\ \  if\ n\ is\ even\ and\ positive, \\
+    (a^{(n-1)/2})^2\cdot a \quad if\ n\ is\ odd\,\\
+    1 \qquad\qquad \quad \ \ \ \ if\ n=0
+\end{cases}\)</p>
+
+<h3 id="binary-search">Binary search</h3>
+
+<p align="center"><img src="/assets/img/%5BAL%5D5/bs1.png" width="50%" height="50%" /></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM BinarySearch(A[0..n-1], K)
+    //Input: An array A[0..n-1] sorted in ascending order and a search key K
+    //Output: An index of the array's element that is equal to k or -1 if there is no such element
+    l &lt;- 0; r &lt;- n-1
+    while l &lt;= r do
+        m &lt;- ⌊(l+r)/2⌋
+        if K = A[m] return m
+        else if K &lt; A[M] r &lt;- m-1
+        else l &lt;- m+1
+    return -1 
+</code></pre></div></div>
+
+<p>For $K=70$</p>
+<p align="center"><img src="/assets/img/%5BAL%5D5/bs2.png" width="60%" height="60%" /></p>
+
+<h3 id="fake-coin-problem">Fake-Coin Problem</h3>
+
+<h3 id="russian-peasant-multiplication">Russian Peasant Multiplication</h3>
+<p>두 양수의 곱을 구하는 문제</p>
+
+<p><img src="/assets/img/%5BAL%5D5/RPM.png" width="50%" height="50%" /></p>
 <ul>
-  <li>실제 문제 모델링
+  <li>$n\cdot m =\begin{cases} {n\over2}\cdot 2m \ {n-1\over2}\cdot 2m + m \end{cases}$</li>
+  <li>$1\cdot m = m$ to stop</li>
+</ul>
+
+<h2 id="variable-size-decrease">Variable-size decrease</h2>
+
+<h3 id="euclids-algorithm">Euclid’s algorithm</h3>
+<p>\(gcd(n,\ m) = gcd(n,\ m\ mod \ n)\)</p>
+
+<h3 id="selection-problem">Selection problem</h3>
+<p>$n$개의 원소 중 $k$번째로 작은 수를 찾는 문제</p>
+<ul>
+  <li>정렬 기반 알고리즘
     <ul>
-      <li>World Wide Web(WWW) 모델링</li>
-      <li>통신망 모델링</li>
-      <li>프로젝트 스케줄링</li>
+      <li>Efficiency : $O(n\log n)$</li>
     </ul>
   </li>
-  <li>기본적인 그래프 알고리즘
+  <li>partitioning
     <ul>
-      <li>그래프 순회 알고리즘</li>
-      <li>최단거리 알고리즘</li>
-      <li>위상정렬</li>
+      <li><img src="/assets/img/%5BAL%5D5/partitioning.png" width="70%" height="70%" /></li>
     </ul>
   </li>
 </ul>
 
-<h2 id="combinational-problems">Combinational problems</h2>
+<h4 id="lomuto-partitioning">Lomuto partitioning</h4>
+<p><img src="/assets/img/%5BAL%5D5/lomuto.png" width="70%" height="70%" /></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM LomutoPartition(A[l..r])
+    //Input: A subarray A[1..r] of array A[0..n-1], defined by its left and right indices l and r (l&lt;=r)
+    //Output: Partition of A[l..r] and the new position of the pivot
+    p &lt;- A[l]
+    s &lt;- l
+    for i &lt;- l to r do
+        if A[i] &lt; p
+            s &lt;- s+1; swap(A[s], A[i])
+    swap(A[l], A[s])
+    return s
+</code></pre></div></div>
+
 <ul>
-  <li>명시적으로나 암묵적으로 순열, 조합, 부분집합과 같은 <code class="language-plaintext highlighter-rouge">combinatorial object</code>를 찾는것을 요청</li>
-  <li>ex) traveling salesman problem (TSP)
-    <ul>
-      <li>N개 도시를 모두 정확히 한 번 방문하는 최단 기간 찾기</li>
-    </ul>
-  </li>
-  <li><code class="language-plaintext highlighter-rouge">Combinational</code> 문제는 이론적 및 실제적 관점에서 컴퓨팅에서 가장 어려운 문제이다.</li>
-  <li><code class="language-plaintext highlighter-rouge">combinatorial object</code>의 수는 일반적으로 문제의 크기에 따라 매우 빠르게 증가한다.</li>
-  <li>제한된 시간안에 정확하게 푸는 알려진 알고리즘이 없다.</li>
+  <li>$s=k-1$ 이라면 문제 해결</li>
+  <li>$s&gt;k-1$ 왼쪽에서 $k$번째로 작은 원소 다시 탐색</li>
+  <li>$s&lt;k-1$ 오른쪽에서 $(k-s)$번째로 작은 원소 다시 탐색</li>
 </ul>
 
-<h2 id="geometric-problems">Geometric problems</h2>
+<h4 id="quickselect-algorithm">Quickselect algorithm</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM Quickselect(A[l..r], k)
+    //Input: Subarray A[1..r] of array A[0..n-1] of orderable elements and iteger k(1&lt;=k&lt;=r-l+1) 
+    //Output: The value of the kth smallest element in A[l..r]
+    s &lt;- LomutoPartition(A[l..r]) //or another partition algorithm
+    if s=l+k-1 return A[s]
+    else if s&gt;l+k-1 Quickselect(A[l..s-1], k)
+    else Quickselect(A[s+1..r], l+k-1-s)
+</code></pre></div></div>
 <ul>
-  <li>점, 선, 다각형과 같은 <code class="language-plaintext highlighter-rouge">geometric object</code>를 다룬다.
-    <ul>
-      <li>응용 : 컴퓨터 그래픽, 로보틱스, 단층 촬영</li>
-    </ul>
+  <li>$C_{best}(n) = n-1 \in \Theta(n).$</li>
+  <li>$C_{worst}(n) = (n-1) + (n-2) + \ \cdots\ + 1 = (n-1)n/2 \in \Theta(n^2)$</li>
+  <li>$C_{avg}(n) \rightarrow linear$</li>
+</ul>
+
+<h3 id="interpolation-search">Interpolation search</h3>
+<ul>
+  <li>binary search : search key를 항상 정렬된 배열의 중앙값과 비교</li>
+  <li>Interpolation search : search key의 값을 고려하여 비교할 값을 정함
+    <p align="center"><img src="/assets/img/%5BAL%5D5/interpolation.png" width="70%" height="70%" /></p>
   </li>
-  <li>Example
+</ul>
+
+\[x=l+\lfloor{(v-A[l])(r-l)\over A[r]-A[l]}\rfloor\]
+
+<ul>
+  <li>Efficiency
     <ul>
-      <li>The closest-pair problem</li>
-      <li>The convex-hull problem</li>
+      <li>Basic operation: key comparison</li>
+      <li>average case: $C(n)&lt;\log_2\log_2 n +1$</li>
+      <li>worst case: $C(n)=n$</li>
     </ul>
   </li>
 </ul>
 
-<h2 id="numerical-problems">Numerical problems</h2>
+<h3 id="binary-search-tree">Binary Search Tree</h3>
 <ul>
-  <li>연속적인 <code class="language-plaintext highlighter-rouge">mathematical objects</code>를 포함하는 문제이다.</li>
-  <li>이러한 대부분의 수학적 문제들은 근사적으로만 풀 수 있다.</li>
-  <li>근사된 숫자에 대해 산술 연산을 많이 수행하면 반올림 오차가 누적되어 크게 왜곡될 수 있다.</li>
-  <li>Example
+  <li>Efficiency
     <ul>
-      <li>방정식</li>
-      <li>연립방적식</li>
-      <li>정적분</li>
-      <li>함수값 계산</li>
+      <li>$C_{worst}(n) = \Theta(n)$</li>
+      <li>$C_{avg}(n) = \Theta(\log n)$</li>
     </ul>
   </li>
+</ul>
+
+<h2 id="generating-combinatorial-objects">Generating Combinatorial Objects</h2>
+<p>Minimal-change requirement</p>
+<ul>
+  <li>Advantage of this order in TSP</li>
+</ul>
+
+<h4 id="johnson-trotter-algorithm">Johnson-Trotter algorithm</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM JohnsonTrotter(n)
+    //Input: A positive integer n
+    //Output: A list of all permutations of {1,...,n}
+    initialize the first permutation with 1(&lt;-)2(&lt;-)...n(&lt;-)
+    while the last permutation has a mobile element do
+        find its largest mobile element k
+        swap k with the adjacent element k's arrow points to
+        reverse the direction of all the elements that are larger than k
+        add the new permutation to the lis
+</code></pre></div></div>
+<ul>
+  <li>An application of Johnson-Trotter algorithm $(n=3)$
+    <p align="center"><img src="/assets/img/%5BAL%5D5/J-T.png" width="70%" height="70%" /></p>
+  </li>
+  <li>가장 효율적인 generating permutations 알고리즘 중 하나이다.</li>
+  <li>Time efficiency: Θ(𝑛!)</li>
+</ul>
+
+<h2 id="generating-subsets">Generating Subsets</h2>
+<p>Minimal change algorithm</p>
+
+<h3 id="binary-reflected-gray-code-brgc">Binary Reflected Gray Code (BRGC)</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM BRGC(n)
+    //Input: A positive integer n
+    //Output: A list of all bit strings of length n composing the Gray code
+    if n=1 make list L containing bit string 0 and 1 in this order
+    else generate list L1 of bit strings of size n-1 by calling BRGC(n-1)
+        copy list L1 to list L2 in reversed order
+        add 0 in front of each bit string in list L1
+        add 1 in front of each bit string in list L2
+        append L2 to L1 to get list L
+    return L
+</code></pre></div></div>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">L</code>의 첫번째 원소와 마지막 원소도 1 비트 차이나기 때문에 <code class="language-plaintext highlighter-rouge">cyclic</code>이라고 한다.</li>
 </ul>
 
         
@@ -503,7 +618,7 @@ for i  0 to n – 2 do
 
         
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2022-04-30T00:00:00+09:00">April 30, 2022</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2022-05-02T00:00:00+09:00">May 2, 2022</time></p>
 
       </footer>
 
@@ -512,23 +627,22 @@ for i  0 to n – 2 do
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=%5BAL%5D+2.+Important+problem+types%20http%3A%2F%2Flocalhost%3A4000%2Fcomputerscience%2FAL-2-Important-problem-types%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=%5BAL%5D+5.+Decrease-and-Conquer%20http%3A%2F%2Flocalhost%3A4000%2Fcomputerscience%2FAL-5-Decrease-and-Conquer%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fcomputerscience%2FAL-2-Important-problem-types%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fcomputerscience%2FAL-5-Decrease-and-Conquer%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fcomputerscience%2FAL-2-Important-problem-types%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fcomputerscience%2FAL-5-Decrease-and-Conquer%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/computerscience/AL-1.-Intro/" class="pagination--pager" title="[AL] 1. Intro
+      <a href="/computerscience/AL-4-Brute-Force-and-Exhaustive-Search-copy/" class="pagination--pager" title="[AL] 4. Brute Force and Exhaustive Search
 ">이전</a>
     
     
-      <a href="/computerscience/AL-3-Fundamentals-of-the-Analysis-of-Algorithm-Efficiency/" class="pagination--pager" title="[AL] 3. Fundamentals of the Analysis of Algorithm Efficiency
-">다음</a>
+      <a href="#" class="pagination--pager disabled">다음</a>
     
   </nav>
 
@@ -542,49 +656,6 @@ for i  0 to n – 2 do
     <div class="page__related">
       <h2 class="page__related-title">참고</h2>
       <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/computerscience/AL-5-Decrease-and-Conquer/" rel="permalink">[AL] 5. Decrease-and-Conquer
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          2 분 소요
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">
-  Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin
-
-
-</p>
-  </article>
-</div>
-
         
           
 
@@ -613,7 +684,7 @@ for i  0 to n – 2 do
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          1 분 소요
+          3 분 소요
         
       </span>
     
@@ -656,7 +727,50 @@ for i  0 to n – 2 do
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          3 분 소요
+          4 분 소요
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">
+  Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin
+
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/computerscience/AL-2-Important-problem-types/" rel="permalink">[AL] 2. Important problem types
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          1 분 소요
         
       </span>
     

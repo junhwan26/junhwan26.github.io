@@ -5,8 +5,13 @@ categories:
 tags: 
 - algorithm
 - CSE214
+toc: true
+toc_sticky: true
+toc_label: CSE214
+toc_icon: pen
 
 ---
+>Materials are adapted from “Introduction to the design & Analysis of Algorithms,” 3rd ed., by A. Levitin
 
 ## Sorting 
 ### Sorting을  하는 이유

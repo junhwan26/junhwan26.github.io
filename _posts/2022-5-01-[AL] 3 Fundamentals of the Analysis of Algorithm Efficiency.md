@@ -11,6 +11,7 @@ toc_label: CSE214
 toc_icon: pen
 
 ---
+>Materials are adapted from “Introduction to the design & Analysis of Algorithms,” 3rd ed., by A. Levitin
 
 ## Efficiency
 - 시간 효율성 (시간 복잡도) : 문제에서 알고리즘이 얼마나 빨리 실행되는지를 의미한다.

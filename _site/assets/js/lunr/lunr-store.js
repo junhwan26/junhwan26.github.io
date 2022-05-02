@@ -30,20 +30,32 @@ var store = [{
         "teaser": null
       },{
         "title": "[AL] 1. Intro",
-        "excerpt":"Algorithm을 공부해야하는 이유 컴퓨터 전문가가 되려고 하는 학생이라면 실용적인 이유 다양한 컴퓨팅 분야의 중요한 Algorithm의 표준적인 집합을 알아야한다. 새로운 Algorithm을 디자인하고 효율성을 분석할 수 있어야 한다. 이론적인 이유 algorithmics은 컴퓨터 과학의 기반이다. computing-related 학생이 아니라면 Algorithm이 없는 컴퓨터 프로그램은 존재하지 않는다. 컴퓨터 어플리케이션이 우리의 직업적, 개인적인 삶의 거의 모든 면에서...","categories": ["ComputerScience"],
+        "excerpt":"Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin Algorithm을 공부해야하는 이유 컴퓨터 전문가가 되려고 하는 학생이라면 실용적인 이유 다양한 컴퓨팅 분야의 중요한 Algorithm의 표준적인 집합을 알아야한다. 새로운 Algorithm을 디자인하고 효율성을 분석할 수 있어야 한다. 이론적인 이유 algorithmics은 컴퓨터 과학의 기반이다. computing-related...","categories": ["ComputerScience"],
         "tags": ["algorithm","CSE214"],
         "url": "/computerscience/AL-1.-Intro/",
         "teaser": null
       },{
         "title": "[AL] 2. Important problem types",
-        "excerpt":"Sorting Sorting을 하는 이유 정렬이 출력으로 요구되는 작업이 있다. ex) ranking 정렬은 리스트에 대한 질문에 쉽게 대답할 수 있게 해준다 ex) searching 정렬은 다른 분야의 중요한 알고리즘의 보조 단계로 사용된다. ex) geometric algorithms and data compression Sorting 알고리즘의 예 Selection sort Bubble sort Insertion sort Merge sort Heap sort …...","categories": ["ComputerScience"],
+        "excerpt":"Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin Sorting Sorting을 하는 이유 정렬이 출력으로 요구되는 작업이 있다. ex) ranking 정렬은 리스트에 대한 질문에 쉽게 대답할 수 있게 해준다 ex) searching 정렬은 다른 분야의 중요한 알고리즘의 보조 단계로 사용된다. ex) geometric algorithms...","categories": ["ComputerScience"],
         "tags": ["algorithm","CSE214"],
         "url": "/computerscience/AL-2-Important-problem-types/",
         "teaser": null
       },{
         "title": "[AL] 3. Fundamentals of the Analysis of Algorithm Efficiency",
-        "excerpt":"Efficiency 시간 효율성 (시간 복잡도) : 문제에서 알고리즘이 얼마나 빨리 실행되를 의미한다. 공간 효율성 (공간 복잡도) : 입출력에 필요한 공간 외에 알고리즘에 필요한 메모리 단위의 양을 의미한다. 현재 일반적으로 알고리즘에 필요한 추가 공간의 양은 크게 중요하지 않다. 대부분의 문제에서 공간보다 속도에서 훨씬 더 눈부신 발전을 이룰 수 있다. Time efficiency...","categories": ["ComputerScience"],
+        "excerpt":"Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin Efficiency 시간 효율성 (시간 복잡도) : 문제에서 알고리즘이 얼마나 빨리 실행되는지를 의미한다. 공간 효율성 (공간 복잡도) : 입출력에 필요한 공간 외에 알고리즘에 필요한 메모리 단위의 양을 의미한다. 현재 일반적으로 알고리즘에 필요한 추가 공간의...","categories": ["ComputerScience"],
         "tags": ["algorithm","CSE214"],
         "url": "/computerscience/AL-3-Fundamentals-of-the-Analysis-of-Algorithm-Efficiency/",
+        "teaser": null
+      },{
+        "title": "[AL] 4. Brute Force and Exhaustive Search",
+        "excerpt":"Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin Brute Force 문제를 해결하기 위한 간단한 접근 방식이며, 보통 문제의 문장과 관련된 개념의 정의에 직접적으로 기초한다. 영리하거나 효율적인 알고리즘의 소스가 되는 경우는 드물지만 Brute force는 중요한 알고리즘 디자인 전략으로써 간과해선 안된다. 매우 다양한...","categories": ["ComputerScience"],
+        "tags": ["algorithm","CSE214"],
+        "url": "/computerscience/AL-4-Brute-Force-and-Exhaustive-Search-copy/",
+        "teaser": null
+      },{
+        "title": "[AL] 5. Decrease-and-Conquer",
+        "excerpt":"Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin Decrease-and-Conquer Decrease-and-conquer technique 문제에서 주어진 인스턴스에 대한 솔루션과 더 작은 인스턴스에 대한 솔루션 사이의 관계를 기반으로 문제를 푼다. 하향식(Top down) → 재귀적으로 구현(최종 구현은 비재귀적일 수 있음) 상향식(Bottom up) → 반복적 구현 문제의...","categories": ["ComputerScience"],
+        "tags": ["algorithm","CSE214"],
+        "url": "/computerscience/AL-5-Decrease-and-Conquer/",
         "teaser": null
       }]
