@@ -58,4 +58,10 @@ var store = [{
         "tags": ["algorithm","CSE214"],
         "url": "/computerscience/AL-5-Decrease-and-Conquer/",
         "teaser": null
+      },{
+        "title": "[AL] 6. Divide-and-Conquer",
+        "excerpt":"Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin Divide-and-Conquer Divide-and-conquer technique 가장 잘 알려진 알고리즘 설계 기법이다. 문제는 같은 유형의 이상적으로 크기가 같은 여러 하위 문제로 나뉜다. 하위문제는 일반적으로 재귀적으로 해결되고 하위 문제에 대한 솔루션을 결합하여 원래 문에에 대한 솔루션을 구한다....","categories": ["ComputerScience"],
+        "tags": ["algorithm","CSE214"],
+        "url": "/computerscience/AL-6-Divide-and-Conquer/",
+        "teaser": null
       }]

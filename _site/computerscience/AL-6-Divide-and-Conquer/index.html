@@ -9,7 +9,7 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>[AL] 4. Brute Force and Exhaustive Search - Slow and Steady</title>
+<!-- begin _includes/seo.html --><title>[AL] 6. Divide-and-Conquer - Slow and Steady</title>
 <meta name="description" content="Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin">
 
 
@@ -22,8 +22,8 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="Slow and Steady">
-<meta property="og:title" content="[AL] 4. Brute Force and Exhaustive Search">
-<meta property="og:url" content="http://localhost:4000/computerscience/AL-4-Brute-Force-and-Exhaustive-Search-copy/">
+<meta property="og:title" content="[AL] 6. Divide-and-Conquer">
+<meta property="og:url" content="http://localhost:4000/computerscience/AL-6-Divide-and-Conquer/">
 
 
   <meta property="og:description" content="Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin">
@@ -34,7 +34,7 @@
 
 
 
-  <meta property="article:published_time" content="2022-05-01T00:00:00+09:00">
+  <meta property="article:published_time" content="2022-05-02T00:00:00+09:00">
 
 
 
@@ -45,7 +45,7 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/computerscience/AL-4-Brute-Force-and-Exhaustive-Search-copy/">
+<link rel="canonical" href="http://localhost:4000/computerscience/AL-6-Divide-and-Conquer/">
 
 
 
@@ -272,16 +272,16 @@
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="[AL] 4. Brute Force and Exhaustive Search">
+    <meta itemprop="headline" content="[AL] 6. Divide-and-Conquer">
     <meta itemprop="description" content="  Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin">
-    <meta itemprop="datePublished" content="2022-05-01T00:00:00+09:00">
+    <meta itemprop="datePublished" content="2022-05-02T00:00:00+09:00">
     
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="http://localhost:4000/computerscience/AL-4-Brute-Force-and-Exhaustive-Search-copy/" class="u-url" itemprop="url">[AL] 4. Brute Force and Exhaustive Search
+            <a href="http://localhost:4000/computerscience/AL-6-Divide-and-Conquer/" class="u-url" itemprop="url">[AL] 6. Divide-and-Conquer
 </a>
           </h1>
           
@@ -313,7 +313,7 @@
           <aside class="sidebar__right sticky">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-pen"></i> CSE214</h4></header>
-              <ul class="toc__menu"><li><a href="#brute-force">Brute Force</a><ul><li><a href="#sorting">Sorting</a><ul><li><a href="#selection-sort">Selection sort</a></li><li><a href="#bubble-sort">Bubble sort</a></li></ul></li><li><a href="#search">Search</a><ul><li><a href="#sequential-search">Sequential Search</a></li><li><a href="#string-matching">String matching</a></li></ul></li><li><a href="#geometric-problems">Geometric problems</a><ul><li><a href="#closest-pair-problem">Closest-Pair Problem</a></li><li><a href="#convex-hull-problem">Convex-Hull Problem</a></li></ul></li></ul></li><li><a href="#exhaustive-search">Exhaustive Search</a><ul><li><a href="#combinational-problems">Combinational problems</a><ul><li><a href="#tsp">TSP</a></li><li><a href="#knapsack-problem">Knapsack problem</a></li><li><a href="#assigntment-problem">Assigntment problem</a></li></ul></li></ul></li></ul>
+              <ul class="toc__menu"><li><a href="#divide-and-conquer">Divide-and-Conquer</a><ul><li><a href="#divide-and-conquer-technique">Divide-and-conquer technique</a></li><li><a href="#general-divide-and-conquer-recurrence">General divide-and-conquer recurrence</a><ul><li><a href="#master-theorem">Master Theorem</a></li></ul></li><li><a href="#mergesort">Mergesort</a></li><li><a href="#quicksort">Quicksort</a><ul><li><a href="#partitioning-algorithm">Partitioning Algorithm</a></li><li><a href="#analysis-of-quicksort">Analysis of Quicksort</a></li></ul></li><li><a href="#binay-tree">Binay Tree</a><ul><li><a href="#height">Height</a></li><li><a href="#traversals">Traversals</a></li><li><a href="#multiplication-of-large-integers">Multiplication of Large Integers</a></li><li><a href="#closest-pair-problem">Closest-Pair Problem</a></li><li><a href="#convex-hull">Convex-Hull</a><ul><li><a href="#quickhull">Quickhull</a></li></ul></li></ul></li></ul></li></ul>
 
             </nav>
           </aside>
@@ -322,172 +322,213 @@
   <p>Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin</p>
 </blockquote>
 
-<h1 id="brute-force">Brute Force</h1>
-<p>문제를 해결하기 위한 간단한 접근 방식이며, 보통 문제의 문장과 관련된 개념의 정의에 직접적으로 기초한다.</p>
+<h1 id="divide-and-conquer">Divide-and-Conquer</h1>
 
-<p>영리하거나 효율적인 알고리즘의 소스가 되는 경우는 드물지만 Brute force는 중요한 알고리즘 디자인 전략으로써 간과해선 안된다.</p>
-<ol>
-  <li>매우 다양한 문제에 적용될 수 있다.</li>
-  <li>어떤 중요한 문제에 대해 적어도 입력의 크기에 제한 없는 실제적인 값에 의미있는 알고리즘이 된다.
+<h2 id="divide-and-conquer-technique">Divide-and-conquer technique</h2>
+<ul>
+  <li>가장 잘 알려진 알고리즘 설계 기법이다.</li>
+  <li>문제는 같은 유형의 이상적으로 크기가 같은 여러 하위 문제로 나뉜다.</li>
+  <li>하위문제는 일반적으로 재귀적으로 해결되고 하위 문제에 대한 솔루션을 결합하여 원래 문에에 대한 솔루션을 구한다.</li>
+  <li>Divide-and-conquer technique은 각각의 하위문제를 자체 프로세서에 의해 동시에 해결할 수 있는 병렬 계산에 이상적으로 적합하다.</li>
+</ul>
+
+<p align="center"><img src="/assets/img/%5BAL%5D6/dividenconquer.png" width="70%" height="70%" /></p>
+
+<h2 id="general-divide-and-conquer-recurrence">General divide-and-conquer recurrence</h2>
+<p>사이즈가 $n$인 인스턴스를 사이즈가 $n/b$인 인스턴스로 나누고 그것을 $a$번 풀어야할 때, $a\ge1$, $b&gt;1$. 
+\(T(n)=aT(n/b)+f(n)\)
+$f(n)$은 인스턴스를 나누고 합치는데 걸리는 시간에 대한 함수이다.</p>
+
+<h3 id="master-theorem">Master Theorem</h3>
+
+<p>If $f(n)\in\Theta(n^d)$ where $d\ge 0$ in recurrence, then
+\(T(n)\in 
+\begin{cases} 
+\Theta(n^d) \qquad \quad \ if\ a&lt;b^d\\ 
+\Theta(n^d\log n) \quad if\ a&lt;b^d\\ 
+\Theta(n^{\log_ba})\quad \ \ \ if\ a&lt;b^d
+\end{cases}\)</p>
+
+<h2 id="mergesort">Mergesort</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM Mergesort(A[0..n-1])
+    //Input: An Array A[0..n-1] of orderable elements
+    //Output: Array A[0..n-1] sorted in nondecreasing order
+    if n &gt; 1
+        copy A[0..⌊n/2⌋-1] to B[0..⌊n/2⌋-1]
+        copy A[⌊n/2⌋..n-1] to C[0..⌊n/2⌋-1]
+        Mergesort(B[0..⌊n/2⌋-1])
+        Mergesort(C[0..⌊n/2⌋-1])
+        Merge(B, C, A)
+
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM Merge(B[0..p-1], C[0..q-1], A[0..p+q-1])
+    //Input: Arrays B[0..p-1] and C[0..q-1] both sorted
+    //Output: Sorted array A[0..p+q-1] of the elements of B and C
+    i &lt;- 0; j &lt;- 0; k &lt;- 0;
+    while i &lt; p and j &lt; q do
+        if B[i] &lt;= C[j]
+            A[k] &lt;- B[i]; i &lt;- i+1
+        else 
+            A[k] &lt;- C[j]; j &lt;- j+1
+        k &lt;- k+1
+    if i = p
+        copy C[j..q-1] to A[k..p+q-1]
+    else
+        copy B[i..p-1] to A[k..p+q-1]    
+</code></pre></div></div>
+
+<p align="center"><img src="/assets/img/%5BAL%5D6/mergesort.png" width="70%" height="70%" /></p>
+
+<ul>
+  <li>The number of key comparison
     <ul>
-      <li>ex) sorting, searching, matrix multiplication, string matching</li>
+      <li>$C(n) = 2C(n/2)+C_{merge}(n)$ for $n&gt;1$, $C(1)=0$</li>
+      <li>$C_{merge}(n) = n-1$</li>
+      <li>$C_{worst}(n) = 2C_{worst}(n/2)+n-1$ for $n&gt;1$, $C_{worst}(1)=0$</li>
+      <li>C_{worst}(n)\in\Theta(n\log n)$</li>
     </ul>
   </li>
-  <li>적은 수의 입력만 해결할 필요가 있고 허용할만한 속도로 해결할 수 있다면 더 효율적인 알고리즘을 만들기 위해 비용을 들이지 않아도 된다.</li>
-  <li>일반적으로 매우 비효율적이더라도 작은 크기의 입력을 가진 문제를 푸는데 있어서 유용할 수 있다.</li>
-  <li>더욱 효율적인 대안을 판단하는 기준으로 이론적, 교육적 목적을 제공한다.</li>
-</ol>
-
-<h2 id="sorting">Sorting</h2>
-
-<h3 id="selection-sort">Selection sort</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM SelectionSort(A[0..n-1])
-    //Input: An array A[0..n-1] of orderable elements
-    //Output: Array A[0..n-1] sorted in nondecreasing order
-    for i &lt;- 0 to n-2 do
-        min &lt;- i
-        for j &lt;- i+1 to n-1 do
-            if A[j] &lt; A[min] min &lt;- j
-        swap A[i] and A[min]
-</code></pre></div></div>
-<ul>
-  <li>Input Size: The number of elements, n</li>
-  <li>Basic operation: The key comparison
-  \(C(n)=\sum^{n-2}_{i=0}\sum^{n-1}_{j=i+1}1==\sum^{n-2}_{i=0}(n-1-i)={(n-1)n\over 2}\)</li>
-  <li>모든 입력에서 $\Theta(n^2)$</li>
-  <li>key의 swap은 $n-1$번만 일어난다. 이것은 다른 정렬 알고리즘과 비교하였을 때 좋은 점이다.</li>
+  <li>Stable</li>
+  <li>Space requirement : $\Theta(n)$ (not in-place)</li>
 </ul>
 
-<h3 id="bubble-sort">Bubble sort</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM BubbleSort(A[0..n-1])
-    //Input: An array A[0..n-1] of orderable elements
-    //Output: Array A[0..n-1] sorted in nondecreasing order
-    for i &lt;- 0 to n-2 do
-        for j &lt;- n-2-i to n-1 do
-            if A[j+1] &lt; A[j] swap A[j] and A[j+1]
-</code></pre></div></div>
+<h2 id="quicksort">Quicksort</h2>
+<p align="center"><img src="/assets/img/%5BAL%5D6/quicksort.png" width="70%" height="70%" /></p>
 <ul>
-  <li>key comparison 횟수는 모든 입력에 대해 동일하나 swap 횟수는 입력에 따라 달라진다.</li>
-  <li>worst case에서 swap 횟수와 comparison 횟수가 같다</li>
-  <li>각 반복에서 교환이 한번도 일어나지 않았다면 알고리즘을 멈추는것으로 개선할 수 있다.</li>
+  <li>Mergesort가 요소들의 위치에 따라 나눈거라면 Quicksort는 값에 따라 나눈다.</li>
 </ul>
 
-<h2 id="search">Search</h2>
-
-<h3 id="sequential-search">Sequential Search</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM SequentialSearch2(A[0..n],K)
-    //Input: An Array A of n elements and a search key K
-    //Output: The index of the first element in A[0..n-1] whose value is equal to K or -1 if no such element is found
-    A[n] &lt;- K
-    i &lt;- 0
-    while A[i] != K do
-        i &lt;- i+1
-    if i &lt; n return i
-    else return -1 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM Quicksort(A[l..r])
+    //Input: Subarray of array A[0..n-1], defined by its left and right indices l and r
+    //Output: Subarray A[l..r] sorted in nondecreasing order
+    if l &lt; r
+        s &lt;- Partition(A[l..r]) // s is a split position
+        Quicksort(A[l..s-1])
+        Quicksort(A[s+1..r])
 </code></pre></div></div>
+
+<h3 id="partitioning-algorithm">Partitioning Algorithm</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM HoarePartition(A[l..r])
+    //Input: Subarray of array A[0..n-1], defined by its left and right indices l and r (l &lt; r)
+    //Output: Partition of A[l..r], with the split position returned as this function's value 
+    p &lt;- A[l]
+    i &lt;- l; j &lt;-  r+1
+    repeat
+        repeat i &lt;- i+1 until A[i] &gt;= p
+        repeat j &lt;- j-1 until A[j] &lt;= q
+        swap(A[i], A[j])
+    until i &gt;= j
+    swap(A[i], A[j]) //undo last swap when i &gt;= j
+    swap(A[l], A[j])
+    return j
+</code></pre></div></div>
+<p align="center"><img src="/assets/img/%5BAL%5D6/pa1.png" width="70%" height="70%" /></p>
+<p align="center"><img src="/assets/img/%5BAL%5D6/pa2.png" width="70%" height="70%" /></p>
+<p align="center"><img src="/assets/img/%5BAL%5D6/pa3.png" width="70%" height="70%" /></p>
+
+<h3 id="analysis-of-quicksort">Analysis of Quicksort</h3>
 <ul>
-  <li>배열이 정렬되어 있다면 요소가 search key보다 크거나 같아진다면 알고리즘을 멈추는 것으로 개선할 수 있다.</li>
+  <li>Best case: 중간에서 split — $\Theta(n\log n)</li>
+  <li>Worst case: 이미 정렬된 배열 — $\Theta(n^2)</li>
+  <li>Average case: random 배열 —$\Theta(n\log n)
+    <ul>
+      <li>보통 Mergesort보다 빠르다</li>
+    </ul>
+  </li>
+  <li>Improvements:
+    <ul>
+      <li>pivot을 선택할 때 세 개의 값중 중간값을 선택</li>
+      <li>매우 작은 subarray에서 insertion sort 사용</li>
+    </ul>
+  </li>
+  <li>Not Stable</li>
 </ul>
 
-<h3 id="string-matching">String matching</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM BruteForceStringMatch(T[0..n-1], P[0..m-1])
-    //Input: An array T[0..n-1] of n characters representing a text and
-             An array P[0..m-1] of m characters representing a pattern
-    //Output: The index of the first character in the text that starts a matching substring or -1 if the search is unsuccessful
-    for i &lt;- 0 to n-m do
-        j &lt;- 0
-        while j &lt; m and P[j] = T[i+j] do
-            j &lt;- j+1
-        if j = m return i
-    return -1    
+<h2 id="binay-tree">Binay Tree</h2>
+<p>Binary trees와 관련된 많은 문제가 divede-and-conquer technique로 해결된다.
+<img src="/assets/img/%5BAL%5D6/BT.png" width="70%" height="70%" /></p>
+
+<h3 id="height">Height</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM HEIGHT(T)
+    //Input: A binary tree T
+    //Output: The height of T
+    if T = NULL return -1
+    else return max{Height(T_left), Height(T_right)}+1
 </code></pre></div></div>
+<h3 id="traversals">Traversals</h3>
 <ul>
-  <li>최악의 경우 이 알고리즘은 $m(n-m+1)$개의 character를 비교해야하고 이것은 $O(nm)이다.</li>
-  <li>그러나 일반적인 자연어 텍스트의 경우 대부분 매우 적은 비교 이후 <code class="language-plaintext highlighter-rouge">i</code>의 이동이 일어날 것으로 기대해야한다.</li>
-  <li>랜덤 텍스트에서 검색할 경우 $\Theta(n)$로 보였다.</li>
+  <li>preorder traversal</li>
+  <li>inorder traversal</li>
+  <li>postorder traversal</li>
 </ul>
 
-<h2 id="geometric-problems">Geometric problems</h2>
+<h3 id="multiplication-of-large-integers">Multiplication of Large Integers</h3>
+
+<p>두 자리수 정수$a$, $b$를 $a=a_1a_0$,  $b=b_1b_0$로 나누어 계산한다.</p>
+
+\[c = a*b = c_210^2+c_110^1+c_0\]
+
+<p>$c_2=a_1*b_1$ 첫째 자리수의 곱</p>
+
+<p>$c_0=a_0*b_0$ 둘재 자리 수의 곱</p>
+
+<p>$c_1=(a_1+a_0)*(b_1+b_0)-(c_2+c_0)$ 각 자리수의 합을 곱한 값에 $c_2$, $c_0$를 뺀 값</p>
+
+<p>$n$-자리수의 경우</p>
+
+\[c = a*b = c_210^n+c_110^{n/2}+c_0\]
+
+<p>$c_2=a_1*b_1$ 앞쪽 반의 자리수의 곱</p>
+
+<p>$c_0=a_0*b_0$ 뒷쪽 반의 자리수의 곱</p>
+
+<p>$c_1=(a_1+a_0)*(b_1+b_0)-(c_2+c_0)$ 각 자리수의 합을 곱한 값에 $c_2$, $c_0$를 뺀 값</p>
+
+<ul>
+  <li>곱 횟수 : $M(n)=3M(n/2)$ for $n&gt;1$, $M(1)=1$.
+    <ul>
+      <li>$M(n) = 3^{\log_2n}$</li>
+    </ul>
+  </li>
+</ul>
 
 <h3 id="closest-pair-problem">Closest-Pair Problem</h3>
-<p>점들의 집합에서 가장 가까운 두 점을 찾기.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM BruteForceClosestPair(P)
-    //Input: A list P of n (n&gt;=2) points p1(x1,y1),...,pn(xn,yn)
-    //Output: The distance between the closest pair of points
-    d &lt;- ∞
-    for i &lt;- 1 to n-1 do
-        for j &lt;- i+1 to n do
-            d &lt;- min(d, sqrt((xi-xj)^2 + (yi-yj)^2))
-    return d
-</code></pre></div></div>
-<ul>
-  <li>Basic operation: computing the sqrt -&gt; squaring a number
-  \(C(n)=\sum^{n-1}_{i=1}\sum^{n}_{j=i+1}2 = 2\sum^{n-1}_{i=1}(n-i)=n(n-1)\in\Theta(n^2)\)</li>
-</ul>
+<p><img src="/assets/img/%5BAL%5D6/cp1.png" width="30%" height="30%" />
+<img src="/assets/img/%5BAL%5D6/cp2.png" width="60%" height="60%" /></p>
 
-<h3 id="convex-hull-problem">Convex-Hull Problem</h3>
-<p>평면 또는 고차워너 공간의 특정 점 집합에서 볼록 껍질 찾기.</p>
 <ul>
-  <li>컴퓨터 기하학에서 가장 중요한 문제들 중 하나이다.</li>
-  <li>볼록 껍질은 주어진 물체의 모양과 데이터 셋에 가까운 근사치를 제공한다.</li>
-  <li>정의
+  <li>Recurrence for the running time of the algorithm
     <ul>
-      <li>공간상에서 점들의 집합(유한 or 무한)의 어느 두 점 $p$와 $q$에 대해 $p$와 $q$의 끝점을 연결한 선분들이 모두 집합에 속한다면 Convex한다고 한다.</li>
+      <li>$T(n) = 2T(n/2) + f(n) $, where $f(n)\in\Theta(n)$</li>
+      <li>Applying the Master Theorem (with $a=2$, $b=2$, and $d=1$),  $T(n)\in\Theta(n\log n)$</li>
     </ul>
   </li>
 </ul>
 
-<p><img src="/assets/img/%5BAL%5D4/convexhull.png" alt="convexhull" width="70%" height="70%" /></p>
-
+<h3 id="convex-hull">Convex-Hull</h3>
 <ul>
-  <li>Algorithm
+  <li>Quickhull
     <ul>
-      <li>두 점 $(x_1,\ y_1),\ (x_2,\ y_2)$을 지나는 직선은 다음과 같이 정의된다
-\(ax+by=c\)
-\(a=y_2-y_1,\ b=x_1=x_2,\ c=x_1y_2-y_1x_2\)</li>
-      <li>이 직선의 방정식은 평면을 $ax+by&gt;c$ 와 $ax+by&lt;c$ 두개의 평면으로 나눈다.</li>
-      <li>모든 점들이 같은 평면에 있다면 그 직선을 선택한다.
-        <ul>
-          <li>$ax+by-c$의 부호를 확인하는 방법을 사용한다.</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li>Time efficiency : $O(n^3)$</li>
-</ul>
-
-<h1 id="exhaustive-search">Exhaustive Search</h1>
-<h2 id="combinational-problems">Combinational problems</h2>
-
-<h3 id="tsp">TSP</h3>
-<p>최소비용으로 모든 도시를 여행하는 방법을 찾는 문제
-<img src="/assets/img/%5BAL%5D4/TSP.png" alt="TSP" width="70%" height="70%" /></p>
-<ul>
-  <li>The total number of permutations : ${1\over2}(n-1)!$</li>
-</ul>
-
-<h3 id="knapsack-problem">Knapsack problem</h3>
-<p>weight $w_i$, value $v_i$를 가진 $n$개의 아이템의 부분집합 중 가방에 담을 수 있는 가장 비싼 집합을 찾는 문제
-<img src="/assets/img/%5BAL%5D4/knapsack1.png" alt="knapack" width="50%" height="50%" /> 
-<img src="/assets/img/%5BAL%5D4/knapsack2.png" alt="knapack" width="40%" height="40%" /></p>
-<ul>
-  <li>모든 부분집합을 만들고 가방에 담을 수 있는 부분 집합 중 가장 비싼 부분집합을 선택한다.</li>
-  <li>The number of subsets of an n-element set is $2^n$
-    <ul>
-      <li>$\Omega(2^n)$ algorithm</li>
+      <li>$n$개의 점들 ($p_1(x_1, y_1), \cdots, p_n(x_n,y_n)$이 집합 $S$에 속해있다.</li>
+      <li>$n$개의 점들을 $x$좌표를 기준으로 정렬한 뒤 양 끝점 $p_1$, $p_n$을 지나는 직선을 중심으로 위쪽을 $S_1$, 아래쪽을 $S_2$로 $S$를 두개의 평면으로 나눈다.</li>
     </ul>
   </li>
 </ul>
+<p align="center"><img src="/assets/img/%5BAL%5D6/ch1.png" width="60%" height="60%" /></p>
 
-<h3 id="assigntment-problem">Assigntment problem</h3>
-<p>$n$명의 사람에게 $n$개의 일을 한 사람 당 하나씩 최소 비용으로 부여하는 문제
-<img src="/assets/img/%5BAL%5D4/assign.png" alt="assign" width="100%" height="100%" /></p>
-
-<p><img src="/assets/img/%5BAL%5D4/assign2.png" alt="assign2" height="100%" /></p>
+<h4 id="quickhull">Quickhull</h4>
 <ul>
-  <li>가능한 모든 순열을 구한 뒤 각 순열마다 비용을 구해 최소값을 갖는 순열을 찾는다.</li>
+  <li>$S_1$이 비어있을 경우 두 점 $p_1$, $p_n$을 연결한 선분을 추가한다.</li>
+  <li>$S_1$이 비어있지 않을 경우 집합 $S_1$의 점중 직선 $\overrightarrow{p_1p_n}$과의 거리가 가장 먼 점 $p_max$을 찾는다.</li>
+  <li>$\overrightarrow{p_1p_{max}}$의 왼쪽에 있는 점들의 집합을 $S_{1,1}$, $\overrightarrow{p_{max}p_n}$의 왼쪽에 있는 점들의 집합을 $S_{1,2}$라고 하고 이 집합들에 대해 위의 과정을 반복한다.</li>
 </ul>
 
+<p align="center"><img src="/assets/img/%5BAL%5D6/qh.png" width="60%" height="60%" /></p>
+
+<ul>
+  <li>worst-case : $\Theta(n^2)$</li>
+  <li>average-case : lnear</li>
+</ul>
 
         
       </section>
@@ -531,7 +572,7 @@
 
         
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2022-05-01T00:00:00+09:00">May 1, 2022</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2022-05-02T00:00:00+09:00">May 2, 2022</time></p>
 
       </footer>
 
@@ -540,23 +581,22 @@
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=%5BAL%5D+4.+Brute+Force+and+Exhaustive+Search%20http%3A%2F%2Flocalhost%3A4000%2Fcomputerscience%2FAL-4-Brute-Force-and-Exhaustive-Search-copy%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=%5BAL%5D+6.+Divide-and-Conquer%20http%3A%2F%2Flocalhost%3A4000%2Fcomputerscience%2FAL-6-Divide-and-Conquer%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fcomputerscience%2FAL-4-Brute-Force-and-Exhaustive-Search-copy%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fcomputerscience%2FAL-6-Divide-and-Conquer%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fcomputerscience%2FAL-4-Brute-Force-and-Exhaustive-Search-copy%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fcomputerscience%2FAL-6-Divide-and-Conquer%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/computerscience/AL-3-Fundamentals-of-the-Analysis-of-Algorithm-Efficiency/" class="pagination--pager" title="[AL] 3. Fundamentals of the Analysis of Algorithm Efficiency
+      <a href="/computerscience/AL-5-Decrease-and-Conquer/" class="pagination--pager" title="[AL] 5. Decrease-and-Conquer
 ">이전</a>
     
     
-      <a href="/computerscience/AL-5-Decrease-and-Conquer/" class="pagination--pager" title="[AL] 5. Decrease-and-Conquer
-">다음</a>
+      <a href="#" class="pagination--pager disabled">다음</a>
     
   </nav>
 
@@ -570,49 +610,6 @@
     <div class="page__related">
       <h2 class="page__related-title">참고</h2>
       <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/computerscience/AL-6-Divide-and-Conquer/" rel="permalink">[AL] 6. Divide-and-Conquer
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          2 분 소요
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">
-  Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin
-
-
-</p>
-  </article>
-</div>
-
         
           
 
@@ -641,7 +638,50 @@
       <span class="page__meta-readtime">
         <i class="far fa-clock" aria-hidden="true"></i>
         
-          2 분 소요
+          3 분 소요
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">
+  Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin
+
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/computerscience/AL-4-Brute-Force-and-Exhaustive-Search-copy/" rel="permalink">[AL] 4. Brute Force and Exhaustive Search
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 분 소요
         
       </span>
     
