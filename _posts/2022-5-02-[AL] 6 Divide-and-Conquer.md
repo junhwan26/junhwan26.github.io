@@ -114,9 +114,9 @@ ALGORITHM HoarePartition(A[l..r])
 <p align="center"><img src="/assets/img/%5BAL%5D6/pa3.png" width="70%" height="70%"></p>
 
 ### Analysis of Quicksort
-- Best case: 중간에서 split — $\Theta(n\log n)
-- Worst case: 이미 정렬된 배열 — $\Theta(n^2)
-- Average case: random 배열 —$\Theta(n\log n)
+- Best case: 중간에서 split — $\Theta(n\log n)$
+- Worst case: 이미 정렬된 배열 — $\Theta(n^2)$
+- Average case: random 배열 —$\Theta(n\log n)$
   - 보통 Mergesort보다 빠르다
 - Improvements:
   - pivot을 선택할 때 세 개의 값중 중간값을 선택
