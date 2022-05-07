@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-05-02T23:42:13+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Slow and Steady</title><subtitle>Data Science, Computer Science, Statistics, AI.</subtitle><author><name>Junhwan</name></author><entry><title type="html">[AL] 5. Decrease-and-Conquer</title><link href="http://localhost:4000/computerscience/AL-5-Decrease-and-Conquer/" rel="alternate" type="text/html" title="[AL] 5. Decrease-and-Conquer" /><published>2022-05-02T00:00:00+09:00</published><updated>2022-05-02T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/%5BAL%5D%205%20Decrease-and-Conquer</id><content type="html" xml:base="http://localhost:4000/computerscience/AL-5-Decrease-and-Conquer/"><![CDATA[<blockquote>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-05-04T13:36:22+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Slow and Steady</title><subtitle>Data Science, Computer Science, Statistics, AI.</subtitle><author><name>Junhwan</name></author><entry><title type="html">[AL] 5. Decrease-and-Conquer</title><link href="http://localhost:4000/computerscience/AL-5-Decrease-and-Conquer/" rel="alternate" type="text/html" title="[AL] 5. Decrease-and-Conquer" /><published>2022-05-02T00:00:00+09:00</published><updated>2022-05-02T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/%5BAL%5D%205%20Decrease-and-Conquer</id><content type="html" xml:base="http://localhost:4000/computerscience/AL-5-Decrease-and-Conquer/"><![CDATA[<blockquote>
   <p>Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin</p>
 </blockquote>
 
@@ -364,9 +364,9 @@ $f(n)$은 인스턴스를 나누고 합치는데 걸리는 시간에 대한 함�
 
 <h3 id="analysis-of-quicksort">Analysis of Quicksort</h3>
 <ul>
-  <li>Best case: 중간에서 split — $\Theta(n\log n)</li>
-  <li>Worst case: 이미 정렬된 배열 — $\Theta(n^2)</li>
-  <li>Average case: random 배열 —$\Theta(n\log n)
+  <li>Best case: 중간에서 split — $\Theta(n\log n)$</li>
+  <li>Worst case: 이미 정렬된 배열 — $\Theta(n^2)$</li>
+  <li>Average case: random 배열 —$\Theta(n\log n)$
     <ul>
       <li>보통 Mergesort보다 빠르다</li>
     </ul>
@@ -1158,10 +1158,14 @@ for i  0 to n – 2 do
 
 <h2 id="최대공약수-구하기">최대공약수 구하기</h2>
 <h3 id="유클리드-algorithm">유클리드 Algorithm</h3>
-<p><strong>Eclid’s algorithm</strong> for computing <code class="language-plaintext highlighter-rouge">gcd(m,n)
-**Step 1** 만약 </code>n=0<code class="language-plaintext highlighter-rouge"> 이면 정답으로 </code>m<code class="language-plaintext highlighter-rouge">을 리턴하고 멈춘다.; 아니라면 **Step 2**를 진행한다.
-**Step 2** </code>m<code class="language-plaintext highlighter-rouge">을 </code>n<code class="language-plaintext highlighter-rouge">으로 나눈 나머지를 </code>r<code class="language-plaintext highlighter-rouge">에 할당한다.
-**Step 3** </code>n<code class="language-plaintext highlighter-rouge">을 </code>m<code class="language-plaintext highlighter-rouge">에 할당하고 </code>r<code class="language-plaintext highlighter-rouge">을 </code>n`에 할당한 뒤 <strong>Step 1</strong>로 돌아간다.</p>
+
+<p><strong>Eclid’s algorithm</strong> for computing `gcd(m,n)</p>
+
+<p><strong>Step 1</strong> 만약 <code class="language-plaintext highlighter-rouge">n=0</code> 이면 정답으로 <code class="language-plaintext highlighter-rouge">m</code>을 리턴하고 멈춘다.; 아니라면 <strong>Step 2</strong>를 진행한다.</p>
+
+<p><strong>Step 2</strong> <code class="language-plaintext highlighter-rouge">m</code>을 <code class="language-plaintext highlighter-rouge">n</code>으로 나눈 나머지를 <code class="language-plaintext highlighter-rouge">r</code>에 할당한다.</p>
+
+<p><strong>Step 3</strong> <code class="language-plaintext highlighter-rouge">n</code>을 <code class="language-plaintext highlighter-rouge">m</code>에 할당하고 <code class="language-plaintext highlighter-rouge">r</code>을 <code class="language-plaintext highlighter-rouge">n</code>에 할당한 뒤 <strong>Step 1</strong>로 돌아간다.</p>
 
 <p>pseudo code</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//Inputs: Two nonegative, not-both-zero integers m and n
@@ -1175,18 +1179,24 @@ Euclid(m,n)
 </code></pre></div></div>
 
 <h3 id="consecutive-integer-checking-algorithm">Consecutive integer checking algorithm</h3>
-<p><strong>Step 1</strong> <code class="language-plaintext highlighter-rouge">t</code>에 <code class="language-plaintext highlighter-rouge">min(m.n)</code>을 할당한다 
-<strong>Step 2</strong> <code class="language-plaintext highlighter-rouge">m</code>을 <code class="language-plaintext highlighter-rouge">t</code>로 나누고 나머지가 <code class="language-plaintext highlighter-rouge">0</code>이라면 <strong>Step 3</strong>로 가고 아니면 <strong>Step 4</strong>로 간다.
-<strong>Step 3</strong> <code class="language-plaintext highlighter-rouge">n</code>을 <code class="language-plaintext highlighter-rouge">t</code>로 나누고 나머지가 <code class="language-plaintext highlighter-rouge">0</code>이라면 <code class="language-plaintext highlighter-rouge">t</code>를 정답으로 리턴하고 멈춘다. 아니라면 <strong>Step 4</strong>로 간다.
-<strong>Step 4</strong> <code class="language-plaintext highlighter-rouge">t</code>를 1 감소시키고 <strong>Step 2</strong>로 간다.</p>
+<p><strong>Step 1</strong> <code class="language-plaintext highlighter-rouge">t</code>에 <code class="language-plaintext highlighter-rouge">min(m.n)</code>을 할당한다</p>
+
+<p><strong>Step 2</strong> <code class="language-plaintext highlighter-rouge">m</code>을 <code class="language-plaintext highlighter-rouge">t</code>로 나누고 나머지가 <code class="language-plaintext highlighter-rouge">0</code>이라면 <strong>Step 3</strong>로 가고 아니면 <strong>Step 4</strong>로 간다.</p>
+
+<p><strong>Step 3</strong> <code class="language-plaintext highlighter-rouge">n</code>을 <code class="language-plaintext highlighter-rouge">t</code>로 나누고 나머지가 <code class="language-plaintext highlighter-rouge">0</code>이라면 <code class="language-plaintext highlighter-rouge">t</code>를 정답으로 리턴하고 멈춘다. 아니라면 <strong>Step 4</strong>로 간다.</p>
+
+<p><strong>Step 4</strong> <code class="language-plaintext highlighter-rouge">t</code>를 1 감소시키고 <strong>Step 2</strong>로 간다.</p>
 
 <p>이 Algorithm은 입력값이 0일 때 제대로 작동하지 않는다.</p>
 
 <h3 id="소인수-분해">소인수 분해</h3>
-<p><strong>Step 1</strong> <code class="language-plaintext highlighter-rouge">m</code>을 소인수를 찾아라
-<strong>Step 2</strong> <code class="language-plaintext highlighter-rouge">n</code>을 소인수를 찾아라
-<strong>Step 3</strong> <strong>Step 1</strong>과 <strong>Step 2</strong>에서 공통으로 나오는 소인수를 찾아라
-<strong>Step 4</strong> 모두 곱해라</p>
+<p><strong>Step 1</strong> <code class="language-plaintext highlighter-rouge">m</code>을 소인수를 찾아라</p>
+
+<p><strong>Step 2</strong> <code class="language-plaintext highlighter-rouge">n</code>을 소인수를 찾아라</p>
+
+<p><strong>Step 3</strong> <strong>Step 1</strong>과 <strong>Step 2</strong>에서 공통으로 나오는 소인수를 찾아라</p>
+
+<p><strong>Step 4</strong> 모두 곱해라</p>
 
 <p>소인수 분해를 하는 방법이 unambiguously하게 정의되어 있지 않아 좋은 Algorithm 기술방법이 아니다.</p>
 
