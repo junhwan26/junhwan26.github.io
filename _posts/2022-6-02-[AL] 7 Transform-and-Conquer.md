@@ -183,7 +183,8 @@ Heap은 가장 효율적으로 우선순위 큐를 구현하는 방법이다.
 
 ## Horner's Rule
 `representation-change` technique의 예로 다항식을 계산하는 알고리즘이다.
-$$p(x) = (\cdots(a_nx+a_{n-1})x+\cdots)x+a_0$$
+$$p(x) = (\cdots(a_nx+a_{n-1})x+\cdots )x+a_0$$
+
 ```
 ALGORITHM Horner(P[0..n], x)
     //Evaluates a polynomial at a given point by Horner's rule
@@ -194,8 +195,8 @@ ALGORITHM Horner(P[0..n], x)
         p <- x*p + P[i]
     return p
 ```
-곱셈과 덧셈의 횟수는 모두 $n$이다.
 
+곱셈과 덧셈의 횟수는 모두 $n$이다.
 
 ## Problem Reduction
 - 문제를 이미 해결방법을 알고 있는 다른 문제로 바꾸어 해결한다.
@@ -207,7 +208,7 @@ ALGORITHM Horner(P[0..n], x)
 
 ### Computing the Least Common Multiple
 - `GCD`를 구하는 매우 효율적인 알고리즘인 유클리드 알고리즘을 이용하여 구한다.
-$$lcm(m,n) = {{m \cdot n}\over{gcd(m,n)}}$$
+$$lcm(m,n) = {m\cdot n\over{gcd(m,n)}}$$
 
 ### Countingn Paths in a Graph
 - 두개의 정점 사이의 경로의 갯수를 구하는 문제

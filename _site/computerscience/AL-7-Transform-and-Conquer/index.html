@@ -1,0 +1,995 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[AL] 7. Transform-and-Conquer - Slow and Steady</title>
+<meta name="description" content="Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin">
+
+
+  <meta name="author" content="Junhwan">
+  
+  <meta property="article:author" content="Junhwan">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="Slow and Steady">
+<meta property="og:title" content="[AL] 7. Transform-and-Conquer">
+<meta property="og:url" content="http://localhost:4000/computerscience/AL-7-Transform-and-Conquer/">
+
+
+  <meta property="og:description" content="Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-06-02T00:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/computerscience/AL-7-Transform-and-Conquer/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Junhwan",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Slow and Steady Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/logo.ico/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/logo.ico/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/logo.ico/favicon-16x16.png">
+<link rel="mask-icon" href="/assets/logo.ico/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+    
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          Slow and Steady
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/year-archive/">Archive</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">tag</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/">Category</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <a href="http://localhost:4000/">
+        <img src="/assets/images/profile.png" alt="Junhwan" itemprop="image" class="u-photo">
+      </a>
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">Junhwan</a>
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>-</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Republic of Korea</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:gjwnsghks02@gmail.com" rel="nofollow noopener noreferrer me"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span></a></li>
+          
+        
+          
+            <li><a href="https://www.kaggle.com/junhwan26" rel="nofollow noopener noreferrer me"><i class="fab fa-fw fa-kaggle" aria-hidden="true"></i><span class="label">kaggle</span></a></li>
+          
+        
+          
+            <li><a href="https://github.com/junhwan26" rel="nofollow noopener noreferrer me"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://www.instagram.com/jxnhwxn26/" rel="nofollow noopener noreferrer me"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i><span class="label">Instagram</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+  
+  </div>
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[AL] 7. Transform-and-Conquer">
+    <meta itemprop="description" content="  Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin">
+    <meta itemprop="datePublished" content="2022-06-02T00:00:00+09:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/computerscience/AL-7-Transform-and-Conquer/" class="u-url" itemprop="url">[AL] 7. Transform-and-Conquer
+</a>
+          </h1>
+          
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          5 분 소요
+        
+      </span>
+    
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-pen"></i> CSE214</h4></header>
+              <ul class="toc__menu"><li><a href="#transform-and-conquer">Transform-and-Conquer</a><ul><li><a href="#transform-and-conquer-technique">Transform-and-conquer technique</a></li><li><a href="#instance-simplication">Instance Simplication</a><ul><li><a href="#presorting">Presorting</a><ul><li><a href="#checking-element-uniqueness">Checking Element Uniqueness</a></li><li><a href="#computing-a-mode">Computing a mode</a></li><li><a href="#searching-problem">Searching problem</a></li></ul></li></ul></li><li><a href="#searching-algorithm의-분류">Searching algorithm의 분류</a><ul><li><a href="#binary-search-tree">Binary Search Tree</a></li><li><a href="#balanced-search-trees">Balanced Search Trees</a><ul><li><a href="#avl-trees">AVL trees</a></li><li><a href="#multiway-search-trees">Multiway Search Trees</a><ul><li><a href="#2-3-trees">2-3 trees</a></li></ul></li><li><a href="#heap">Heap</a><ul><li><a href="#heap-sort">Heap Sort</a></li></ul></li></ul></li></ul></li><li><a href="#horners-rule">Horner’s Rule</a></li><li><a href="#problem-reduction">Problem Reduction</a><ul><li><a href="#computing-the-least-common-multiple">Computing the Least Common Multiple</a></li><li><a href="#countingn-paths-in-a-graph">Countingn Paths in a Graph</a></li><li><a href="#reduction-of-optimization-problems">Reduction of Optimization problems</a><ul><li><a href="#linear-programming">Linear Programming</a></li></ul></li><li><a href="#reduction-to-graph-problems">Reduction to Graph Problems</a></li></ul></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        <blockquote>
+  <p>Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin</p>
+</blockquote>
+
+<h1 id="transform-and-conquer">Transform-and-Conquer</h1>
+
+<h2 id="transform-and-conquer-technique">Transform-and-conquer technique</h2>
+<ul>
+  <li>두가지 절차
+    <ol>
+      <li>인스턴스들을 문제를 더 풀기 쉽도록 변형한다</li>
+      <li>변형된 입력들로 문제를 해결한다.</li>
+    </ol>
+  </li>
+  <li>주어진 인스턴스의 세 가지 주요 변형:
+    <ol>
+      <li>Instance Simplication: 동일한 문제의 더 단순하고 편리한 인스턴스로 전환</li>
+      <li>Representation change: 동일한 인스턴스의 다른 표현으로 변경</li>
+      <li>Problem reduction: 알고리즘을 이미 사용할 수 있는 다른 문제로 이동</li>
+    </ol>
+  </li>
+</ul>
+
+<h2 id="instance-simplication">Instance Simplication</h2>
+<p>동일한 문제의 다른 단순하고 쉬운 인스턴스로 변환하여 문제 해결</p>
+
+<h3 id="presorting">Presorting</h3>
+<p>리스트와 관련된 많은 문제는 리스트를 정렬되었을 때 쉽게 풀 수 있다.</p>
+<ul>
+  <li>searching</li>
+  <li>selection problem</li>
+  <li>element uniqueness
+알고리즘의 시간 효율은 사용하는 정렬 알고리즘의 효율성에 따라 달라질 수 있다.</li>
+</ul>
+
+<h4 id="checking-element-uniqueness">Checking Element Uniqueness</h4>
+<ul>
+  <li>Brute Force algorithm
+    <ul>
+      <li>모든 원소 쌍들을 비교한다.</li>
+      <li>The worst-case efficiency: $\Theta(n^2)$</li>
+    </ul>
+  </li>
+  <li>Presorting-based algorithm
+    <ul>
+      <li>Stage 1 : 효울적인 정렬 알고리즘으로 원소들을 정렬한다.</li>
+      <li>Stage 2 : 인접한 두 원소가 같은 값인지 확인한다.</li>
+      <li>Efficiency : $T(n)=T_{sort}(n)+T_{scan}(n) \in \theta(n\log n)+\theta(n) = \theta(n \log n)$</li>
+      <li>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM PresortElementUniqueness(A[0..n-1])
+    //Solved the arry uniqueness problem by sorting the array first
+    //Input: An Arrays A[0..n-1] of oderable elements
+    //Output: Returns "true" if A has no equal elements, "false" otherwise
+    sort the array A
+        
+    for i &lt;- 0 to n-2 do
+        if A[i] = A[i+1] return false
+    return true
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="computing-a-mode">Computing a mode</h4>
+<p>주어진 숫자 리스트에서 최빈값을 찾는 문제</p>
+<ul>
+  <li>Brute Force algorithm
+    <ul>
+      <li>각 원소들의 빈도를 나타내는 리스트를 만들어 비교한다.</li>
+      <li>The worst-case efficiency: $\Theta(n^2)$</li>
+    </ul>
+  </li>
+  <li>Presorting-based algorithm
+    <ul>
+      <li>Stage 1 : 효울적인 정렬 알고리즘으로 원소들을 정렬한다. (원소들을 정렬하면 같은 원소들은 서로 인접하게된다.)</li>
+      <li>Stage 2 : 인접한 같은 원소들의 갯수를 센다.</li>
+      <li>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM PresortMode(A[0..n-1])
+    //Computes the mode of an array by sorting it  first
+    //Input: An Arrays A[0..n-1] of oderable elements
+    //Output: The array's mode 
+    sort the array A
+    i &lt;- 0
+    modefrequency &lt;- 0
+    while i&lt;= n-1 do
+      runlength &lt;- 1; runvalue &lt;- A[i]
+      while i + runlength &lt;= n-1 and A[i + runlength] = runvalue
+        runlength &lt;- runlength + 1
+      if runlength &gt; mmodefrequency
+        modefrequency &lt;- length; modevalue &lt;- runvalue
+      i &lt;- i + runlength
+    return modevalue
+</code></pre></div>        </div>
+      </li>
+      <li>알고리즘이 실행되는 시간은 정렬이 실행되는 시간에 의해 결정된다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="searching-problem">Searching problem</h4>
+<p>주어진 <code class="language-plaintext highlighter-rouge">K</code>를 `A[0..n-1]에서 찾는 문제</p>
+<ul>
+  <li>Brute Force algorithm
+    <ul>
+      <li>순차탐색</li>
+      <li>Efficiency: $O(n)$</li>
+    </ul>
+  </li>
+  <li>Presorting-based algorithm
+    <ul>
+      <li>Stage 1: 효울적인 정렬 알고리즘으로 원소들을 정렬한다.</li>
+      <li>Stage 2: binary search를 사용한다.</li>
+      <li>$T(n) = T_{sort}(n) + T_{search}(n) \in \Theta(n \log n) + \Theta(\log n)= \Theta(n \log n)$</li>
+      <li>순차탐색보다 오래걸리지만 탑색을 한 번 이상 해야될 경우 유용하다.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>점들의 집합을 다루는 많은 기하학적 알고리즘은 한 가지 방법 또는 다른 방법으로 사전 정렬을 사용한다.
+방향 비순환 그래프의 일부 문제는 해당 이중 그래프를 위상적으로 정렬한 후 더 쉽게 해결할 수 있다.
+대부분의 그리디 알고리즘은 입력의 사전 정렬을 그들의 작업의 본질적인 부분으로 요구한다.</p>
+
+<h2 id="searching-algorithm의-분류">Searching algorithm의 분류</h2>
+<ul>
+  <li>List searching
+    <ul>
+      <li>sequential search</li>
+      <li>binary search</li>
+      <li>interpolation search</li>
+    </ul>
+  </li>
+  <li>Tree searhcing
+    <ul>
+      <li>binary search tree</li>
+      <li>binary balanced trees: AVL trees, red-black trees</li>
+      <li>multiway balanced trees: 2-3 trees, 2-3-4 trees, B trees</li>
+    </ul>
+  </li>
+  <li>Hashing
+    <ul>
+      <li>open hashing (separate chaining)</li>
+      <li>closed hashing (open addressing)</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="binary-search-tree">Binary Search Tree</h3>
+<p>노드당 하나의 요소인 정렬 가능한 항목 집합의 요소를 포함하는 이진 트리.
+왼쪽 하위 트리의 모든 요소가 하위 트리의 루트 요소보다 작고 오른쪽 하위 트리의 모든 요소가 하위 트리보다 큽니다.
+집합에서 이진 검색 트리로의 변환은 <code class="language-plaintext highlighter-rouge">reqresentation-change technique</code>의 한 예이다.</p>
+<ul>
+  <li>Operations
+    <ul>
+      <li>Searching</li>
+      <li>Insertion</li>
+      <li>Deletion</li>
+    </ul>
+  </li>
+  <li>worst case efficiency : $\Theta(n)$</li>
+  <li>average case efiiciency : $\Theta(\log n)$</li>
+  <li>중위순회로 정렬할 수 있다.</li>
+</ul>
+
+<h3 id="balanced-search-trees">Balanced Search Trees</h3>
+<p>한 쪽으로 치우치는 worst-case를 피하기 위해 만들어진 Tree</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">unbalanced binary search tree</code>를 <code class="language-plaintext highlighter-rouge">balanced binary search tree</code>로 바꾸는 방법 (<code class="language-plaintext highlighter-rouge">instance-simplication</code>)
+    <ul>
+      <li>self-balancing</li>
+      <li>AVL trees</li>
+      <li>red-black trees</li>
+    </ul>
+  </li>
+  <li>각 노드에 너 두 개 이상의 노드를 포함하도록 하는 방법 (<code class="language-plaintext highlighter-rouge">representation-change</code>)
+    <ul>
+      <li>2-3 trees</li>
+      <li>2-3-4 trees</li>
+      <li>B-trees</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="avl-trees">AVL trees</h4>
+<p>모든 노드의 <code class="language-plaintext highlighter-rouge">balance factor</code>가 $0$, $-1$, $+1$인 트리</p>
+
+<ul>
+  <li>Rotation : 새로운 노드가 삽입되었을 때 AVL tree가 unbalanced해진다면 <code class="language-plaintext highlighter-rouge">rotation</code>를 통해 바꿔준다.
+    <ul>
+      <li>single right rotation (R-rotation)</li>
+      <li>single left rotation (L-rotation)</li>
+      <li>double left-right rotation (LR-rotation)</li>
+      <li>double right-left rotation (RL-rotation)</li>
+    </ul>
+  </li>
+  <li>Efficiency : $\Theta(\log n)$</li>
+  <li>단점
+    <ul>
+      <li>rotation이 자주 일어난다.</li>
+      <li>각 노드의 <code class="language-plaintext highlighter-rouge">balance factor</code>를 관리해야한다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="multiway-search-trees">Multiway Search Trees</h4>
+<p>같은 노드에 한개 이상의 <code class="language-plaintext highlighter-rouge">key</code>를 갖는 것을 허용하는 트리
+$n-1$개의 정렬된 <code class="language-plaintext highlighter-rouge">key</code>를 가진 노드를 <code class="language-plaintext highlighter-rouge">n-node</code>라고 한다.</p>
+
+<h5 id="2-3-trees">2-3 trees</h5>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">2-node</code>와 <code class="language-plaintext highlighter-rouge">3-node</code>만을 갖는 트리</li>
+  <li>모든 <code class="language-plaintext highlighter-rouge">leaf node</code>가 같은 <code class="language-plaintext highlighter-rouge">level</code>에 존재한다.</li>
+  <li><code class="language-plaintext highlighter-rouge">3-node</code>인 <code class="language-plaintext highlighter-rouge">leaf node</code>에 삽입이 일어난다면 가운데 <code class="language-plaintext highlighter-rouge">key</code>를 기준으로 두개로 나눈다.</li>
+  <li>$\log_{3}(n+1)-1 \leq h \leq log_{2}(n+1)-1$</li>
+  <li>Efficiency : $\Theta(\log n)$</li>
+</ul>
+
+<h4 id="heap">Heap</h4>
+<p>Heap은 가장 효율적으로 우선순위 큐를 구현하는 방법이다.
+다음 두가지 조건을 만족하는 binary tree이다.</p>
+<ol>
+  <li>shape property
+    <ul>
+      <li>`essentially complete (simply complete)</li>
+      <li>마지막 <code class="language-plaintext highlighter-rouge">level</code>을 제외한 모든 <code class="language-plaintext highlighter-rouge">level</code>에 노드가 모두 차있고 마지막 <code class="language-plaintext highlighter-rouge">level</code>만 오른쪽에서 부터 비어있다.</li>
+    </ul>
+  </li>
+  <li>parental dominance
+    <ul>
+      <li>모든 노드의 <code class="language-plaintext highlighter-rouge">key</code>값은 자식 노드의 키 값보다 크거나 같아야한다.</li>
+    </ul>
+  </li>
+</ol>
+
+<ul>
+  <li>Heap properties
+    <ul>
+      <li>형제노드들끼리의 순서는 존재하지 않는다.</li>
+      <li>root 노드의 <code class="language-plaintext highlighter-rouge">key</code>값은 가장 큰 <code class="language-plaintext highlighter-rouge">key</code>값이다.</li>
+      <li>배열로 구현이 가능하다.</li>
+      <li>모든 노드를 root로 하는 <code class="language-plaintext highlighter-rouge">subtree</code> 또한 heap 이다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h5 id="heap-sort">Heap Sort</h5>
+<ul>
+  <li>Stage 1: 주어진 배열으로 heap을 만든다.
+    <ul>
+      <li>worst-case : $O(n)$</li>
+    </ul>
+  </li>
+  <li>Stage 2: heap에서 n-1번 삭제하여 순서대로 나열한다.
+    <ul>
+      <li>worst-case : $O(n \log n)$</li>
+    </ul>
+  </li>
+  <li>in-place</li>
+  <li>heapsort는 quicksort보다 느리고 mergesort와 비슷한 속도를 보인다.</li>
+</ul>
+
+<h2 id="horners-rule">Horner’s Rule</h2>
+<p><code class="language-plaintext highlighter-rouge">representation-change</code> technique의 예로 다항식을 계산하는 알고리즘이다.
+\(p(x) = (\cdots(a_nx+a_{n-1})x+\cdots )x+a_0\)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM Horner(P[0..n], x)
+    //Evaluates a polynomial at a given point by Horner's rule
+    //Input: An array P[0..n] of coefficients of a polynomial of degree n, sorted from the lowest to the highest and a number x
+    //Output: The value of the polynomial at x
+    p &lt;- P[n]
+    for i &lt;- n-1 downto 0 do
+        p &lt;- x*p + P[i]
+    return p
+</code></pre></div></div>
+
+<p>곱셈과 덧셈의 횟수는 모두 $n$이다.</p>
+
+<h2 id="problem-reduction">Problem Reduction</h2>
+<ul>
+  <li>문제를 이미 해결방법을 알고 있는 다른 문제로 바꾸어 해결한다.</li>
+  <li>문제를 변형하는 시간과 변형된 문제를 해결하는 시간이 기존의 문제를 해결하는 시간보다 효율적이어야한다.</li>
+  <li>Examples
+    <ul>
+      <li>$lcm(m,n)$을 $gcm(m,n)$을 구해 해결한다.</li>
+      <li>그래프에서 길이가 $n$인 경로의 갯수를 인접행렬의 $n$제곱을 이용해 구할 수 있다.</li>
+      <li>최대값 문제와 최솟값 문제를 서로 변형한다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="computing-the-least-common-multiple">Computing the Least Common Multiple</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">GCD</code>를 구하는 매우 효율적인 알고리즘인 유클리드 알고리즘을 이용하여 구한다.
+\(lcm(m,n) = {m\cdot n\over{gcd(m,n)}}\)</li>
+</ul>
+
+<h3 id="countingn-paths-in-a-graph">Countingn Paths in a Graph</h3>
+<ul>
+  <li>두개의 정점 사이의 경로의 갯수를 구하는 문제</li>
+  <li>길이가 $k$인 <code class="language-plaintext highlighter-rouge">i</code>번째 정점에서 <code class="language-plaintext highlighter-rouge">j</code>번째 정점으로 가는 경로의 갯수는 $A$가 인접 행렬일 때 $A^k$의 <code class="language-plaintext highlighter-rouge">(i,j)</code>번째 요소와 같다.</li>
+</ul>
+
+<h3 id="reduction-of-optimization-problems">Reduction of Optimization problems</h3>
+<ul>
+  <li>maximization problem : 어떤 함수의 최댓값을 찾는 문제</li>
+  <li>minimization problem : 어떤 함수의 최솟값을 찾는 문제</li>
+  <li>$\min f(x)=-\max [-f(x)]$</li>
+</ul>
+
+<h4 id="linear-programming">Linear Programming</h4>
+<ul>
+  <li>어떤 선형 방정식과 선형 부등식을 만족하는 여러 변수의 선형 함수를 최적화하는 문제</li>
+  <li>많은 optimal decision making 문제는 linear programming problem으로 ruduced 될 수 있다.</li>
+</ul>
+
+<h3 id="reduction-to-graph-problems">Reduction to Graph Problems</h3>
+<ul>
+  <li>많은 문제들이 그래프 문제로 reduction 될 수 있다.</li>
+  <li>정점은 가능한 <code class="language-plaintext highlighter-rouge">states</code>를 나타낸다.</li>
+  <li>간선은 각 정점들 사이의 <code class="language-plaintext highlighter-rouge">transitions</code>를 나타낸다.</li>
+  <li><code class="language-plaintext highlighter-rouge">initial state</code>를 <code class="language-plaintext highlighter-rouge">goal state</code>로 찾아가는 문제이다.</li>
+  <li>이 그래프는 <code class="language-plaintext highlighter-rouge">state-space graph</code>라고 부른다.</li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#algorithm" class="page__taxonomy-item p-category" rel="tag">algorithm</a><span class="sep">, </span>
+    
+      <a href="/tags/#cse214" class="page__taxonomy-item p-category" rel="tag">CSE214</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#computerscience" class="page__taxonomy-item p-category" rel="tag">ComputerScience</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time class="dt-published" datetime="2022-06-02T00:00:00+09:00">June 2, 2022</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%5BAL%5D+7.+Transform-and-Conquer%20http%3A%2F%2Flocalhost%3A4000%2Fcomputerscience%2FAL-7-Transform-and-Conquer%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fcomputerscience%2FAL-7-Transform-and-Conquer%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fcomputerscience%2FAL-7-Transform-and-Conquer%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/computerscience/AL-6-Divide-and-Conquer/" class="pagination--pager" title="[AL] 6. Divide-and-Conquer
+">이전</a>
+    
+    
+      <a href="/computerscience/AL-8-Space-and-Time-Trade-Offs/" class="pagination--pager" title="[AL] 8. Space and Time Trade-Offs
+">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">참고</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/computerscience/AL-8-Space-and-Time-Trade-Offs/" rel="permalink">[AL] 8. Space and Time Trade-Offs
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 분 소요
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">
+  Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin
+
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/computerscience/AL-6-Divide-and-Conquer/" rel="permalink">[AL] 6. Divide-and-Conquer
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 분 소요
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">
+  Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin
+
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/computerscience/AL-5-Decrease-and-Conquer/" rel="permalink">[AL] 5. Decrease-and-Conquer
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 분 소요
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">
+  Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin
+
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/computerscience/AL-4-Brute-Force-and-Exhaustive-Search-copy/" rel="permalink">[AL] 4. Brute Force and Exhaustive Search
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+
+    
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          3 분 소요
+        
+      </span>
+    
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">
+  Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin
+
+
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="mailto:gjwnsghks02@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+        
+      
+        
+          <li><a href="https://www.kaggle.com/junhwan26" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-kaggle" aria-hidden="true"></i> kaggle</a></li>
+        
+      
+        
+          <li><a href="https://github.com/junhwan26" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://www.instagram.com/jxnhwxn26/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2022 Junhwan. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+<script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+    inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+    displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+    processEscapes: true
+    },
+    "HTML-CSS": { availableFonts: ["TeX"] }
+});
+</script>
+
+
+  </body>
+</html>

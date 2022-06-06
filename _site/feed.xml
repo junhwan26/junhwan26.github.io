@@ -1,4 +1,702 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-05-04T13:36:22+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Slow and Steady</title><subtitle>Data Science, Computer Science, Statistics, AI.</subtitle><author><name>Junhwan</name></author><entry><title type="html">[AL] 5. Decrease-and-Conquer</title><link href="http://localhost:4000/computerscience/AL-5-Decrease-and-Conquer/" rel="alternate" type="text/html" title="[AL] 5. Decrease-and-Conquer" /><published>2022-05-02T00:00:00+09:00</published><updated>2022-05-02T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/%5BAL%5D%205%20Decrease-and-Conquer</id><content type="html" xml:base="http://localhost:4000/computerscience/AL-5-Decrease-and-Conquer/"><![CDATA[<blockquote>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-06-07T00:56:59+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Slow and Steady</title><subtitle>Data Science, Computer Science, Statistics, AI.</subtitle><author><name>Junhwan</name></author><entry><title type="html">[AL] 8. Space and Time Trade-Offs</title><link href="http://localhost:4000/computerscience/AL-8-Space-and-Time-Trade-Offs/" rel="alternate" type="text/html" title="[AL] 8. Space and Time Trade-Offs" /><published>2022-06-04T00:00:00+09:00</published><updated>2022-06-04T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/%5BAL%5D%208%20Space%20and%20Time%20Trade-Offs</id><content type="html" xml:base="http://localhost:4000/computerscience/AL-8-Space-and-Time-Trade-Offs/"><![CDATA[<blockquote>
+  <p>Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin</p>
+</blockquote>
+
+<h1 id="space-and-time-trade-offs">Space and Time Trade-Offs</h1>
+<p>두가지 종류의 space-for-time 알고리즘</p>
+<ol>
+  <li>Input enhancement
+    <ul>
+      <li>문제 해결을 가속화하기 위해 입력을 전처리하여 저장한다.</li>
+      <li>Ex) countingn methods for sorting, string matching algorithms (Boyer-Moore algorithm and Horspool algorithm)</li>
+    </ul>
+  </li>
+  <li>Prestructuring
+    <ul>
+      <li>데이터를 더 빠르고 유연하게 접근하기 위해 추가적인 공간을 사용한다.</li>
+      <li>Ex) Hashing, indexing with B-trees</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="counting-sort">Counting sort</h2>
+
+<h3 id="comparison-counting-sort">Comparison-counting sort</h3>
+<ul>
+  <li>Input-enhancement technique</li>
+  <li>정렬을 해야하는 각각의 원소에 대하여 그 원소보다 더 작은 원소의 갯수를 저장한다.</li>
+  <li>이 숫자는 정렬된 리스트에서 그 원소의 위치를 나타낸다.
+    <p align="center"><img src="/assets/img/[AL]8/comparisonsorting.png" width="70%" height="70%" /></p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM ComparisonCountingSort(A[0..n-1])
+  //Sorts an array by comparison counting
+  //Input: An array A[0..n-1] of orderable elements
+  //Output: Array S[0..n-1] of A's elements sorted in nondecreasing order
+      for i &lt;- 0 to n-1 do Count[i] &lt;- 0
+      for i &lt;- 0 to n-2 do
+          for j &lt;- i+1 to n-1 do
+              if A[i] &lt; A[j]
+                  Count[j] &lt;- Count[j] + 1
+              else
+                  Count[i] &lt;- Count[i] + 1
+      for i &lt;- 0 to n-1 do S[Count[i]] &lt;- A[i]
+      return S
+</code></pre></div>    </div>
+  </li>
+  <li>The number of key comparison 
+$$C(n)=\sum^{n-2}<em>{i=0}\sum^{n-1}</em>{j=i+1} 1 = \sum^{n-2}<em>{i=0}[(n-1)-(i+1)+1]=\sum^{n=2}</em>{i=0}(n-1-i) = {n(n-1) \over 2}</li>
+  <li>선택정렬과 같은 횟수 만큼 key를 비교한다.</li>
+  <li>입력의 크기만큼 추가 공간이 필요하다.</li>
+  <li>key의 이동 횟수를 최소화하여 정렬된 배열을 얻을 수 있다.</li>
+  <li>Counting idea는 입력된 원소들이 범위를 알고 있는 작은 집합의 값들일 때 생산적으로 작동한다.</li>
+</ul>
+
+<h3 id="distribution-counting-sort">Distribution-counting sort</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM DistributionCountingSort(A[0..n-1], l, u)
+    //Sorts an array of integers from a limited range by  distribution counting
+    //Input: An array A[0..n-1] of integers between l and u (l &lt;= u)
+    //Output: Array S[0..n-1] of A's elements sorted in nondecreasing order
+        for j &lt;- 0 to u-l do D[j] &lt;- 0
+        for i &lt;- 0 to n-1 do D[A[i]-1] &lt;- D[A[i]-l] + 1
+        for j &lt;- 1 to u-1 do D[j] &lt;- D[j-1] + D[j]
+        for i &lt;- n-1 downto 0 do
+            j &lt;- A[i] - l
+            S[D[j]-1] &lt;- A[i]
+            D[j] &lt;- D[j] - 1
+        return S
+</code></pre></div></div>
+
+<h2 id="string-matching-problem">String matching problem</h2>
+<p>Input-enhancement idea</p>
+<ul>
+  <li>패턴을 전처리하여 정보를 표에 저장한다.</li>
+  <li>주어진 텍스트에서 패턴을 검색할 때 저장된 정보를 이용한다.</li>
+  <li>KMP algorithm, Boyer-Moore algorithm, Horspool’s algorithm
+(KMP는 앞에서 부터 비교, Boyer-Moore는 뒤에서 부터 비교)</li>
+</ul>
+
+<h3 id="horspoola-algorithm">Horspool’a Algorithm</h3>
+<ul>
+  <li>패턴의 오른쪽에서 왼쪽으로 이동하며 텍스트의 부분문자열과 비교한다.</li>
+  <li>텍스트의 부분문자열과 패턴이 일지하지 않을 때 패턴과 일치하는 부분문자열을 빠트리지 않으면서 패턴을 가장 많이 이동시킨다.</li>
+  <li>Horspool’s algorithm에선 패턴을 이동시킬 거리를 패턴의 가장 마지막 글자와 대응되는 텍스트의 글자 <code class="language-plaintext highlighter-rouge">c</code>를 보고 결정한다. (가장 처음 비교하는 글자)
+    <ul>
+      <li>Case 1: <code class="language-plaintext highlighter-rouge">c</code>가 패턴에 없는 글자 일 때
+        <p align="center"><img src="/assets/img/[AL]8/hpcase1.png" width="70%" height="70%" /></p>
+        <ul>
+          <li>패턴의 길이만큼 이동한다.</li>
+        </ul>
+      </li>
+      <li>Case 2: mismatch가 패턴의 마지막 글자에서 발생했고 <code class="language-plaintext highlighter-rouge">c</code>가 패턴에 존재할때
+        <p align="center"><img src="/assets/img/[AL]8/hpcase2.png" width="70%" height="70%" /></p>
+        <ul>
+          <li>패턴의 가장 오른쪽에 있는 <code class="language-plaintext highlighter-rouge">c</code>의 위치가 mismatch가 일어난 위치에 오도록 이동시킨다.</li>
+        </ul>
+      </li>
+      <li>Case 3: mismatch가 중간에서 일어났고 <code class="language-plaintext highlighter-rouge">c</code>가 다른 위치에 없는 경우
+        <p align="center"><img src="/assets/img/[AL]8/hpcase3.png" width="70%" height="70%" /></p>
+        <ul>
+          <li>패턴의 길이만큼 이동한다.</li>
+        </ul>
+      </li>
+      <li>Case 4: mismatch가 중간에서 일어났고 <code class="language-plaintext highlighter-rouge">c</code>가 다른 위치에 존재할 때
+        <p align="center"><img src="/assets/img/[AL]8/hpcase4.png" width="70%" height="70%" /></p>
+        <ul>
+          <li>마지막을 글자를 제외한 가장 오른쪽에 있는 <code class="language-plaintext highlighter-rouge">c</code>가 mismatch가 일어난 위치에 오도록 이동시킨다.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="shift-table">Shift table</h4>
+<p>Input-enhancement가 불필요한 비교를 반복해서 하지 않도록 한다.</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">shift table</code>에 이동해야하는 크기를 사전에 저장한다.</li>
+  <li><code class="language-plaintext highlighter-rouge">shift table</code>은 패턴에 나오는 글자 뿐만아니라 텍스트에 나올 수 있는 모든 글자들에 대한 정보를 포함한다.</li>
+  <li>$t(c)$
+    <ul>
+      <li>패턴의 길이 $m$ (<code class="language-plaintext highlighter-rouge">c</code>가 패턴의 마지막 글자를 제외한 $m-1$개의 글자에 포함되이 않는 경우)</li>
+      <li>패턴의 가장 마지막 글자와 <code class="language-plaintext highlighter-rouge">c</code>와의 거리 (<code class="language-plaintext highlighter-rouge">c</code>가 패턴의 마지막 글자를 제외한 $m-1$개의 글자에 포함되어 있는 경우)</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM shiftTable(P[0..m-1])
+    //Fills the shift table used by Horspool's and Boyer-Moore algorithms
+    //Input: Parttern P[0..m-1] and an alphabet of possible characters
+    //Output: Table[0..size-1] indexed by the alphabet's characters and filled with shift sizes computed by t(c)
+    for i &lt;- 0 to size-1 do Table[i] &lt;- m
+    for j &lt;- to m-2 do Table[P[j]] &lt;- m-1-j
+    return Table
+</code></pre></div></div>
+
+<h4 id="horspools-algorithm">Horspool’s Algorithm</h4>
+<ul>
+  <li>Step 1: 주어진 패턴과 텍스트를 이용하여 <code class="language-plaintext highlighter-rouge">shift table</code>을 만든다.</li>
+  <li>Step 2: 텍스트의 시작위치에 패턴을 나열한다.</li>
+  <li>Step 3: 패턴과 일치한 부분물자열을 찾거나 텍스트의 마지막 글자에 도달할 때 까지 다음 실행을 반복한다.
+    <ul>
+      <li>패턴의 마지막 글자부터 패턴과 텍스트를 비교하고 일치하는 부분 문자열을 찾으면 멈춘다.</li>
+      <li>mismatch가 일어나면 <code class="language-plaintext highlighter-rouge">shitf table</code>의 $t(c)$ 값 만큼 패턴을 오른쪽으로 이동시킨다.</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Algorithm HorspoolMatching(P[0..m-1], T[0..n-1])
+    //Implements Horspool's algorithm for string matching
+    //Input: Pattern P[0..m-1] and text T[0..n-1]
+    //Output: The index of the left end of the first matching substring or -1 if there are no matches
+    ShiftTable(P[0..m-1])   //generate Table of shifts
+    i &lt;- m-1                //position of the pattern's right end
+    while i &lt;= n-1 do
+        k &lt;- 0              //number of matched characters
+        while k &lt;= m-1 and P[m-1-k] = T[i-k] do
+            k &lt;- k+1
+        if k=m
+            return i-m+1
+        else
+            i &lt;- i + Table[T[i]]
+    return -1
+</code></pre></div></div>
+
+<ul>
+  <li>worst-case efficiency: $O(mn)$</li>
+  <li>for random texts: $\theta(n)$</li>
+  <li>Boyer-Moore algorithm 만큼 효율적이다.</li>
+  <li>자연어와 유사한 문자열을 다룰 때 간단한 Horspool’s algorithm을 더 선호한다.</li>
+</ul>]]></content><author><name>Junhwan</name></author><category term="ComputerScience" /><category term="algorithm" /><category term="CSE214" /><summary type="html"><![CDATA[Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin]]></summary></entry><entry><title type="html">[AL] 7. Transform-and-Conquer</title><link href="http://localhost:4000/computerscience/AL-7-Transform-and-Conquer/" rel="alternate" type="text/html" title="[AL] 7. Transform-and-Conquer" /><published>2022-06-02T00:00:00+09:00</published><updated>2022-06-02T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/%5BAL%5D%207%20Transform-and-Conquer</id><content type="html" xml:base="http://localhost:4000/computerscience/AL-7-Transform-and-Conquer/"><![CDATA[<blockquote>
+  <p>Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin</p>
+</blockquote>
+
+<h1 id="transform-and-conquer">Transform-and-Conquer</h1>
+
+<h2 id="transform-and-conquer-technique">Transform-and-conquer technique</h2>
+<ul>
+  <li>두가지 절차
+    <ol>
+      <li>인스턴스들을 문제를 더 풀기 쉽도록 변형한다</li>
+      <li>변형된 입력들로 문제를 해결한다.</li>
+    </ol>
+  </li>
+  <li>주어진 인스턴스의 세 가지 주요 변형:
+    <ol>
+      <li>Instance Simplication: 동일한 문제의 더 단순하고 편리한 인스턴스로 전환</li>
+      <li>Representation change: 동일한 인스턴스의 다른 표현으로 변경</li>
+      <li>Problem reduction: 알고리즘을 이미 사용할 수 있는 다른 문제로 이동</li>
+    </ol>
+  </li>
+</ul>
+
+<h2 id="instance-simplication">Instance Simplication</h2>
+<p>동일한 문제의 다른 단순하고 쉬운 인스턴스로 변환하여 문제 해결</p>
+
+<h3 id="presorting">Presorting</h3>
+<p>리스트와 관련된 많은 문제는 리스트를 정렬되었을 때 쉽게 풀 수 있다.</p>
+<ul>
+  <li>searching</li>
+  <li>selection problem</li>
+  <li>element uniqueness
+알고리즘의 시간 효율은 사용하는 정렬 알고리즘의 효율성에 따라 달라질 수 있다.</li>
+</ul>
+
+<h4 id="checking-element-uniqueness">Checking Element Uniqueness</h4>
+<ul>
+  <li>Brute Force algorithm
+    <ul>
+      <li>모든 원소 쌍들을 비교한다.</li>
+      <li>The worst-case efficiency: $\Theta(n^2)$</li>
+    </ul>
+  </li>
+  <li>Presorting-based algorithm
+    <ul>
+      <li>Stage 1 : 효울적인 정렬 알고리즘으로 원소들을 정렬한다.</li>
+      <li>Stage 2 : 인접한 두 원소가 같은 값인지 확인한다.</li>
+      <li>Efficiency : $T(n)=T_{sort}(n)+T_{scan}(n) \in \theta(n\log n)+\theta(n) = \theta(n \log n)$</li>
+      <li>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM PresortElementUniqueness(A[0..n-1])
+    //Solved the arry uniqueness problem by sorting the array first
+    //Input: An Arrays A[0..n-1] of oderable elements
+    //Output: Returns "true" if A has no equal elements, "false" otherwise
+    sort the array A
+        
+    for i &lt;- 0 to n-2 do
+        if A[i] = A[i+1] return false
+    return true
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="computing-a-mode">Computing a mode</h4>
+<p>주어진 숫자 리스트에서 최빈값을 찾는 문제</p>
+<ul>
+  <li>Brute Force algorithm
+    <ul>
+      <li>각 원소들의 빈도를 나타내는 리스트를 만들어 비교한다.</li>
+      <li>The worst-case efficiency: $\Theta(n^2)$</li>
+    </ul>
+  </li>
+  <li>Presorting-based algorithm
+    <ul>
+      <li>Stage 1 : 효울적인 정렬 알고리즘으로 원소들을 정렬한다. (원소들을 정렬하면 같은 원소들은 서로 인접하게된다.)</li>
+      <li>Stage 2 : 인접한 같은 원소들의 갯수를 센다.</li>
+      <li>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM PresortMode(A[0..n-1])
+    //Computes the mode of an array by sorting it  first
+    //Input: An Arrays A[0..n-1] of oderable elements
+    //Output: The array's mode 
+    sort the array A
+    i &lt;- 0
+    modefrequency &lt;- 0
+    while i&lt;= n-1 do
+      runlength &lt;- 1; runvalue &lt;- A[i]
+      while i + runlength &lt;= n-1 and A[i + runlength] = runvalue
+        runlength &lt;- runlength + 1
+      if runlength &gt; mmodefrequency
+        modefrequency &lt;- length; modevalue &lt;- runvalue
+      i &lt;- i + runlength
+    return modevalue
+</code></pre></div>        </div>
+      </li>
+      <li>알고리즘이 실행되는 시간은 정렬이 실행되는 시간에 의해 결정된다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="searching-problem">Searching problem</h4>
+<p>주어진 <code class="language-plaintext highlighter-rouge">K</code>를 `A[0..n-1]에서 찾는 문제</p>
+<ul>
+  <li>Brute Force algorithm
+    <ul>
+      <li>순차탐색</li>
+      <li>Efficiency: $O(n)$</li>
+    </ul>
+  </li>
+  <li>Presorting-based algorithm
+    <ul>
+      <li>Stage 1: 효울적인 정렬 알고리즘으로 원소들을 정렬한다.</li>
+      <li>Stage 2: binary search를 사용한다.</li>
+      <li>$T(n) = T_{sort}(n) + T_{search}(n) \in \Theta(n \log n) + \Theta(\log n)= \Theta(n \log n)$</li>
+      <li>순차탐색보다 오래걸리지만 탑색을 한 번 이상 해야될 경우 유용하다.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>점들의 집합을 다루는 많은 기하학적 알고리즘은 한 가지 방법 또는 다른 방법으로 사전 정렬을 사용한다.
+방향 비순환 그래프의 일부 문제는 해당 이중 그래프를 위상적으로 정렬한 후 더 쉽게 해결할 수 있다.
+대부분의 그리디 알고리즘은 입력의 사전 정렬을 그들의 작업의 본질적인 부분으로 요구한다.</p>
+
+<h2 id="searching-algorithm의-분류">Searching algorithm의 분류</h2>
+<ul>
+  <li>List searching
+    <ul>
+      <li>sequential search</li>
+      <li>binary search</li>
+      <li>interpolation search</li>
+    </ul>
+  </li>
+  <li>Tree searhcing
+    <ul>
+      <li>binary search tree</li>
+      <li>binary balanced trees: AVL trees, red-black trees</li>
+      <li>multiway balanced trees: 2-3 trees, 2-3-4 trees, B trees</li>
+    </ul>
+  </li>
+  <li>Hashing
+    <ul>
+      <li>open hashing (separate chaining)</li>
+      <li>closed hashing (open addressing)</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="binary-search-tree">Binary Search Tree</h3>
+<p>노드당 하나의 요소인 정렬 가능한 항목 집합의 요소를 포함하는 이진 트리.
+왼쪽 하위 트리의 모든 요소가 하위 트리의 루트 요소보다 작고 오른쪽 하위 트리의 모든 요소가 하위 트리보다 큽니다.
+집합에서 이진 검색 트리로의 변환은 <code class="language-plaintext highlighter-rouge">reqresentation-change technique</code>의 한 예이다.</p>
+<ul>
+  <li>Operations
+    <ul>
+      <li>Searching</li>
+      <li>Insertion</li>
+      <li>Deletion</li>
+    </ul>
+  </li>
+  <li>worst case efficiency : $\Theta(n)$</li>
+  <li>average case efiiciency : $\Theta(\log n)$</li>
+  <li>중위순회로 정렬할 수 있다.</li>
+</ul>
+
+<h3 id="balanced-search-trees">Balanced Search Trees</h3>
+<p>한 쪽으로 치우치는 worst-case를 피하기 위해 만들어진 Tree</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">unbalanced binary search tree</code>를 <code class="language-plaintext highlighter-rouge">balanced binary search tree</code>로 바꾸는 방법 (<code class="language-plaintext highlighter-rouge">instance-simplication</code>)
+    <ul>
+      <li>self-balancing</li>
+      <li>AVL trees</li>
+      <li>red-black trees</li>
+    </ul>
+  </li>
+  <li>각 노드에 너 두 개 이상의 노드를 포함하도록 하는 방법 (<code class="language-plaintext highlighter-rouge">representation-change</code>)
+    <ul>
+      <li>2-3 trees</li>
+      <li>2-3-4 trees</li>
+      <li>B-trees</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="avl-trees">AVL trees</h4>
+<p>모든 노드의 <code class="language-plaintext highlighter-rouge">balance factor</code>가 $0$, $-1$, $+1$인 트리</p>
+
+<ul>
+  <li>Rotation : 새로운 노드가 삽입되었을 때 AVL tree가 unbalanced해진다면 <code class="language-plaintext highlighter-rouge">rotation</code>를 통해 바꿔준다.
+    <ul>
+      <li>single right rotation (R-rotation)</li>
+      <li>single left rotation (L-rotation)</li>
+      <li>double left-right rotation (LR-rotation)</li>
+      <li>double right-left rotation (RL-rotation)</li>
+    </ul>
+  </li>
+  <li>Efficiency : $\Theta(\log n)$</li>
+  <li>단점
+    <ul>
+      <li>rotation이 자주 일어난다.</li>
+      <li>각 노드의 <code class="language-plaintext highlighter-rouge">balance factor</code>를 관리해야한다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="multiway-search-trees">Multiway Search Trees</h4>
+<p>같은 노드에 한개 이상의 <code class="language-plaintext highlighter-rouge">key</code>를 갖는 것을 허용하는 트리
+$n-1$개의 정렬된 <code class="language-plaintext highlighter-rouge">key</code>를 가진 노드를 <code class="language-plaintext highlighter-rouge">n-node</code>라고 한다.</p>
+
+<h5 id="2-3-trees">2-3 trees</h5>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">2-node</code>와 <code class="language-plaintext highlighter-rouge">3-node</code>만을 갖는 트리</li>
+  <li>모든 <code class="language-plaintext highlighter-rouge">leaf node</code>가 같은 <code class="language-plaintext highlighter-rouge">level</code>에 존재한다.</li>
+  <li><code class="language-plaintext highlighter-rouge">3-node</code>인 <code class="language-plaintext highlighter-rouge">leaf node</code>에 삽입이 일어난다면 가운데 <code class="language-plaintext highlighter-rouge">key</code>를 기준으로 두개로 나눈다.</li>
+  <li>$\log_{3}(n+1)-1 \leq h \leq log_{2}(n+1)-1$</li>
+  <li>Efficiency : $\Theta(\log n)$</li>
+</ul>
+
+<h4 id="heap">Heap</h4>
+<p>Heap은 가장 효율적으로 우선순위 큐를 구현하는 방법이다.
+다음 두가지 조건을 만족하는 binary tree이다.</p>
+<ol>
+  <li>shape property
+    <ul>
+      <li>`essentially complete (simply complete)</li>
+      <li>마지막 <code class="language-plaintext highlighter-rouge">level</code>을 제외한 모든 <code class="language-plaintext highlighter-rouge">level</code>에 노드가 모두 차있고 마지막 <code class="language-plaintext highlighter-rouge">level</code>만 오른쪽에서 부터 비어있다.</li>
+    </ul>
+  </li>
+  <li>parental dominance
+    <ul>
+      <li>모든 노드의 <code class="language-plaintext highlighter-rouge">key</code>값은 자식 노드의 키 값보다 크거나 같아야한다.</li>
+    </ul>
+  </li>
+</ol>
+
+<ul>
+  <li>Heap properties
+    <ul>
+      <li>형제노드들끼리의 순서는 존재하지 않는다.</li>
+      <li>root 노드의 <code class="language-plaintext highlighter-rouge">key</code>값은 가장 큰 <code class="language-plaintext highlighter-rouge">key</code>값이다.</li>
+      <li>배열로 구현이 가능하다.</li>
+      <li>모든 노드를 root로 하는 <code class="language-plaintext highlighter-rouge">subtree</code> 또한 heap 이다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h5 id="heap-sort">Heap Sort</h5>
+<ul>
+  <li>Stage 1: 주어진 배열으로 heap을 만든다.
+    <ul>
+      <li>worst-case : $O(n)$</li>
+    </ul>
+  </li>
+  <li>Stage 2: heap에서 n-1번 삭제하여 순서대로 나열한다.
+    <ul>
+      <li>worst-case : $O(n \log n)$</li>
+    </ul>
+  </li>
+  <li>in-place</li>
+  <li>heapsort는 quicksort보다 느리고 mergesort와 비슷한 속도를 보인다.</li>
+</ul>
+
+<h2 id="horners-rule">Horner’s Rule</h2>
+<p><code class="language-plaintext highlighter-rouge">representation-change</code> technique의 예로 다항식을 계산하는 알고리즘이다.
+\(p(x) = (\cdots(a_nx+a_{n-1})x+\cdots )x+a_0\)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM Horner(P[0..n], x)
+    //Evaluates a polynomial at a given point by Horner's rule
+    //Input: An array P[0..n] of coefficients of a polynomial of degree n, sorted from the lowest to the highest and a number x
+    //Output: The value of the polynomial at x
+    p &lt;- P[n]
+    for i &lt;- n-1 downto 0 do
+        p &lt;- x*p + P[i]
+    return p
+</code></pre></div></div>
+
+<p>곱셈과 덧셈의 횟수는 모두 $n$이다.</p>
+
+<h2 id="problem-reduction">Problem Reduction</h2>
+<ul>
+  <li>문제를 이미 해결방법을 알고 있는 다른 문제로 바꾸어 해결한다.</li>
+  <li>문제를 변형하는 시간과 변형된 문제를 해결하는 시간이 기존의 문제를 해결하는 시간보다 효율적이어야한다.</li>
+  <li>Examples
+    <ul>
+      <li>$lcm(m,n)$을 $gcm(m,n)$을 구해 해결한다.</li>
+      <li>그래프에서 길이가 $n$인 경로의 갯수를 인접행렬의 $n$제곱을 이용해 구할 수 있다.</li>
+      <li>최대값 문제와 최솟값 문제를 서로 변형한다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="computing-the-least-common-multiple">Computing the Least Common Multiple</h3>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">GCD</code>를 구하는 매우 효율적인 알고리즘인 유클리드 알고리즘을 이용하여 구한다.
+\(lcm(m,n) = {m\cdot n\over{gcd(m,n)}}\)</li>
+</ul>
+
+<h3 id="countingn-paths-in-a-graph">Countingn Paths in a Graph</h3>
+<ul>
+  <li>두개의 정점 사이의 경로의 갯수를 구하는 문제</li>
+  <li>길이가 $k$인 <code class="language-plaintext highlighter-rouge">i</code>번째 정점에서 <code class="language-plaintext highlighter-rouge">j</code>번째 정점으로 가는 경로의 갯수는 $A$가 인접 행렬일 때 $A^k$의 <code class="language-plaintext highlighter-rouge">(i,j)</code>번째 요소와 같다.</li>
+</ul>
+
+<h3 id="reduction-of-optimization-problems">Reduction of Optimization problems</h3>
+<ul>
+  <li>maximization problem : 어떤 함수의 최댓값을 찾는 문제</li>
+  <li>minimization problem : 어떤 함수의 최솟값을 찾는 문제</li>
+  <li>$\min f(x)=-\max [-f(x)]$</li>
+</ul>
+
+<h4 id="linear-programming">Linear Programming</h4>
+<ul>
+  <li>어떤 선형 방정식과 선형 부등식을 만족하는 여러 변수의 선형 함수를 최적화하는 문제</li>
+  <li>많은 optimal decision making 문제는 linear programming problem으로 ruduced 될 수 있다.</li>
+</ul>
+
+<h3 id="reduction-to-graph-problems">Reduction to Graph Problems</h3>
+<ul>
+  <li>많은 문제들이 그래프 문제로 reduction 될 수 있다.</li>
+  <li>정점은 가능한 <code class="language-plaintext highlighter-rouge">states</code>를 나타낸다.</li>
+  <li>간선은 각 정점들 사이의 <code class="language-plaintext highlighter-rouge">transitions</code>를 나타낸다.</li>
+  <li><code class="language-plaintext highlighter-rouge">initial state</code>를 <code class="language-plaintext highlighter-rouge">goal state</code>로 찾아가는 문제이다.</li>
+  <li>이 그래프는 <code class="language-plaintext highlighter-rouge">state-space graph</code>라고 부른다.</li>
+</ul>]]></content><author><name>Junhwan</name></author><category term="ComputerScience" /><category term="algorithm" /><category term="CSE214" /><summary type="html"><![CDATA[Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin]]></summary></entry><entry><title type="html">[AL] 6. Divide-and-Conquer</title><link href="http://localhost:4000/computerscience/AL-6-Divide-and-Conquer/" rel="alternate" type="text/html" title="[AL] 6. Divide-and-Conquer" /><published>2022-05-02T00:00:00+09:00</published><updated>2022-05-02T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/%5BAL%5D%206%20Divide-and-Conquer</id><content type="html" xml:base="http://localhost:4000/computerscience/AL-6-Divide-and-Conquer/"><![CDATA[<blockquote>
+  <p>Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin</p>
+</blockquote>
+
+<h1 id="divide-and-conquer">Divide-and-Conquer</h1>
+
+<h2 id="divide-and-conquer-technique">Divide-and-conquer technique</h2>
+<ul>
+  <li>가장 잘 알려진 알고리즘 설계 기법이다.</li>
+  <li>문제는 같은 유형의 이상적으로 크기가 같은 여러 하위 문제로 나뉜다.</li>
+  <li>하위문제는 일반적으로 재귀적으로 해결되고 하위 문제에 대한 솔루션을 결합하여 원래 문에에 대한 솔루션을 구한다.</li>
+  <li>Divide-and-conquer technique은 각각의 하위문제를 자체 프로세서에 의해 동시에 해결할 수 있는 병렬 계산에 이상적으로 적합하다.</li>
+</ul>
+
+<p align="center"><img src="/assets/img/%5BAL%5D6/dividenconquer.png" width="70%" height="70%" /></p>
+
+<h2 id="general-divide-and-conquer-recurrence">General divide-and-conquer recurrence</h2>
+<p>사이즈가 $n$인 인스턴스를 사이즈가 $n/b$인 인스턴스로 나누고 그것을 $a$번 풀어야할 때, $a\ge1$, $b&gt;1$. 
+\(T(n)=aT(n/b)+f(n)\)
+$f(n)$은 인스턴스를 나누고 합치는데 걸리는 시간에 대한 함수이다.</p>
+
+<h3 id="master-theorem">Master Theorem</h3>
+
+<p>If $f(n)\in\Theta(n^d)$ where $d\ge 0$ in recurrence, then
+\(T(n)\in 
+\begin{cases} 
+\Theta(n^d) \qquad \quad \ if\ a&lt;b^d\\ 
+\Theta(n^d\log n) \quad if\ a&lt;b^d\\ 
+\Theta(n^{\log_ba})\quad \ \ \ if\ a&lt;b^d
+\end{cases}\)</p>
+
+<h2 id="mergesort">Mergesort</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM Mergesort(A[0..n-1])
+    //Input: An Array A[0..n-1] of orderable elements
+    //Output: Array A[0..n-1] sorted in nondecreasing order
+    if n &gt; 1
+        copy A[0..⌊n/2⌋-1] to B[0..⌊n/2⌋-1]
+        copy A[⌊n/2⌋..n-1] to C[0..⌊n/2⌋-1]
+        Mergesort(B[0..⌊n/2⌋-1])
+        Mergesort(C[0..⌊n/2⌋-1])
+        Merge(B, C, A)
+
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM Merge(B[0..p-1], C[0..q-1], A[0..p+q-1])
+    //Input: Arrays B[0..p-1] and C[0..q-1] both sorted
+    //Output: Sorted array A[0..p+q-1] of the elements of B and C
+    i &lt;- 0; j &lt;- 0; k &lt;- 0;
+    while i &lt; p and j &lt; q do
+        if B[i] &lt;= C[j]
+            A[k] &lt;- B[i]; i &lt;- i+1
+        else 
+            A[k] &lt;- C[j]; j &lt;- j+1
+        k &lt;- k+1
+    if i = p
+        copy C[j..q-1] to A[k..p+q-1]
+    else
+        copy B[i..p-1] to A[k..p+q-1]    
+</code></pre></div></div>
+
+<p align="center"><img src="/assets/img/%5BAL%5D6/mergesort.png" width="70%" height="70%" /></p>
+
+<ul>
+  <li>The number of key comparison
+    <ul>
+      <li>$C(n) = 2C(n/2)+C_{merge}(n)$ for $n&gt;1$, $C(1)=0$</li>
+      <li>$C_{merge}(n) = n-1$</li>
+      <li>$C_{worst}(n) = 2C_{worst}(n/2)+n-1$ for $n&gt;1$, $C_{worst}(1)=0$</li>
+      <li>C_{worst}(n)\in\Theta(n\log n)$</li>
+    </ul>
+  </li>
+  <li>Stable</li>
+  <li>Space requirement : $\Theta(n)$ (not in-place)</li>
+</ul>
+
+<h2 id="quicksort">Quicksort</h2>
+<p align="center"><img src="/assets/img/%5BAL%5D6/quicksort.png" width="70%" height="70%" /></p>
+<ul>
+  <li>Mergesort가 요소들의 위치에 따라 나눈거라면 Quicksort는 값에 따라 나눈다.</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM Quicksort(A[l..r])
+    //Input: Subarray of array A[0..n-1], defined by its left and right indices l and r
+    //Output: Subarray A[l..r] sorted in nondecreasing order
+    if l &lt; r
+        s &lt;- Partition(A[l..r]) // s is a split position
+        Quicksort(A[l..s-1])
+        Quicksort(A[s+1..r])
+</code></pre></div></div>
+
+<h3 id="partitioning-algorithm">Partitioning Algorithm</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM HoarePartition(A[l..r])
+    //Input: Subarray of array A[0..n-1], defined by its left and right indices l and r (l &lt; r)
+    //Output: Partition of A[l..r], with the split position returned as this function's value 
+    p &lt;- A[l]
+    i &lt;- l; j &lt;-  r+1
+    repeat
+        repeat i &lt;- i+1 until A[i] &gt;= p
+        repeat j &lt;- j-1 until A[j] &lt;= q
+        swap(A[i], A[j])
+    until i &gt;= j
+    swap(A[i], A[j]) //undo last swap when i &gt;= j
+    swap(A[l], A[j])
+    return j
+</code></pre></div></div>
+<p align="center"><img src="/assets/img/%5BAL%5D6/pa1.png" width="70%" height="70%" /></p>
+<p align="center"><img src="/assets/img/%5BAL%5D6/pa2.png" width="70%" height="70%" /></p>
+<p align="center"><img src="/assets/img/%5BAL%5D6/pa3.png" width="70%" height="70%" /></p>
+
+<h3 id="analysis-of-quicksort">Analysis of Quicksort</h3>
+<ul>
+  <li>Best case: 중간에서 split — $\Theta(n\log n)$</li>
+  <li>Worst case: 이미 정렬된 배열 — $\Theta(n^2)$</li>
+  <li>Average case: random 배열 —$\Theta(n\log n)$
+    <ul>
+      <li>보통 Mergesort보다 빠르다</li>
+    </ul>
+  </li>
+  <li>Improvements:
+    <ul>
+      <li>pivot을 선택할 때 세 개의 값중 중간값을 선택</li>
+      <li>매우 작은 subarray에서 insertion sort 사용</li>
+    </ul>
+  </li>
+  <li>Not Stable</li>
+</ul>
+
+<h2 id="binay-tree">Binay Tree</h2>
+<p>Binary trees와 관련된 많은 문제가 divede-and-conquer technique로 해결된다.
+<img src="/assets/img/%5BAL%5D6/BT.png" width="70%" height="70%" /></p>
+
+<h3 id="height">Height</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM HEIGHT(T)
+    //Input: A binary tree T
+    //Output: The height of T
+    if T = NULL return -1
+    else return max{Height(T_left), Height(T_right)}+1
+</code></pre></div></div>
+<h3 id="traversals">Traversals</h3>
+<ul>
+  <li>preorder traversal</li>
+  <li>inorder traversal</li>
+  <li>postorder traversal</li>
+</ul>
+
+<h3 id="multiplication-of-large-integers">Multiplication of Large Integers</h3>
+
+<p>두 자리수 정수$a$, $b$를 $a=a_1a_0$,  $b=b_1b_0$로 나누어 계산한다.</p>
+
+\[c = a*b = c_210^2+c_110^1+c_0\]
+
+<p>$c_2=a_1*b_1$ 첫째 자리수의 곱</p>
+
+<p>$c_0=a_0*b_0$ 둘재 자리 수의 곱</p>
+
+<p>$c_1=(a_1+a_0)*(b_1+b_0)-(c_2+c_0)$ 각 자리수의 합을 곱한 값에 $c_2$, $c_0$를 뺀 값</p>
+
+<p>$n$-자리수의 경우</p>
+
+\[c = a*b = c_210^n+c_110^{n/2}+c_0\]
+
+<p>$c_2=a_1*b_1$ 앞쪽 반의 자리수의 곱</p>
+
+<p>$c_0=a_0*b_0$ 뒷쪽 반의 자리수의 곱</p>
+
+<p>$c_1=(a_1+a_0)*(b_1+b_0)-(c_2+c_0)$ 각 자리수의 합을 곱한 값에 $c_2$, $c_0$를 뺀 값</p>
+
+<ul>
+  <li>곱 횟수 : $M(n)=3M(n/2)$ for $n&gt;1$, $M(1)=1$.
+    <ul>
+      <li>$M(n) = 3^{\log_2n}$</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="closest-pair-problem">Closest-Pair Problem</h3>
+<p><img src="/assets/img/%5BAL%5D6/cp1.png" width="30%" height="30%" />
+<img src="/assets/img/%5BAL%5D6/cp2.png" width="60%" height="60%" /></p>
+
+<ul>
+  <li>Recurrence for the running time of the algorithm
+    <ul>
+      <li>$T(n) = 2T(n/2) + f(n) $, where $f(n)\in\Theta(n)$</li>
+      <li>Applying the Master Theorem (with $a=2$, $b=2$, and $d=1$),  $T(n)\in\Theta(n\log n)$</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="convex-hull">Convex-Hull</h3>
+<ul>
+  <li>Quickhull
+    <ul>
+      <li>$n$개의 점들 ($p_1(x_1, y_1), \cdots, p_n(x_n,y_n)$이 집합 $S$에 속해있다.</li>
+      <li>$n$개의 점들을 $x$좌표를 기준으로 정렬한 뒤 양 끝점 $p_1$, $p_n$을 지나는 직선을 중심으로 위쪽을 $S_1$, 아래쪽을 $S_2$로 $S$를 두개의 평면으로 나눈다.</li>
+    </ul>
+  </li>
+</ul>
+<p align="center"><img src="/assets/img/%5BAL%5D6/ch1.png" width="60%" height="60%" /></p>
+
+<h4 id="quickhull">Quickhull</h4>
+<ul>
+  <li>$S_1$이 비어있을 경우 두 점 $p_1$, $p_n$을 연결한 선분을 추가한다.</li>
+  <li>$S_1$이 비어있지 않을 경우 집합 $S_1$의 점중 직선 $\overrightarrow{p_1p_n}$과의 거리가 가장 먼 점 $p_max$을 찾는다.</li>
+  <li>$\overrightarrow{p_1p_{max}}$의 왼쪽에 있는 점들의 집합을 $S_{1,1}$, $\overrightarrow{p_{max}p_n}$의 왼쪽에 있는 점들의 집합을 $S_{1,2}$라고 하고 이 집합들에 대해 위의 과정을 반복한다.</li>
+</ul>
+
+<p align="center"><img src="/assets/img/%5BAL%5D6/qh.png" width="60%" height="60%" /></p>
+
+<ul>
+  <li>worst-case : $\Theta(n^2)$</li>
+  <li>average-case : lnear</li>
+</ul>]]></content><author><name>Junhwan</name></author><category term="ComputerScience" /><category term="algorithm" /><category term="CSE214" /><summary type="html"><![CDATA[Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin]]></summary></entry><entry><title type="html">[AL] 5. Decrease-and-Conquer</title><link href="http://localhost:4000/computerscience/AL-5-Decrease-and-Conquer/" rel="alternate" type="text/html" title="[AL] 5. Decrease-and-Conquer" /><published>2022-05-02T00:00:00+09:00</published><updated>2022-05-02T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/%5BAL%5D%205%20Decrease-and-Conquer</id><content type="html" xml:base="http://localhost:4000/computerscience/AL-5-Decrease-and-Conquer/"><![CDATA[<blockquote>
   <p>Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin</p>
 </blockquote>
 
@@ -254,216 +952,6 @@ f(n-1) \cdot a \quad if\ n&gt;0 \\
 </code></pre></div></div>
 <ul>
   <li><code class="language-plaintext highlighter-rouge">L</code>의 첫번째 원소와 마지막 원소도 1 비트 차이나기 때문에 <code class="language-plaintext highlighter-rouge">cyclic</code>이라고 한다.</li>
-</ul>]]></content><author><name>Junhwan</name></author><category term="ComputerScience" /><category term="algorithm" /><category term="CSE214" /><summary type="html"><![CDATA[Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin]]></summary></entry><entry><title type="html">[AL] 6. Divide-and-Conquer</title><link href="http://localhost:4000/computerscience/AL-6-Divide-and-Conquer/" rel="alternate" type="text/html" title="[AL] 6. Divide-and-Conquer" /><published>2022-05-02T00:00:00+09:00</published><updated>2022-05-02T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/%5BAL%5D%206%20Divide-and-Conquer</id><content type="html" xml:base="http://localhost:4000/computerscience/AL-6-Divide-and-Conquer/"><![CDATA[<blockquote>
-  <p>Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin</p>
-</blockquote>
-
-<h1 id="divide-and-conquer">Divide-and-Conquer</h1>
-
-<h2 id="divide-and-conquer-technique">Divide-and-conquer technique</h2>
-<ul>
-  <li>가장 잘 알려진 알고리즘 설계 기법이다.</li>
-  <li>문제는 같은 유형의 이상적으로 크기가 같은 여러 하위 문제로 나뉜다.</li>
-  <li>하위문제는 일반적으로 재귀적으로 해결되고 하위 문제에 대한 솔루션을 결합하여 원래 문에에 대한 솔루션을 구한다.</li>
-  <li>Divide-and-conquer technique은 각각의 하위문제를 자체 프로세서에 의해 동시에 해결할 수 있는 병렬 계산에 이상적으로 적합하다.</li>
-</ul>
-
-<p align="center"><img src="/assets/img/%5BAL%5D6/dividenconquer.png" width="70%" height="70%" /></p>
-
-<h2 id="general-divide-and-conquer-recurrence">General divide-and-conquer recurrence</h2>
-<p>사이즈가 $n$인 인스턴스를 사이즈가 $n/b$인 인스턴스로 나누고 그것을 $a$번 풀어야할 때, $a\ge1$, $b&gt;1$. 
-\(T(n)=aT(n/b)+f(n)\)
-$f(n)$은 인스턴스를 나누고 합치는데 걸리는 시간에 대한 함수이다.</p>
-
-<h3 id="master-theorem">Master Theorem</h3>
-
-<p>If $f(n)\in\Theta(n^d)$ where $d\ge 0$ in recurrence, then
-\(T(n)\in 
-\begin{cases} 
-\Theta(n^d) \qquad \quad \ if\ a&lt;b^d\\ 
-\Theta(n^d\log n) \quad if\ a&lt;b^d\\ 
-\Theta(n^{\log_ba})\quad \ \ \ if\ a&lt;b^d
-\end{cases}\)</p>
-
-<h2 id="mergesort">Mergesort</h2>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM Mergesort(A[0..n-1])
-    //Input: An Array A[0..n-1] of orderable elements
-    //Output: Array A[0..n-1] sorted in nondecreasing order
-    if n &gt; 1
-        copy A[0..⌊n/2⌋-1] to B[0..⌊n/2⌋-1]
-        copy A[⌊n/2⌋..n-1] to C[0..⌊n/2⌋-1]
-        Mergesort(B[0..⌊n/2⌋-1])
-        Mergesort(C[0..⌊n/2⌋-1])
-        Merge(B, C, A)
-
-</code></pre></div></div>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM Merge(B[0..p-1], C[0..q-1], A[0..p+q-1])
-    //Input: Arrays B[0..p-1] and C[0..q-1] both sorted
-    //Output: Sorted array A[0..p+q-1] of the elements of B and C
-    i &lt;- 0; j &lt;- 0; k &lt;- 0;
-    while i &lt; p and j &lt; q do
-        if B[i] &lt;= C[j]
-            A[k] &lt;- B[i]; i &lt;- i+1
-        else 
-            A[k] &lt;- C[j]; j &lt;- j+1
-        k &lt;- k+1
-    if i = p
-        copy C[j..q-1] to A[k..p+q-1]
-    else
-        copy B[i..p-1] to A[k..p+q-1]    
-</code></pre></div></div>
-
-<p align="center"><img src="/assets/img/%5BAL%5D6/mergesort.png" width="70%" height="70%" /></p>
-
-<ul>
-  <li>The number of key comparison
-    <ul>
-      <li>$C(n) = 2C(n/2)+C_{merge}(n)$ for $n&gt;1$, $C(1)=0$</li>
-      <li>$C_{merge}(n) = n-1$</li>
-      <li>$C_{worst}(n) = 2C_{worst}(n/2)+n-1$ for $n&gt;1$, $C_{worst}(1)=0$</li>
-      <li>C_{worst}(n)\in\Theta(n\log n)$</li>
-    </ul>
-  </li>
-  <li>Stable</li>
-  <li>Space requirement : $\Theta(n)$ (not in-place)</li>
-</ul>
-
-<h2 id="quicksort">Quicksort</h2>
-<p align="center"><img src="/assets/img/%5BAL%5D6/quicksort.png" width="70%" height="70%" /></p>
-<ul>
-  <li>Mergesort가 요소들의 위치에 따라 나눈거라면 Quicksort는 값에 따라 나눈다.</li>
-</ul>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM Quicksort(A[l..r])
-    //Input: Subarray of array A[0..n-1], defined by its left and right indices l and r
-    //Output: Subarray A[l..r] sorted in nondecreasing order
-    if l &lt; r
-        s &lt;- Partition(A[l..r]) // s is a split position
-        Quicksort(A[l..s-1])
-        Quicksort(A[s+1..r])
-</code></pre></div></div>
-
-<h3 id="partitioning-algorithm">Partitioning Algorithm</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM HoarePartition(A[l..r])
-    //Input: Subarray of array A[0..n-1], defined by its left and right indices l and r (l &lt; r)
-    //Output: Partition of A[l..r], with the split position returned as this function's value 
-    p &lt;- A[l]
-    i &lt;- l; j &lt;-  r+1
-    repeat
-        repeat i &lt;- i+1 until A[i] &gt;= p
-        repeat j &lt;- j-1 until A[j] &lt;= q
-        swap(A[i], A[j])
-    until i &gt;= j
-    swap(A[i], A[j]) //undo last swap when i &gt;= j
-    swap(A[l], A[j])
-    return j
-</code></pre></div></div>
-<p align="center"><img src="/assets/img/%5BAL%5D6/pa1.png" width="70%" height="70%" /></p>
-<p align="center"><img src="/assets/img/%5BAL%5D6/pa2.png" width="70%" height="70%" /></p>
-<p align="center"><img src="/assets/img/%5BAL%5D6/pa3.png" width="70%" height="70%" /></p>
-
-<h3 id="analysis-of-quicksort">Analysis of Quicksort</h3>
-<ul>
-  <li>Best case: 중간에서 split — $\Theta(n\log n)$</li>
-  <li>Worst case: 이미 정렬된 배열 — $\Theta(n^2)$</li>
-  <li>Average case: random 배열 —$\Theta(n\log n)$
-    <ul>
-      <li>보통 Mergesort보다 빠르다</li>
-    </ul>
-  </li>
-  <li>Improvements:
-    <ul>
-      <li>pivot을 선택할 때 세 개의 값중 중간값을 선택</li>
-      <li>매우 작은 subarray에서 insertion sort 사용</li>
-    </ul>
-  </li>
-  <li>Not Stable</li>
-</ul>
-
-<h2 id="binay-tree">Binay Tree</h2>
-<p>Binary trees와 관련된 많은 문제가 divede-and-conquer technique로 해결된다.
-<img src="/assets/img/%5BAL%5D6/BT.png" width="70%" height="70%" /></p>
-
-<h3 id="height">Height</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALGORITHM HEIGHT(T)
-    //Input: A binary tree T
-    //Output: The height of T
-    if T = NULL return -1
-    else return max{Height(T_left), Height(T_right)}+1
-</code></pre></div></div>
-<h3 id="traversals">Traversals</h3>
-<ul>
-  <li>preorder traversal</li>
-  <li>inorder traversal</li>
-  <li>postorder traversal</li>
-</ul>
-
-<h3 id="multiplication-of-large-integers">Multiplication of Large Integers</h3>
-
-<p>두 자리수 정수$a$, $b$를 $a=a_1a_0$,  $b=b_1b_0$로 나누어 계산한다.</p>
-
-\[c = a*b = c_210^2+c_110^1+c_0\]
-
-<p>$c_2=a_1*b_1$ 첫째 자리수의 곱</p>
-
-<p>$c_0=a_0*b_0$ 둘재 자리 수의 곱</p>
-
-<p>$c_1=(a_1+a_0)*(b_1+b_0)-(c_2+c_0)$ 각 자리수의 합을 곱한 값에 $c_2$, $c_0$를 뺀 값</p>
-
-<p>$n$-자리수의 경우</p>
-
-\[c = a*b = c_210^n+c_110^{n/2}+c_0\]
-
-<p>$c_2=a_1*b_1$ 앞쪽 반의 자리수의 곱</p>
-
-<p>$c_0=a_0*b_0$ 뒷쪽 반의 자리수의 곱</p>
-
-<p>$c_1=(a_1+a_0)*(b_1+b_0)-(c_2+c_0)$ 각 자리수의 합을 곱한 값에 $c_2$, $c_0$를 뺀 값</p>
-
-<ul>
-  <li>곱 횟수 : $M(n)=3M(n/2)$ for $n&gt;1$, $M(1)=1$.
-    <ul>
-      <li>$M(n) = 3^{\log_2n}$</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="closest-pair-problem">Closest-Pair Problem</h3>
-<p><img src="/assets/img/%5BAL%5D6/cp1.png" width="30%" height="30%" />
-<img src="/assets/img/%5BAL%5D6/cp2.png" width="60%" height="60%" /></p>
-
-<ul>
-  <li>Recurrence for the running time of the algorithm
-    <ul>
-      <li>$T(n) = 2T(n/2) + f(n) $, where $f(n)\in\Theta(n)$</li>
-      <li>Applying the Master Theorem (with $a=2$, $b=2$, and $d=1$),  $T(n)\in\Theta(n\log n)$</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="convex-hull">Convex-Hull</h3>
-<ul>
-  <li>Quickhull
-    <ul>
-      <li>$n$개의 점들 ($p_1(x_1, y_1), \cdots, p_n(x_n,y_n)$이 집합 $S$에 속해있다.</li>
-      <li>$n$개의 점들을 $x$좌표를 기준으로 정렬한 뒤 양 끝점 $p_1$, $p_n$을 지나는 직선을 중심으로 위쪽을 $S_1$, 아래쪽을 $S_2$로 $S$를 두개의 평면으로 나눈다.</li>
-    </ul>
-  </li>
-</ul>
-<p align="center"><img src="/assets/img/%5BAL%5D6/ch1.png" width="60%" height="60%" /></p>
-
-<h4 id="quickhull">Quickhull</h4>
-<ul>
-  <li>$S_1$이 비어있을 경우 두 점 $p_1$, $p_n$을 연결한 선분을 추가한다.</li>
-  <li>$S_1$이 비어있지 않을 경우 집합 $S_1$의 점중 직선 $\overrightarrow{p_1p_n}$과의 거리가 가장 먼 점 $p_max$을 찾는다.</li>
-  <li>$\overrightarrow{p_1p_{max}}$의 왼쪽에 있는 점들의 집합을 $S_{1,1}$, $\overrightarrow{p_{max}p_n}$의 왼쪽에 있는 점들의 집합을 $S_{1,2}$라고 하고 이 집합들에 대해 위의 과정을 반복한다.</li>
-</ul>
-
-<p align="center"><img src="/assets/img/%5BAL%5D6/qh.png" width="60%" height="60%" /></p>
-
-<ul>
-  <li>worst-case : $\Theta(n^2)$</li>
-  <li>average-case : lnear</li>
 </ul>]]></content><author><name>Junhwan</name></author><category term="ComputerScience" /><category term="algorithm" /><category term="CSE214" /><summary type="html"><![CDATA[Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin]]></summary></entry><entry><title type="html">[AL] 4. Brute Force and Exhaustive Search</title><link href="http://localhost:4000/computerscience/AL-4-Brute-Force-and-Exhaustive-Search-copy/" rel="alternate" type="text/html" title="[AL] 4. Brute Force and Exhaustive Search" /><published>2022-05-01T00:00:00+09:00</published><updated>2022-05-01T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/%5BAL%5D%204%20Brute%20Force%20and%20Exhaustive%20Search%20copy</id><content type="html" xml:base="http://localhost:4000/computerscience/AL-4-Brute-Force-and-Exhaustive-Search-copy/"><![CDATA[<blockquote>
   <p>Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin</p>
 </blockquote>
@@ -925,147 +1413,6 @@ $$T(n) \approx c_mM(n)+c_aM(n)=(c_m+c_a)n^3$$</center>
 for $n\ge1$</li>
     </ul>
   </li>
-</ul>]]></content><author><name>Junhwan</name></author><category term="ComputerScience" /><category term="algorithm" /><category term="CSE214" /><summary type="html"><![CDATA[Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin]]></summary></entry><entry><title type="html">[AL] 2. Important problem types</title><link href="http://localhost:4000/computerscience/AL-2-Important-problem-types/" rel="alternate" type="text/html" title="[AL] 2. Important problem types" /><published>2022-04-30T00:00:00+09:00</published><updated>2022-04-30T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/%5BAL%5D%202%20Important%20problem%20types</id><content type="html" xml:base="http://localhost:4000/computerscience/AL-2-Important-problem-types/"><![CDATA[<blockquote>
-  <p>Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin</p>
-</blockquote>
-
-<h2 id="sorting">Sorting</h2>
-<h3 id="sorting을--하는-이유">Sorting을  하는 이유</h3>
-<ul>
-  <li>정렬이 출력으로 요구되는 작업이 있다.
-    <ul>
-      <li>ex) ranking</li>
-    </ul>
-  </li>
-  <li>정렬은 리스트에 대한 질문에 쉽게 대답할 수 있게 해준다
-    <ul>
-      <li>ex) searching</li>
-    </ul>
-  </li>
-  <li>정렬은 다른 분야의 중요한 알고리즘의 보조 단계로 사용된다.
-    <ul>
-      <li>ex) geometric algorithms and data compression</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="sorting-알고리즘의-예">Sorting 알고리즘의 예</h3>
-<ul>
-  <li>Selection sort</li>
-  <li>Bubble sort</li>
-  <li>Insertion sort</li>
-  <li>Merge sort</li>
-  <li>Heap sort</li>
-  <li>…
-Sorting 알고리즘의 복잡성은 key의 비교 횟수로 평가한다.</li>
-</ul>
-
-<h3 id="sorting-알고리즘의-속성">Sorting 알고리즘의 속성</h3>
-<p><code class="language-plaintext highlighter-rouge">stable</code> : 입력에서의 동일한 두 요소의 상대적인 순서가 바뀌지 않는 경우
-<code class="language-plaintext highlighter-rouge">in place</code> : 적은 메모리 단위를 제외한 추가 메모리를 사용하지 않는 경우</p>
-
-<h3 id="selection-sort">Selection Sort</h3>
-<p>Input : array <code class="language-plaintext highlighter-rouge">a[1]</code>,…,<code class="language-plaintext highlighter-rouge">a[n]</code></p>
-
-<p>Output :  array a sorted in non-decreasing order</p>
-
-<p>Algorithm:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for i=1 to n 
-    swap a[i] with smallest of a[i],…,a[n] 
-</code></pre></div></div>
-<p>Pseudocode</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Algorithm SelectionSort(A[0..n-1])
-//The algorithm sorts a given array by selection sort
-//Input: An array A[0..n-1] of orderable elements
-//Output: Array A[0..n-1] sorted in ascending order
-for i  0 to n – 2 do
-	min  i
-	for j  i + 1 to n – 1 do
-		if A[j] &lt; A[min] 	
-			min  j
-	swap A[i] and A[min]
-</code></pre></div></div>
-
-<h2 id="searching">Searching</h2>
-<ul>
-  <li>
-    <p>주어진 집합(또는 여러 요소가 동일한 값을 가질 수 있도록 허용된 다중 집합)에서 주어진 <code class="language-plaintext highlighter-rouge">search key</code>를 찾는다.</p>
-  </li>
-  <li>
-    <p>Example</p>
-    <ul>
-      <li>Sequentail search</li>
-      <li>Binary search</li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="string-processing">String processing</h2>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">string</code>: character 배열</li>
-  <li><code class="language-plaintext highlighter-rouge">Text strings</code>: letters, numbers, and special characters.</li>
-  <li><code class="language-plaintext highlighter-rouge">String matching</code>: 글에서 주어진 단어나 패턴을 검색</li>
-</ul>
-
-<h2 id="graph-problems">Graph problems</h2>
-<ul>
-  <li>실제 문제 모델링
-    <ul>
-      <li>World Wide Web(WWW) 모델링</li>
-      <li>통신망 모델링</li>
-      <li>프로젝트 스케줄링</li>
-    </ul>
-  </li>
-  <li>기본적인 그래프 알고리즘
-    <ul>
-      <li>그래프 순회 알고리즘</li>
-      <li>최단거리 알고리즘</li>
-      <li>위상정렬</li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="combinational-problems">Combinational problems</h2>
-<ul>
-  <li>명시적으로나 암묵적으로 순열, 조합, 부분집합과 같은 <code class="language-plaintext highlighter-rouge">combinatorial object</code>를 찾는것을 요청</li>
-  <li>ex) traveling salesman problem (TSP)
-    <ul>
-      <li>N개 도시를 모두 정확히 한 번 방문하는 최단 기간 찾기</li>
-    </ul>
-  </li>
-  <li><code class="language-plaintext highlighter-rouge">Combinational</code> 문제는 이론적 및 실제적 관점에서 컴퓨팅에서 가장 어려운 문제이다.</li>
-  <li><code class="language-plaintext highlighter-rouge">combinatorial object</code>의 수는 일반적으로 문제의 크기에 따라 매우 빠르게 증가한다.</li>
-  <li>제한된 시간안에 정확하게 푸는 알려진 알고리즘이 없다.</li>
-</ul>
-
-<h2 id="geometric-problems">Geometric problems</h2>
-<ul>
-  <li>점, 선, 다각형과 같은 <code class="language-plaintext highlighter-rouge">geometric object</code>를 다룬다.
-    <ul>
-      <li>응용 : 컴퓨터 그래픽, 로보틱스, 단층 촬영</li>
-    </ul>
-  </li>
-  <li>Example
-    <ul>
-      <li>The closest-pair problem</li>
-      <li>The convex-hull problem</li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="numerical-problems">Numerical problems</h2>
-<ul>
-  <li>연속적인 <code class="language-plaintext highlighter-rouge">mathematical objects</code>를 포함하는 문제이다.</li>
-  <li>이러한 대부분의 수학적 문제들은 근사적으로만 풀 수 있다.</li>
-  <li>근사된 숫자에 대해 산술 연산을 많이 수행하면 반올림 오차가 누적되어 크게 왜곡될 수 있다.</li>
-  <li>Example
-    <ul>
-      <li>방정식</li>
-      <li>연립방적식</li>
-      <li>정적분</li>
-      <li>함수값 계산</li>
-    </ul>
-  </li>
 </ul>]]></content><author><name>Junhwan</name></author><category term="ComputerScience" /><category term="algorithm" /><category term="CSE214" /><summary type="html"><![CDATA[Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin]]></summary></entry><entry><title type="html">[AL] 1. Intro</title><link href="http://localhost:4000/computerscience/AL-1.-Intro/" rel="alternate" type="text/html" title="[AL] 1. Intro" /><published>2022-04-30T00:00:00+09:00</published><updated>2022-04-30T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/%5BAL%5D%201.%20Intro</id><content type="html" xml:base="http://localhost:4000/computerscience/AL-1.-Intro/"><![CDATA[<blockquote>
   <p>Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin</p>
 </blockquote>
@@ -1300,7 +1647,148 @@ Ex) 제곱근 구하기, 비선형 방정식 해결 및 유한 적분 계산</li
 실질적인 문제로서, 프로그램의 유효성은 여전히 테스트를 통해 확립된다.
 알고리즘을 구현할 때마다 프로그램을 철저히 테스트하고 디버깅해야한다.</p>
 
-<p>일반적으로, 좋은 알고리즘은 반복적인 노력과 재작업의 결과이다.</p>]]></content><author><name>Junhwan</name></author><category term="ComputerScience" /><category term="algorithm" /><category term="CSE214" /><summary type="html"><![CDATA[Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin]]></summary></entry><entry><title type="html">[AI] Uniformed Search</title><link href="http://localhost:4000/computerscience/1-Uniformed-Search/" rel="alternate" type="text/html" title="[AI] Uniformed Search" /><published>2022-04-24T00:00:00+09:00</published><updated>2022-04-24T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/1%20Uniformed%20Search</id><content type="html" xml:base="http://localhost:4000/computerscience/1-Uniformed-Search/"><![CDATA[<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>용어 정리
+<p>일반적으로, 좋은 알고리즘은 반복적인 노력과 재작업의 결과이다.</p>]]></content><author><name>Junhwan</name></author><category term="ComputerScience" /><category term="algorithm" /><category term="CSE214" /><summary type="html"><![CDATA[Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin]]></summary></entry><entry><title type="html">[AL] 2. Important problem types</title><link href="http://localhost:4000/computerscience/AL-2-Important-problem-types/" rel="alternate" type="text/html" title="[AL] 2. Important problem types" /><published>2022-04-30T00:00:00+09:00</published><updated>2022-04-30T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/%5BAL%5D%202%20Important%20problem%20types</id><content type="html" xml:base="http://localhost:4000/computerscience/AL-2-Important-problem-types/"><![CDATA[<blockquote>
+  <p>Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin</p>
+</blockquote>
+
+<h2 id="sorting">Sorting</h2>
+<h3 id="sorting을--하는-이유">Sorting을  하는 이유</h3>
+<ul>
+  <li>정렬이 출력으로 요구되는 작업이 있다.
+    <ul>
+      <li>ex) ranking</li>
+    </ul>
+  </li>
+  <li>정렬은 리스트에 대한 질문에 쉽게 대답할 수 있게 해준다
+    <ul>
+      <li>ex) searching</li>
+    </ul>
+  </li>
+  <li>정렬은 다른 분야의 중요한 알고리즘의 보조 단계로 사용된다.
+    <ul>
+      <li>ex) geometric algorithms and data compression</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="sorting-알고리즘의-예">Sorting 알고리즘의 예</h3>
+<ul>
+  <li>Selection sort</li>
+  <li>Bubble sort</li>
+  <li>Insertion sort</li>
+  <li>Merge sort</li>
+  <li>Heap sort</li>
+  <li>…
+Sorting 알고리즘의 복잡성은 key의 비교 횟수로 평가한다.</li>
+</ul>
+
+<h3 id="sorting-알고리즘의-속성">Sorting 알고리즘의 속성</h3>
+<p><code class="language-plaintext highlighter-rouge">stable</code> : 입력에서의 동일한 두 요소의 상대적인 순서가 바뀌지 않는 경우
+<code class="language-plaintext highlighter-rouge">in place</code> : 적은 메모리 단위를 제외한 추가 메모리를 사용하지 않는 경우</p>
+
+<h3 id="selection-sort">Selection Sort</h3>
+<p>Input : array <code class="language-plaintext highlighter-rouge">a[1]</code>,…,<code class="language-plaintext highlighter-rouge">a[n]</code></p>
+
+<p>Output :  array a sorted in non-decreasing order</p>
+
+<p>Algorithm:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for i=1 to n 
+    swap a[i] with smallest of a[i],…,a[n] 
+</code></pre></div></div>
+<p>Pseudocode</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Algorithm SelectionSort(A[0..n-1])
+//The algorithm sorts a given array by selection sort
+//Input: An array A[0..n-1] of orderable elements
+//Output: Array A[0..n-1] sorted in ascending order
+for i  0 to n – 2 do
+	min  i
+	for j  i + 1 to n – 1 do
+		if A[j] &lt; A[min] 	
+			min  j
+	swap A[i] and A[min]
+</code></pre></div></div>
+
+<h2 id="searching">Searching</h2>
+<ul>
+  <li>
+    <p>주어진 집합(또는 여러 요소가 동일한 값을 가질 수 있도록 허용된 다중 집합)에서 주어진 <code class="language-plaintext highlighter-rouge">search key</code>를 찾는다.</p>
+  </li>
+  <li>
+    <p>Example</p>
+    <ul>
+      <li>Sequentail search</li>
+      <li>Binary search</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="string-processing">String processing</h2>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">string</code>: character 배열</li>
+  <li><code class="language-plaintext highlighter-rouge">Text strings</code>: letters, numbers, and special characters.</li>
+  <li><code class="language-plaintext highlighter-rouge">String matching</code>: 글에서 주어진 단어나 패턴을 검색</li>
+</ul>
+
+<h2 id="graph-problems">Graph problems</h2>
+<ul>
+  <li>실제 문제 모델링
+    <ul>
+      <li>World Wide Web(WWW) 모델링</li>
+      <li>통신망 모델링</li>
+      <li>프로젝트 스케줄링</li>
+    </ul>
+  </li>
+  <li>기본적인 그래프 알고리즘
+    <ul>
+      <li>그래프 순회 알고리즘</li>
+      <li>최단거리 알고리즘</li>
+      <li>위상정렬</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="combinational-problems">Combinational problems</h2>
+<ul>
+  <li>명시적으로나 암묵적으로 순열, 조합, 부분집합과 같은 <code class="language-plaintext highlighter-rouge">combinatorial object</code>를 찾는것을 요청</li>
+  <li>ex) traveling salesman problem (TSP)
+    <ul>
+      <li>N개 도시를 모두 정확히 한 번 방문하는 최단 기간 찾기</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">Combinational</code> 문제는 이론적 및 실제적 관점에서 컴퓨팅에서 가장 어려운 문제이다.</li>
+  <li><code class="language-plaintext highlighter-rouge">combinatorial object</code>의 수는 일반적으로 문제의 크기에 따라 매우 빠르게 증가한다.</li>
+  <li>제한된 시간안에 정확하게 푸는 알려진 알고리즘이 없다.</li>
+</ul>
+
+<h2 id="geometric-problems">Geometric problems</h2>
+<ul>
+  <li>점, 선, 다각형과 같은 <code class="language-plaintext highlighter-rouge">geometric object</code>를 다룬다.
+    <ul>
+      <li>응용 : 컴퓨터 그래픽, 로보틱스, 단층 촬영</li>
+    </ul>
+  </li>
+  <li>Example
+    <ul>
+      <li>The closest-pair problem</li>
+      <li>The convex-hull problem</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="numerical-problems">Numerical problems</h2>
+<ul>
+  <li>연속적인 <code class="language-plaintext highlighter-rouge">mathematical objects</code>를 포함하는 문제이다.</li>
+  <li>이러한 대부분의 수학적 문제들은 근사적으로만 풀 수 있다.</li>
+  <li>근사된 숫자에 대해 산술 연산을 많이 수행하면 반올림 오차가 누적되어 크게 왜곡될 수 있다.</li>
+  <li>Example
+    <ul>
+      <li>방정식</li>
+      <li>연립방적식</li>
+      <li>정적분</li>
+      <li>함수값 계산</li>
+    </ul>
+  </li>
+</ul>]]></content><author><name>Junhwan</name></author><category term="ComputerScience" /><category term="algorithm" /><category term="CSE214" /><summary type="html"><![CDATA[Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin]]></summary></entry><entry><title type="html">[AI] Uniformed Search</title><link href="http://localhost:4000/computerscience/1-Uniformed-Search/" rel="alternate" type="text/html" title="[AI] Uniformed Search" /><published>2022-04-24T00:00:00+09:00</published><updated>2022-04-24T00:00:00+09:00</updated><id>http://localhost:4000/computerscience/1%20Uniformed%20Search</id><content type="html" xml:base="http://localhost:4000/computerscience/1-Uniformed-Search/"><![CDATA[<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>용어 정리
 strategy : 전략
 complete : solution이 하나 존재 할 때 그 solution을 찾는 것이 보장되어 있는가?
 optimal : 최단 경로(the least cost path)를 찾는 것이 보장되어 있는가?   
@@ -1485,243 +1973,4 @@ for constants $a_1,a_2,…,a_n$ and $b_1,b_2,…,b_m.$ Then the following hold:<
   <p><strong>b</strong>    $V(U_1) = \sum^n_{i=1} a_i^2V(Y_i) + 2\sum\sum_{ 1≤i&lt;j≤n} a_ia_jCov(Y_i,Y_j)$, where the double sum is over all pairs $(i, j)$ with $i &lt; j$.</p>
 
   <p><strong>c</strong>    $Cov(U_1,U_2)=\sum_{i=1}^n\sum_{j=1}^m a_ib_jCov(Y_i,X_j)$.</p>
-</blockquote>]]></content><author><name>Junhwan</name></author><category term="Statistics" /><category term="MathematicalStatistics" /><category term="STAT232" /><summary type="html"><![CDATA[5 Multivariate Probability Distributions]]></summary></entry><entry><title type="html">[수리통계학] Continuous Variables and Their Probability Distributions</title><link href="http://localhost:4000/statistics/4-Continuous-Variables-and-Their-Probability-Distributions/" rel="alternate" type="text/html" title="[수리통계학] Continuous Variables and Their Probability Distributions" /><published>2022-03-06T00:00:00+09:00</published><updated>2022-03-06T00:00:00+09:00</updated><id>http://localhost:4000/statistics/4%20Continuous%20Variables%20and%20Their%20Probability%20Distributions</id><content type="html" xml:base="http://localhost:4000/statistics/4-Continuous-Variables-and-Their-Probability-Distributions/"><![CDATA[<h1 id="4-continuous-variables-and-their-probability-distributions">4 Continuous Variables and Their Probability Distributions</h1>
-
-<hr />
-
-<h2 id="42-the-probability-distribution-for-a-continuous-random-variable">4.2 The Probability Distribution for a Continuous Random Variable</h2>
-
-<h3 id="definition-41">DEFINITION 4.1</h3>
-<blockquote>
-  <p>Let $Y$ denote any random variable. The distribution function of $Y$ , denoted by $F(y)$, is such that $F(y) = P(Y ≤ y)$ for $−∞ &lt; y &lt; ∞.$</p>
-</blockquote>
-
-<h3 id="theorem-41">THEOREM 4.1</h3>
-<blockquote>
-  <p>Let Y denote any random variable. The distribution function of $Y$, denoted by $F(y)$, is such that $F(y) = P(Y ≤ y)$ for $−∞ &lt; y &lt; ∞.$</p>
-</blockquote>
-
-<h3 id="definition-42">DEFINITION 4.2</h3>
-<blockquote>
-  <p>A random variable $Y$ with distribution function $F(y)$ is said to be continuous if $F(y)$ is continuous, for $−∞ &lt; y &lt; ∞.$</p>
-</blockquote>
-
-<h3 id="definition-43">DEFINITION 4.3</h3>
-<blockquote>
-  <p>Let $F(y)$ be the distribution function for a continuous random variable $Y$. Then $f(y)$, given by
-$f(y)= dF(y)= {dF^′(y) \over dy}$
-wherever the derivative exists, is called the probability density function for the random variable $Y$ .</p>
-</blockquote>
-
-<h3 id="theorem-42">THEOREM 4.2</h3>
-<blockquote>
-  <p><strong>Properties of a Density Function</strong> If $f(y)$ is a density function for a continuous random variable, then</p>
-  <ol>
-    <li>$f(y) ≥ 0$ for all $y$, $−∞&lt;y&lt;∞.$</li>
-    <li>$\int_{-∞}^{∞} f(y)dy=1.$</li>
-  </ol>
-</blockquote>
-
-<h3 id="definition-44">DEFINITION 4.4</h3>
-<blockquote>
-  <p>Let $Y$ denote any random variable. If $0 &lt; p &lt; 1$, the $p$th <strong><em>quantile</em></strong> of $Y$, denoted by $\phi_p$, is the smallest value such that $P(Y ≤ \phi_p) = F(\phi_p) ≥ p.$ If $Y$ is continuous, $\phi_p$ is the smallest value such that $F(\phi_p) = P(Y ≤ \phi_p) = p.$ Some prefer to call $\phi_p$ the $100p$th percentile of Y.</p>
-</blockquote>
-
-<h3 id="theorem-43">THEOREM 4.3</h3>
-<blockquote>
-  <p>If the random variable $Y$ has density function $f (y)$ and $a &lt; b$, then the probability that $Y$ falls in the interval $[a, b]$ is
-\(P(a ≤ Y ≤ b) = \int_{a}^{b}f (y) dy.\)</p>
-</blockquote>
-
-<hr />
-
-<h2 id="43-expected-values-for-continuous-random-variables">4.3 Expected Values for Continuous Random Variables</h2>
-
-<h3 id="definition-45">DEFINITION 4.5</h3>
-<blockquote>
-  <p>The expected value of a continuous random variable $Y$ is 
-\(E(Y) =\int_{-∞}^{∞}yf(y)\ dy\) 
-provided that the integral exists.</p>
-</blockquote>
-
-<h3 id="theroem-44">THEROEM 4.4</h3>
-<blockquote>
-  <p>Let $g(Y )$ be a function of $Y$ ; then the expected value of $g(Y )$ is given by 
-\(E [g(Y )] = \int_{-∞}^{∞}g(y)f(y)\ dy\)
-provided that the integral exists.</p>
-</blockquote>
-
-<h3 id="theorem-45">THEOREM 4.5</h3>
-<blockquote>
-  <p>Let $c$ be a constant and let $g(Y), g_1(Y), g_2(Y),…,g_k(Y)$ be functions of a continuous random variable $Y$ . Then the following results hold:</p>
-  <ol>
-    <li>$E(c) = c.$</li>
-    <li>$E[cg(Y)] = cE[g(Y)].$</li>
-    <li>$E[g_1(Y)+g_2(Y)+···+gk(Y)] = E[g_1(Y)]+E[g_2(Y)]+···+E[g_k(Y)].$</li>
-  </ol>
-</blockquote>]]></content><author><name>Junhwan</name></author><category term="Statistics" /><category term="MathematicalStatistics" /><category term="STAT232" /><summary type="html"><![CDATA[4 Continuous Variables and Their Probability Distributions]]></summary></entry><entry><title type="html">[수리통계학] Discrete Random Variables and Their Probability Distributions</title><link href="http://localhost:4000/statistics/3-Discrete-Random-Variables-and-Their-Probability-Distributions/" rel="alternate" type="text/html" title="[수리통계학] Discrete Random Variables and Their Probability Distributions" /><published>2022-03-05T00:00:00+09:00</published><updated>2022-03-05T00:00:00+09:00</updated><id>http://localhost:4000/statistics/3%20Discrete%20Random%20Variables%20and%20Their%20Probability%20Distributions</id><content type="html" xml:base="http://localhost:4000/statistics/3-Discrete-Random-Variables-and-Their-Probability-Distributions/"><![CDATA[<h1 id="3-discrete-random-variables-and-their-probability-distributions">3 Discrete Random Variables and Their Probability Distributions</h1>
-
-<hr />
-
-<h2 id="31-basic-definition">3.1 Basic DEFINITION</h2>
-<h3 id="definition-31">DEFINITION 3.1</h3>
-<blockquote>
-  <p>A random variable <strong><em>Y</em></strong> is said to be <em><strong>discrete</strong></em> if it can assume only a finite or countably infinite number of distinct values</p>
-</blockquote>
-
-<p>랜덤 변수 $Y$는 finite하거나 countably infinite한 고유 값만 가정할 수 있는 경우 $discrete$라고 한다.</p>
-
-<h4 id="countably-infinite">Countably infinite</h4>
-<blockquote>
-  <p>A set is countably infinite if its elements can be put in one-to-one correspondence with the set of natural numbers.</p>
-</blockquote>
-
-<p>원소들이 자연수들의 집합과 일대일 대응에 놓일 수 있다면 그 집합은 countably infinite하다.</p>
-
-<p>Countably infinite하다는 것은 우리가 영원히 셀 수 없을 정도로 큰 집합을 설명하는 것과 대조적이다. finite sets을 포함하지 않는 다는 것을 강조할 때 사용한다.</p>
-
-<hr />
-
-<h2 id="32-the-probability-distribution-for-a-discrete-random-variable">3.2 The Probability Distribution for a Discrete Random Variable</h2>
-
-<h3 id="definition-32">DEFINITION 3.2</h3>
-<blockquote>
-  <p>The probability that $Y$ takes on the value $y$, $P(Y = y)$, is defined as the sum of the probabilities of all sample points in S that are assigned the value y. We will sometimes denote $P(Y = y)$ by $p(y)$.</p>
-</blockquote>
-
-<p>$Y$가 $y$를 값으로 가질 확률 $P(Y = y)$는 $y$를 값으로 가지는 모든 표본점의 확률의 합으로 정의된다.</p>
-
-<h4 id="sample-point-표본점">sample point (표본점)</h4>
-<blockquote>
-  <p>a single possible observed value of a variable.
-변수가 가질 수 있는 단일 관측치</p>
-</blockquote>
-
-<h3 id="definition-33">DEFINITION 3.3</h3>
-<blockquote>
-  <p><em>The probability distribution</em> for a discrete variable $Y$ can be represented by a formula, a table, or a graph that provides $p(y) = P(Y = y)$ for all $y$.</p>
-</blockquote>
-
-<p>이산형 변수 $Y$에 대한 확률 분포는 모든 Y에 대해 $p(y) = P(Y = y)$를 규정하는 공식, 표 또는 그래프로 나타낼 수 있다.</p>
-
-<h3 id="theorem-31">THEOREM 3.1</h3>
-<blockquote>
-  <p>For any discrete probability distribution, the following must be true:</p>
-  <ol>
-    <li>$0≤ p(y)≤1$ for all $y$.</li>
-    <li>$\sum_y p(y) = 1$, where the summation is over all values of $y$ with nonzero probability</li>
-  </ol>
-</blockquote>
-
-<hr />
-
-<h2 id="33-the-expected-value-of-a-random-variable-or-a-function-of-a-random-variable">3.3 The Expected Value of a Random Variable or a Function of a Random Variable</h2>
-
-<h3 id="dfinition-34">Dfinition 3.4</h3>
-<blockquote>
-  <p>Let $Y$ be a discrete random variable with the probability function $p(y)$. Then the expected value of $Y$ , $E(Y)$, is defined to be
-\(E(Y)=\sum yp(y).\)</p>
-</blockquote>
-
-<h3 id="theorem-32">THEOREM 3.2</h3>
-<blockquote>
-  <p>Let $Y$ be a discrete random variable with probability function $p(y)$ and $g(Y)$ be a real-valued function of $Y$. Then the expected value of $g(Y)$ is given by
-\(E[g(Y)] = \sum_{all\ y} g(y)p(y).\)</p>
-</blockquote>
-
-<h3 id="definition-35">DEFINITION 3.5</h3>
-<blockquote>
-  <p>If $Y$ is a random variable with mean $E(Y) = μ$, the variance of a random variable $Y$ is defined to be the expected value of $(Y − μ)^2$. That is,
-\(V (Y) = E [(Y − μ)^2].\)
-The <em>standard deviation</em> of $Y$ is the positive square root of $V (Y )$.</p>
-</blockquote>
-
-<h3 id="theorem-33">THEOREM 3.3</h3>
-<blockquote>
-  <p>Let $Y$ be a discrete random variable with probability function $p(y)$ and c be a constant. Then $E(c) = c$.</p>
-</blockquote>
-
-<h3 id="theorem-34">THEOREM 3.4</h3>
-<blockquote>
-  <p>Let $Y$ be a discrete random variable with probability function $p(y)$, $g(Y)$ be a function of $Y$ , and c be a constant. Then
-\(E[cg(Y)] = cE[g(Y)].\)</p>
-</blockquote>
-
-<h3 id="theorem-35">THEOREM 3.5</h3>
-<blockquote>
-  <p>Let $Y$ be a discrete random variable with probability function $p(y)$ and $g_1(Y ), g_2(Y),…, g_k(Y)$ be $k$ functions of $Y$. Then
-\(E [g_1 (Y ) + g_2 (Y ) + · · · + g_k (Y )] = E [g_1 (Y )] + E [g_2 (Y )] + · · · + E [g_k (Y )].\)</p>
-</blockquote>
-
-<h3 id="theotem-36">THEOTEM 3.6</h3>
-<blockquote>
-  <p>Let $Y$ be a discrete random variable with probability function $p(y)$ and mean $E(Y) = μ$; then
-\(V(Y)=σ^2 = E[(Y −μ)^2]= E(Y^2)−μ^2.\)</p>
-</blockquote>
-
-<hr />
-<h2 id="34-the-binomial-probability-distribution">3.4 The Binomial Probability Distribution</h2>
-
-<h3 id="definition-36">DEFINITION 3.6</h3>
-<blockquote>
-  <p>A binomial experiment possesses the following properties:</p>
-  <ol>
-    <li>The experiment consists of a fixed number, $n$, of identical trials.</li>
-    <li>Each trial results in one of two outcomes: success, $S$, or failure, $F$.</li>
-    <li>The probability of success on a single trial is equal to some value $p$ and remains the same from trial to trial. The probability of a failure is equal to $q = (1 − p)$.</li>
-    <li>The trials are independent.</li>
-    <li>The random variable of interest is $Y$ , the number of successes observed during the $n$ trials.</li>
-  </ol>
-</blockquote>
-
-<p>이항 실험의 특성</p>
-
-<ol>
-  <li>실험은  고정된 n개의 동일한 시행으로 구성된다.</li>
-  <li>각 시행의 결과는 성공, $S$ 또는 실패, $F$의 두 가지 결과 중 하나이다.</li>
-  <li>각 시행에서 에서 성공할 확률은 어떤 값 $p$와 같다.같은 시행에서 실패 확률은 $q = (1 - p).$ 이다.</li>
-  <li>각 시행은 독립이다.</li>
-  <li>관심 랜덤 변수는 Y이며, $n$개의 시행 중 관찰된 성공 횟수입니다.</li>
-</ol>
-
-<h3 id="definition-37">DEFINITION 3.7</h3>
-<blockquote>
-  <p>A random variable $Y$ is said to have a binomial distribution based on n trials with success probability p if and only if
-\(p(y)= {n\choose y}p^yq^{n−y},\qquad  y=0,1,2,...,\ n\ and\ 0≤p≤1.\)</p>
-</blockquote>
-
-<h3 id="theorem-37">THEOREM 3.7</h3>
-<blockquote>
-  <p>Let $Y$ be a binomial random variable based on $n$ trials and success probability $p$. Then
-\(μ=E(Y)=np\quad and\quad σ^2 =V(Y)=npq.\)</p>
-</blockquote>
-
-<hr />
-
-<h2 id="35-the-geometric-probability-distribution">3.5 The Geometric Probability Distribution</h2>
-
-<h3 id="definition-38">DEFINITION 3.8</h3>
-<blockquote>
-  <p>A random variable $Y$ is said to have a geometric probability distribution if and only if
-\(p(y)=q^{y−1}p,\quad y=1,2,3,...,\quad 0≤p≤1.\)</p>
-</blockquote>
-
-<h3 id="theorem-38">THEOREM 3.8</h3>
-<blockquote>
-  <p>If $Y$ is a random variable with a geometric distribution,
-\(μ=E(Y)={1\over p} \quad and \quad σ^2=V(Y)={1−p \over p^2}.\)</p>
-</blockquote>
-
-<h2 id="36-the-negative-binomial-probability-distribution">3.6 The Negative Binomial Probability Distribution</h2>
-
-<h3 id="definition-39">DEFINITION 3.9</h3>
-<blockquote>
-  <p>A random variable Y is said to have a <strong><em>negative binomial probability distribution</em></strong> if and only if
-\(p(y)= {y-1\choose r-1}p^r q^{y−r},\quad  y=r,r+1,r+2,..., 0≤p≤1.\)</p>
-</blockquote>
-
-<h3 id="theorem-39">THEOREM 3.9</h3>
-<blockquote>
-  <p>If Y is a random variable with a negative binomial distribution,
-\(μ=E(Y)= {r \over p}\quad and\quad σ^2=V(Y)= {r(1−p) \over p^2}.\)</p>
-</blockquote>]]></content><author><name>Junhwan</name></author><category term="Statistics" /><category term="MathematicalStatistics" /><category term="STAT232" /><summary type="html"><![CDATA[3 Discrete Random Variables and Their Probability Distributions]]></summary></entry></feed>
+</blockquote>]]></content><author><name>Junhwan</name></author><category term="Statistics" /><category term="MathematicalStatistics" /><category term="STAT232" /><summary type="html"><![CDATA[5 Multivariate Probability Distributions]]></summary></entry></feed>

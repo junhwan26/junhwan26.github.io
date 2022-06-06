@@ -64,4 +64,16 @@ var store = [{
         "tags": ["algorithm","CSE214"],
         "url": "/computerscience/AL-6-Divide-and-Conquer/",
         "teaser": null
+      },{
+        "title": "[AL] 7. Transform-and-Conquer",
+        "excerpt":"Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin Transform-and-Conquer Transform-and-conquer technique 두가지 절차 인스턴스들을 문제를 더 풀기 쉽도록 변형한다 변형된 입력들로 문제를 해결한다. 주어진 인스턴스의 세 가지 주요 변형: Instance Simplication: 동일한 문제의 더 단순하고 편리한 인스턴스로 전환 Representation change: 동일한...","categories": ["ComputerScience"],
+        "tags": ["algorithm","CSE214"],
+        "url": "/computerscience/AL-7-Transform-and-Conquer/",
+        "teaser": null
+      },{
+        "title": "[AL] 8. Space and Time Trade-Offs",
+        "excerpt":"Materials are adapted from “Introduction to the design &amp; Analysis of Algorithms,” 3rd ed., by A. Levitin Space and Time Trade-Offs 두가지 종류의 space-for-time 알고리즘 Input enhancement 문제 해결을 가속화하기 위해 입력을 전처리하여 저장한다. Ex) countingn methods for sorting, string matching algorithms (Boyer-Moore algorithm and Horspool algorithm) Prestructuring 데이터를 더...","categories": ["ComputerScience"],
+        "tags": ["algorithm","CSE214"],
+        "url": "/computerscience/AL-8-Space-and-Time-Trade-Offs/",
+        "teaser": null
       }]
