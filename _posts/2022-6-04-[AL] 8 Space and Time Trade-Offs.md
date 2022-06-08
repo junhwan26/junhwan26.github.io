@@ -195,12 +195,51 @@ Horspool's algorithm과 같이 패턴의 오른쪽에서 왼쪽으로 이동하�
 
 
 
-
-
-
-
-
 #### Boyer-Moore ALgorithm
 <p align="center"><img src="/assets/img/[AL]8/BM.png" width="70%" height="70%"></p> 
 
 ## Hasing
+- 사전을 구현하는 매우 효율적인 방법이다.
+- 사전은 추상적인 데이터 유형의 검색, 삽입 및 삭제 작업이 정의된 집합이다.
+- `Hasing`은 `hash table`이라고 불리는 1차원 배열 H[0.m-1] 사이에 `key`를 분배하는 아이디어에 기초한다.
+- 분배는 각 키에 대해 `hash function`라고 불리는 미리 정의된 함수 h의 값을 계산함으로써 이루어진다.
+  - 이 함수는 $0$과 $m-1$ 사이의 정수`hash address`를 `key`에 할당한다.
+
+### Hash function
+- Example: if keys are nonnegative integers
+  - Hash function: $h(K)=K\ \rm{mod}$ $m$
+
+- Example: if keys are letters of some alphabet
+  - Hash function: $h(K)=\rm{ord}(K)\ \rm{mod}$ $m$
+
+- Example: if key is a character string
+  - Hash function: $h \larr 0;$ $\rm for$ $i\ \larr0$ to $s-1$ $\rm do$ $h \larr (h*C+\rm{ord}($$c_i))$ $\rm{mod}$$\ m$
+    - Where $C$ is a constant
+
+- `hash table`의 크기는 키의 수에 비해 지나치게 커서는 안 되지만, 구현의 `time efficiency`를 위태롭게 하지 않을 정도로 충분해야 한다.
+- `hash function`는 `hash function`의 셀들 사이에 키를 가능한 한 균등하게 분배해야 한다.
+- `hash function`는 계산하기 쉬워야 한다.
+
+### Collision
+두 개 이상의 `key`가 `hash table`의 동일한 셀로 해시되는 현상이다. 적절하게 선택된 해시 테이블 크기와 좋은 해시 함수를 사용하면, 이러한 상황은 매우 드물게 발생한다. 그러나 모든 `hash` 체계에는 충돌 해결 메커니즘이 있어야 한다.
+- `open hashing` (`separate chaining`)
+  - `Key`를 `linked list`에 저장하고 `hash table`에 각 `linked list`의 `header`의 주소를 저장한다.
+  <p align="center"><img src="/assets/img/[AL]8/openhashing.png" width="70%" height="70%"></p> 
+- `closed hashing` (`open addressing`)
+  - Linear probing
+    - 셀이 비어 있으면 새 키가 저장된다.
+    - 충돌이 발생한 셀 다음에 오는 셀을 확인한다.
+    - 다음 셀이 이미 사용 중인 경우 해당 셀의 다음 셀을 확인한다.
+    - 마지막에 도달하면 처음으로 돌아간다.
+  - 키를 검색하려면
+    - 셀 $h(K)$가 비어 있으면 검색에 실패합니다.
+    - 셀이 비어 있지 않으면 $K$를 셀에 있는 `key`와 비교해야 한다. 동일하지 않으면 $K$를 다음 셀의 `key`와 비교하고 일치하는 `key`(성공한 검색) 또는 빈 셀(성공하지 못한 검색)이 나타날 때까지 이러한 방식으로 계속합니다.
+  -  Deletion:`lazy deletion`을 사용한다.
+
+### Hashing vs. balanced search trees
+- Asymptotic time efficiency
+  - `Hashing`: 평균적으로 `searching`, `insertion`, and `deletion` $\Theta(n)$이지만 최악의 경우 $\Theta(n)$
+  - `Balanced search tree`: 평균과 최악 모두 $\Theta(\log n)$ 
+- 순서 유지 
+  - `Hashing`: `key` 순서가 있는 것으로 가정하지 않으며 일반적으로 `key` 순서가 유지되지 않는다. `key`를 순서대로 반복해야 하거나 하한과 상한 사이의 `key` 개수 계산이 필요한 작업에 `Hashing`은 적합하지 않는다.
+  - `Balanced search tree`: 순서를 유지한다.
