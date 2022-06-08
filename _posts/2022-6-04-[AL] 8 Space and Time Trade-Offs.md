@@ -183,7 +183,6 @@ Horspool's algorithm과 같이 패턴의 오른쪽에서 왼쪽으로 이동하�
      - $m$ 
  
 ##### Example
-<p align="center">
 
 |k|pattern|$d_2$|
 |-|-------|-----|
@@ -201,7 +200,6 @@ Horspool's algorithm과 같이 패턴의 오른쪽에서 왼쪽으로 이동하�
 |4|***AB***CBAB|4|
 |5|***AB***CBAB|4|
 
-</p> 
 
 #### Boyer-Moore ALgorithm
 <p align="center"><img src="/assets/img/[AL]8/BM.png" width="70%" height="70%"></p> 
