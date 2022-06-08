@@ -182,7 +182,7 @@ Horspool's algorithm과 같이 패턴의 오른쪽에서 왼쪽으로 이동하�
   3. `2.` 에서 정해지지 않으면 
      - $m$ 
  
- ##### Example
+##### Example
 <p align="center">
 
 |k|pattern|$d_2$|
