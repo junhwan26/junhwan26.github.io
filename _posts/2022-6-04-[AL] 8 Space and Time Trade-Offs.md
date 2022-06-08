@@ -184,22 +184,23 @@ Horspool's algorithm과 같이 패턴의 오른쪽에서 왼쪽으로 이동하�
  
 ##### Example
 
-|k|pattern|$d_2$|
-|-|-------|-----|
-|1|DBC***B***AB|2|
-|2|DBCBAB|6|
-|3|DBCBAB|6|
-|4|DBCBAB|6|
-|5|DBCBAB|6|
+|k|pattern|$d_2$||k|pattern|$d_2$|
+|-|-------|-----|-|-|-------|-----|
+|1|DBC***B***AB|2||1|ABC***B***AB|2|
+|2|DBCBAB|6||2|***AB***CBAB|4|
+|3|DBCBAB|6||3|***AB***CBAB|4|
+|4|DBCBAB|6||4|***AB***CBAB|4|
+|5|DBCBAB|6||5|***AB***CBAB|4|
 
-|k|pattern|$d_2$|
-|-|-------|-----|
-|1|ABC***B***AB|2|
-|2|***AB***CBAB|4|
-|3|***AB***CBAB|4|
-|4|***AB***CBAB|4|
-|5|***AB***CBAB|4|
+
+
+
+
+
+
 
 
 #### Boyer-Moore ALgorithm
 <p align="center"><img src="/assets/img/[AL]8/BM.png" width="70%" height="70%"></p> 
+
+## Hasing
