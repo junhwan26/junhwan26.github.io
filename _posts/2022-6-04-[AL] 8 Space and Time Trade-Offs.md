@@ -155,6 +155,7 @@ Horspool's algorithm과 같이 패턴의 오른쪽에서 왼쪽으로 이동하�
 - `c`는 mismatch가 일어난 텍스트의 글자를 의미한다.
 - $d_1=max[t_1(c)-k, 1]$
 - Example pattern: `BBARBER`
+
   |A|B|E|R|*|
   |-|-|-|-|-|
   |4|2|1|3|6|
