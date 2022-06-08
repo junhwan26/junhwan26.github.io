@@ -140,3 +140,30 @@ Algorithm HorspoolMatching(P[0..m-1], T[0..n-1])
 - for random texts: $\theta(n)$
 - Boyer-Moore algorithm 만큼 효율적이다.
 - 자연어와 유사한 문자열을 다룰 때 간단한 Horspool's algorithm을 더 선호한다.
+
+### Boyer-Moore Algorithm
+Horspool's algorithm과 같이 패턴의 오른쪽에서 왼쪽으로 이동하면서 텍스트와 비교한다.
+두가지 방법으로 shift size를 계산한다.
+- Bad-symbol table
+  - mismatch가 일어난 글자를 기준으로 이동할 정도를 나타낸다.
+- Good-suffix table
+  - 패턴의 일치된 부분(suffix)을 기준으로 이동할 정도를 나타낸다.
+패턴의 가장 오른쪽 글자가 텍스트와 일치하지 않는다면 Horspool's algorithm과 같다.
+
+#### Bad-symbol shift in Boyer-Moore algorithm
+패턴의 글자가 양수 k(0 < k < m)개 만큼 일치한 후 mismatch가 발생하는 경우
+- `c`는 mismatch가 일어난 텍스트의 글자를 의미한다.
+- $d_1=max[t_1(c)-k, 1]$
+- Example pattern: `BBARBER`
+  |A|B|E|R|*|
+  |-|-|-|-|-|
+  |4|2|1|3|6|
+
+   <p align="center"><img src="/assets/img/[AL]8/badsymbol1.png" width="70%" height="70%"></p> 
+  
+  $$t_1(S)-2=6-2=4\ positions$$
+
+    <p align="center"><img src="/assets/img/[AL]8/badsymbol2.png" width="70%" height="70%"></p> 
+  
+  $$t_1(A)-2=4-2=4\ positions$$
+  
