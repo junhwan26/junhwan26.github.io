@@ -47,11 +47,17 @@ window.siteData = {
   education: [
     {
       title: "Korea University",
+      logo: "Ku.svg",
+      logoAlt: "Korea University logo",
+      logoVariant: "ku",
       institution: "B.S. in Data Science",
       period: "Mar 2021 - Present",
     },
     {
       title: "Gwangju Science Academy for the Gifted",
+      logo: "gsa.png",
+      logoAlt: "Gwangju Science Academy for the Gifted logo",
+      logoVariant: "gsa",
       institution: "High School Diploma",
       period: "Mar 2018 - Feb 2021",
       description: "Specialized secondary education program for gifted students in science and mathematics.",

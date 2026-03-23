@@ -229,6 +229,26 @@ function toggleSection(sectionId, hasContent) {
   section.hidden = !hasContent;
 }
 
+function itemTitleNode(item) {
+  const title = el("h3", item.logo ? "item-title item-title--with-logo" : "item-title");
+
+  if (item.logo) {
+    const logoBadge = el(
+      "span",
+      item.logoVariant ? `item-logo-badge item-logo-badge--${item.logoVariant}` : "item-logo-badge",
+    );
+    const logo = document.createElement("img");
+    logo.className = item.logoVariant ? `item-logo item-logo--${item.logoVariant}` : "item-logo";
+    logo.src = item.logo;
+    logo.alt = item.logoAlt || `${item.title} logo`;
+    logoBadge.appendChild(logo);
+    title.appendChild(logoBadge);
+  }
+
+  title.appendChild(el("span", "item-title__text", item.title));
+  return title;
+}
+
 function renderTimeline(items, targetId, secondaryKey) {
   const target = document.getElementById(targetId);
 
@@ -236,7 +256,7 @@ function renderTimeline(items, targetId, secondaryKey) {
     const card = el("article", "timeline-item");
     const topline = el("div", "item-topline");
 
-    topline.appendChild(el("h3", "item-title", item.title));
+    topline.appendChild(itemTitleNode(item));
     topline.appendChild(el("span", "item-period", item.period));
     card.appendChild(topline);
 

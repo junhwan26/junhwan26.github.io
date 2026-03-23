@@ -386,6 +386,47 @@ img {
   line-height: 1.45;
 }
 
+.item-title--with-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.item-logo-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 42px;
+  height: 42px;
+  border: 1px solid #e5eaf0;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #ffffff, #f8fafc);
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.item-title__text {
+  min-width: 0;
+}
+
+.item-logo {
+  flex: 0 0 auto;
+  display: block;
+  object-fit: contain;
+}
+
+.item-logo--ku {
+  width: 18px;
+  height: 24px;
+}
+
+.item-logo--gsa {
+  width: 26px;
+  height: 26px;
+}
+
 .item-subtitle {
   margin: 2px 0 0;
   color: var(--muted);
