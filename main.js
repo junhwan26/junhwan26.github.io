@@ -296,7 +296,7 @@ function renderStack(items, targetId, subtitleBuilder) {
   items.forEach((item) => {
     const card = el("article", targetId === "project-list" ? "project-card" : "work-card");
     const topline = el("div", "item-topline");
-    topline.appendChild(el("h3", "item-title", item.title));
+    topline.appendChild(itemTitleNode(item));
     if (item.period) {
       topline.appendChild(el("span", "item-period", item.period));
     }

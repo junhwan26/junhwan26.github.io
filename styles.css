@@ -268,7 +268,7 @@ img {
 
 .content-panel {
   display: grid;
-  gap: 28px;
+  gap: 40px;
 }
 
 .intro-card,
@@ -316,9 +316,21 @@ img {
 }
 
 .section-heading {
-  margin: 0 0 14px;
-  padding-top: 14px;
-  border-top: 1px solid #f0f0f0;
+  position: relative;
+  margin: 0 0 16px;
+  padding-top: 22px;
+  border-top: 0;
+}
+
+.section-heading::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 72px;
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, rgba(47, 47, 47, 0.14), rgba(47, 47, 47, 0.04));
 }
 
 .section-heading h2 {
@@ -332,9 +344,42 @@ img {
   gap: 10px;
 }
 
-.section-heading__title i {
-  color: #8a8a8a;
-  font-size: 1rem;
+.section-emoji {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1;
+  transform: translateY(-1px);
+}
+
+.section-emoji--education {
+  color: #2a5aa8;
+}
+
+.section-emoji--research {
+  color: #2f7d70;
+}
+
+.section-emoji--publication {
+  color: #a46a23;
+}
+
+.section-emoji--project {
+  color: #6d58a8;
+}
+
+.section-emoji--other {
+  color: #5e6776;
+}
+
+.section-emoji--skills {
+  color: #3c6a50;
+}
+
+.section-emoji--contact {
+  color: #a25268;
 }
 
 .section-heading .section-label {
@@ -344,7 +389,7 @@ img {
 .timeline,
 .stack {
   display: grid;
-  gap: 14px;
+  gap: 10px;
 }
 
 .timeline-item,
@@ -425,6 +470,11 @@ img {
 .item-logo--gsa {
   width: 26px;
   height: 26px;
+}
+
+.item-logo--17wing {
+  width: 28px;
+  height: 28px;
 }
 
 .item-subtitle {

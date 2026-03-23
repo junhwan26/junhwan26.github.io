@@ -60,7 +60,6 @@ window.siteData = {
       logoVariant: "gsa",
       institution: "High School Diploma",
       period: "Mar 2018 - Feb 2021",
-      description: "Specialized secondary education program for gifted students in science and mathematics.",
     },
   ],
   experience: [
@@ -159,6 +158,9 @@ window.siteData = {
   otherExperience: [
     {
       title: "Military Service, Republic of Korea Air Force, 17th Fighter Wing",
+      logo: "17wing.svg",
+      logoAlt: "Republic of Korea Air Force 17th Fighter Wing insignia",
+      logoVariant: "17wing",
       subtitle: "Information Systems Specialist",
       period: "Apr 2023 - Jan 2025",
     },
