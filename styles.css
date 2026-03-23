@@ -35,7 +35,11 @@ img {
 }
 
 .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
   background: #ffffff;
+  border-bottom: 1px solid rgba(47, 47, 47, 0.06);
 }
 
 .site-header__inner {
@@ -49,9 +53,13 @@ img {
 }
 
 .site-title {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
   color: var(--text);
   font-size: 1rem;
   font-weight: 600;
+  line-height: 1;
   text-decoration: none;
 }
 
@@ -63,9 +71,13 @@ img {
 }
 
 .site-nav__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
   color: var(--muted);
   font-size: 1rem;
   font-weight: 400;
+  line-height: 1;
   text-decoration: none;
 }
 
@@ -84,7 +96,7 @@ img {
 
 .profile-panel {
   position: sticky;
-  top: 20px;
+  top: 84px;
   align-self: start;
 }
 
@@ -286,6 +298,7 @@ img {
   border: 0;
   background: none;
   box-shadow: none;
+  scroll-margin-top: 84px;
 }
 
 .intro-card {
