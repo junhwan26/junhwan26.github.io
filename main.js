@@ -38,6 +38,26 @@ function smartLink(label, href, className) {
   return link(label, href, className);
 }
 
+function richParagraphNode(paragraph) {
+  const node = el("p");
+
+  if (typeof paragraph === "string") {
+    node.textContent = paragraph;
+    return node;
+  }
+
+  paragraph.forEach((segment) => {
+    if (typeof segment === "string") {
+      node.appendChild(document.createTextNode(segment));
+      return;
+    }
+
+    node.appendChild(link(segment.label, segment.href, segment.className || "intro-link"));
+  });
+
+  return node;
+}
+
 function timelineSubtitle(item, secondaryKey) {
   if (secondaryKey === "organization" && item.organizationLinkLabel) {
     const subtitle = el("p", "item-subtitle");
@@ -67,10 +87,13 @@ function linkWithIcon(item, className) {
     file: "fa-regular fa-file-lines",
     mail: "fa-regular fa-envelope",
     linkedin: "fa-brands fa-linkedin",
+    github: "fa-brands fa-github",
+    home: "fa-solid fa-house",
   };
 
   const anchor = document.createElement("a");
   anchor.className = className;
+  anchor.dataset.icon = item.icon || "";
   anchor.href = item.href;
   anchor.target = item.href.startsWith("#") || item.href.startsWith("mailto:") ? "_self" : "_blank";
   if (anchor.target === "_blank") {
@@ -211,7 +234,7 @@ function renderIntro() {
 
   const introCopy = document.getElementById("intro-copy");
   siteData.intro.paragraphs.forEach((paragraph) => {
-    introCopy.appendChild(el("p", "", paragraph));
+    introCopy.appendChild(richParagraphNode(paragraph));
   });
 
   const focusList = document.getElementById("focus-list");

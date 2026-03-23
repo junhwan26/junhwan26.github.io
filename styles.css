@@ -117,7 +117,7 @@ img {
 }
 
 .profile-copy {
-  margin-top: 14px;
+  margin-top: 16px;
   text-align: left;
 }
 
@@ -157,10 +157,10 @@ img {
 
 .profile-meta {
   list-style: none;
-  margin: 12px 0 0;
+  margin: 16px 0 0;
   padding: 0;
   display: grid;
-  gap: 2px;
+  gap: 6px;
   justify-items: start;
 }
 
@@ -168,7 +168,7 @@ img {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: var(--muted);
+  color: #111111;
   font-size: 1rem;
 }
 
@@ -187,7 +187,7 @@ img {
 }
 
 .profile-meta .meta-link:hover {
-  color: var(--link);
+  color: #111111;
   text-decoration: underline;
 }
 
@@ -229,11 +229,16 @@ img {
 }
 
 .profile-panel .action-row {
-  margin-top: 10px;
-  gap: 12px;
+  margin-top: 16px;
+  display: grid;
+  justify-items: start;
+  gap: 14px;
 }
 
 .profile-panel .button {
+  display: grid;
+  grid-template-columns: 15px auto;
+  column-gap: 8px;
   width: auto;
   height: auto;
   min-height: auto;
@@ -241,20 +246,24 @@ img {
   border: 0;
   border-radius: 0;
   background: none;
-  color: var(--link);
+  color: #111111;
   font-size: 1rem;
   font-weight: 400;
+  line-height: 1.25;
   text-decoration: none;
   transition: color 140ms ease;
 }
 
 .profile-panel .link-icon {
-  display: inline-block;
+  display: block;
   width: 15px;
-  margin-right: 7px;
   color: inherit;
   font-size: 0.95rem;
   text-align: center;
+}
+
+.profile-panel .button[data-icon="linkedin"] .link-icon {
+  color: #0a66c2;
 }
 
 .profile-panel .link-text {
@@ -262,7 +271,7 @@ img {
 }
 
 .profile-panel .button:hover {
-  color: #1d4ed8;
+  color: #111111;
   text-decoration: underline;
 }
 
@@ -279,6 +288,10 @@ img {
   box-shadow: none;
 }
 
+.intro-card {
+  text-align: center;
+}
+
 #intro-headline {
   margin-top: 0;
   max-width: none;
@@ -287,16 +300,29 @@ img {
 }
 
 .intro-copy {
-  margin-top: 0;
+  max-width: 760px;
+  margin: 10px auto 0;
   display: grid;
   gap: 8px;
-  color: var(--muted);
+  color: #111111;
   font-size: 1rem;
   line-height: 1.65;
 }
 
 .intro-copy p {
   margin: 0;
+}
+
+.intro-link {
+  color: #1d4ed8;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.intro-link:hover {
+  color: #1e40af;
 }
 
 .focus-list {

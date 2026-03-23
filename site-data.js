@@ -23,16 +23,22 @@ window.siteData = {
         icon: "file",
       },
       {
-        label: "Email",
-        href: "mailto:junhwan26@korea.ac.kr",
-        style: "secondary",
-        icon: "mail",
-      },
-      {
         label: "LinkedIn",
         href: "https://www.linkedin.com/in/junhwan-heo-970024367/",
         style: "secondary",
         icon: "linkedin",
+      },
+      {
+        label: "GitHub",
+        href: "https://github.com/junhwan26",
+        style: "secondary",
+        icon: "github",
+      },
+      {
+        label: "Homepage",
+        href: "https://junhwan26.tistory.com/",
+        style: "secondary",
+        icon: "home",
       },
     ],
     socialLinks: [],
@@ -40,7 +46,14 @@ window.siteData = {
   intro: {
     headline: "",
     paragraphs: [
-      "My recent work spans computer vision, multimodal reasoning, and language model systems, with research experience at KAIST AI and Korea University.",
+      [
+        "I am an undergraduate student in Data Science at Korea University and currently an undergraduate research intern at KAIST AI advised by ",
+        {
+          label: "Seungryong Kim",
+          href: "https://cvlab.kaist.ac.kr/",
+        },
+        ". I am interested in how computer vision and multimodal AI can work together to understand visual scenes more effectively. Recently, I have been focusing on referring video object segmentation and multimodal reasoning, with the goal of building reliable methods for real-world settings.",
+      ],
     ],
     focusItems: [],
   },
