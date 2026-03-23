@@ -49,7 +49,6 @@ window.siteData = {
       title: "Korea University",
       institution: "B.S. in Data Science",
       period: "Mar 2021 - Present",
-      description: "GPA: 4.22/4.5 (Major GPA: 4.25/4.5)",
     },
     {
       title: "Gwangju Science Academy for the Gifted",
@@ -61,24 +60,20 @@ window.siteData = {
   experience: [
     {
       title: "Undergraduate Research Intern (KAIRI)",
-      organization: "CVLAB, KAIST AI · Advisor: Professor Seungryong Kim",
+      organizationPrefix: "",
+      organizationLinkLabel: "CVLAB",
+      organizationLinkUrl: "https://cvlab.kaist.ac.kr/",
+      organizationSuffix: ", KAIST AI · Advisor: Professor Seungryong Kim",
       period: "Jun 2026 - Present",
-      highlights: [
-        "Investigating training-free referring video object segmentation, focusing on how object-level tracks support spatio-temporal reasoning under complex language queries.",
-        "Exploring agentic integration of SAM3 and multimodal LLMs through iterative concept extraction and spatio-temporal pruning over candidate object tracks.",
-        "Conducting benchmark and ablation analyses on MeViS, ReVOS, and ReasonVOS to validate training-free performance and the contribution of iterative pruning and temporal scope control.",
-      ],
       tags: ["Computer Vision", "RVOS", "Multimodal AI"],
     },
     {
       title: "Undergraduate Research Intern",
-      organization: "Universal Transfer Learning Lab, Korea University · Advisor: Professor Donghyun Kim",
+      organizationPrefix: "",
+      organizationLinkLabel: "Universal Transfer Learning LAB",
+      organizationLinkUrl: "https://utl.korea.ac.kr/",
+      organizationSuffix: ", Korea University · Advisor: Professor Donghyun Kim",
       period: "Jun 2025 - Dec 2025",
-      highlights: [
-        "Investigated data quality bottlenecks in scene graph generation, with emphasis on long-tailed predicate bias and the trade-off between tail-class coverage and semantic validity.",
-        "Characterized failure modes in data augmentation and relabeling pipelines, including distribution shift, hallucinated relations, and noisy grounding.",
-        "Explored VLM/LLM-based label refinement and diffusion-based synthetic data generation to improve relational supervision and long-tailed relation coverage.",
-      ],
       tags: ["Scene Graph Generation", "VLM/LLM", "Data Quality"],
     },
   ],
@@ -88,21 +83,21 @@ window.siteData = {
       authors: "Woojeong Jin*, Jaeho Lee*, Heeseong Shin, Seungho Jang, Junhwan Heo, Seungryong Kim",
       venue: "Under Review (ECCV)",
       period: "2026",
-      description: "A work on reasoning over object tracks for zero-shot referring video object segmentation.",
     },
   ],
   projects: [
     {
       title: "Hierarchy-Constrained Product Text Classification",
       subtitle: "DATA304 Final Project Competition",
+      accentLabel: "1st Rank",
       period: "2025",
       description: "Built a fully unsupervised, hierarchy-constrained product categorization pipeline over a 531-node taxonomy.",
-      highlights: [
-        "Used Sentence-BERT embeddings, GPT-generated synthetic path-conditioned reviews, TF-IDF keyword enrichment, Cross-Encoder reranking, and GAT-based self-training with path projection.",
-        "Ranked 1st among individual submissions in the DATA304 final project competition.",
-      ],
       tags: ["Python", "PyTorch", "Sentence-Transformers"],
       links: [
+        {
+          label: "Report",
+          href: "https://github.com/junhwan26/20252R0136DATA30400/blob/main/2021320323_final.pdf",
+        },
         {
           label: "GitHub",
           href: "https://github.com/junhwan26/20252R0136DATA30400",
@@ -114,28 +109,38 @@ window.siteData = {
       subtitle: "",
       period: "2025",
       description: "Designed a RELF decoding framework that combines retrieval-augmented generation with Lookback Lens for factuality control in small language models.",
-      highlights: [
-        "Ran experiments on the Natural Questions Open dataset with the LLaMA-2-7B model to evaluate hallucination and factual accuracy.",
-      ],
       tags: ["Python", "Transformers", "FAISS", "LangChain"],
+      links: [
+        {
+          label: "Report",
+          href: "https://github.com/junhwan26/junhwan26/blob/main/COSE461_Project_Final_Report__2025_.pdf",
+        },
+      ],
     },
     {
       title: "Lecture Review Clustering",
       subtitle: "",
       period: "2022",
       description: "Collected and clustered university lecture reviews from KLUE based on content similarity and sentiment patterns.",
-      highlights: [
-        "Crawled and cleaned review data using BeautifulSoup.",
-        "Applied KMeans clustering to organize similar lecture feedback.",
-      ],
       tags: ["Python", "scikit-learn", "BeautifulSoup"],
     },
     {
       title: "Public Mask Inventory Mobile App",
       subtitle: "",
       period: "2020",
+      image: "img.png",
+      imageAlt: "MaskApp map screen",
+      imageStyle: "phone",
+      imagePosition: "center top",
+      resourceAccentLabel: "1K+ Downloads",
       description: "Developed a Kotlin-based Android application that visualized nearby mask stock levels using public APIs.",
       tags: ["Kotlin", "Android", "REST API"],
+      links: [
+        {
+          label: "GitHub",
+          href: "https://github.com/junhwan26/MaskApp",
+        },
+      ],
     },
     {
       title: "Deep Learning-based Missing Value Imputation for Air Quality Data",
@@ -150,11 +155,6 @@ window.siteData = {
       title: "Military Service, Republic of Korea Air Force, 17th Fighter Wing",
       subtitle: "Information Systems Specialist",
       period: "Apr 2023 - Jan 2025",
-      highlights: [
-        "Managed and maintained the Air Force internal network and intranet systems (AFCCS).",
-        "Operated and monitored mission-critical servers and communication infrastructure.",
-        "Collaborated with IT officers to ensure cybersecurity compliance and system stability.",
-      ],
     },
   ],
   skills: [

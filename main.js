@@ -30,6 +30,38 @@ function link(label, href, className) {
   return anchor;
 }
 
+function smartLink(label, href, className) {
+  if (!href) {
+    return el("p", className, label);
+  }
+
+  return link(label, href, className);
+}
+
+function timelineSubtitle(item, secondaryKey) {
+  if (secondaryKey === "organization" && item.organizationLinkLabel) {
+    const subtitle = el("p", "item-subtitle");
+
+    if (item.organizationPrefix) {
+      subtitle.appendChild(document.createTextNode(item.organizationPrefix));
+    }
+
+    subtitle.appendChild(link(item.organizationLinkLabel, item.organizationLinkUrl, "item-subtitle-link"));
+
+    if (item.organizationSuffix) {
+      subtitle.appendChild(document.createTextNode(item.organizationSuffix));
+    }
+
+    return subtitle;
+  }
+
+  return smartLink(
+    item[secondaryKey],
+    item.organizationUrl || item.subtitleUrl,
+    "item-subtitle",
+  );
+}
+
 function linkWithIcon(item, className) {
   const iconClassMap = {
     file: "fa-regular fa-file-lines",
@@ -68,9 +100,16 @@ function tagToneClass(tagText) {
 }
 
 function resourceLink(item) {
-  const isGitHub = item.href.includes("github.com") || item.label.toLowerCase() === "github";
+  const normalizedLabel = item.label.toLowerCase();
+  const normalizedHref = item.href.toLowerCase();
+  const isReport = normalizedLabel.includes("report") || normalizedHref.includes(".pdf");
+  const isGitHub = !isReport && (normalizedHref.includes("github.com") || normalizedLabel === "github");
   const anchor = document.createElement("a");
-  anchor.className = `text-link${isGitHub ? " text-link--github" : ""}`;
+  anchor.className = [
+    "text-link",
+    isGitHub ? "text-link--github" : "",
+    isReport ? "text-link--report" : "",
+  ].filter(Boolean).join(" ");
   anchor.href = item.href;
   anchor.target = item.href.startsWith("#") || item.href.startsWith("mailto:") ? "_self" : "_blank";
   if (anchor.target === "_blank") {
@@ -78,9 +117,14 @@ function resourceLink(item) {
   }
 
   const icon = document.createElement("i");
-  icon.className = isGitHub
-    ? "fa-brands fa-github text-link__icon"
-    : "fa-solid fa-arrow-up-right-from-square text-link__icon";
+  icon.className = [
+    isGitHub
+      ? "fa-brands fa-github"
+      : isReport
+        ? "fa-regular fa-file-lines"
+        : "fa-solid fa-arrow-up-right-from-square",
+    "text-link__icon",
+  ].join(" ");
   icon.setAttribute("aria-hidden", "true");
   anchor.appendChild(icon);
   anchor.appendChild(el("span", "", item.label));
@@ -196,8 +240,9 @@ function renderTimeline(items, targetId, secondaryKey) {
     topline.appendChild(el("span", "item-period", item.period));
     card.appendChild(topline);
 
-    if (item[secondaryKey]) {
-      card.appendChild(el("p", "item-subtitle", item[secondaryKey]));
+    if (item[secondaryKey] || (secondaryKey === "organization" && item.organizationLinkLabel)) {
+      const subtitleNode = timelineSubtitle(item, secondaryKey);
+      card.appendChild(subtitleNode);
     }
 
     if (item.description) {
@@ -237,13 +282,34 @@ function renderStack(items, targetId, subtitleBuilder) {
     }
     card.appendChild(topline);
 
+    const contentWrap = el("div", item.image ? "card-content card-content--with-media" : "card-content");
+    const contentMain = el("div", "card-content__main");
+
     const subtitle = subtitleBuilder(item);
-    if (subtitle) {
-      card.appendChild(el("p", "item-subtitle", subtitle));
+    if (subtitle || item.accentLabel) {
+      const subtitleRow = el("div", "item-subtitle-row");
+      if (subtitle) {
+        subtitleRow.appendChild(el("p", "item-subtitle", subtitle));
+      }
+      if (item.accentLabel) {
+        subtitleRow.appendChild(el("span", "item-accent", item.accentLabel));
+      }
+      contentMain.appendChild(subtitleRow);
+    }
+
+    if (item.links?.length || item.resourceAccentLabel) {
+      const resourceRow = el("div", "resource-row");
+      item.links?.forEach((itemLink) => {
+        resourceRow.appendChild(resourceLink(itemLink));
+      });
+      if (item.resourceAccentLabel) {
+        resourceRow.appendChild(el("span", "item-accent", item.resourceAccentLabel));
+      }
+      contentMain.appendChild(resourceRow);
     }
 
     if (item.description) {
-      card.appendChild(el("p", "item-copy", item.description));
+      contentMain.appendChild(el("p", "item-copy", item.description));
     }
 
     if (item.highlights?.length) {
@@ -252,7 +318,7 @@ function renderStack(items, targetId, subtitleBuilder) {
         const li = el("li", "item-list__entry", highlight);
         list.appendChild(li);
       });
-      card.appendChild(list);
+      contentMain.appendChild(list);
     }
 
     if (item.tags?.length) {
@@ -260,16 +326,27 @@ function renderStack(items, targetId, subtitleBuilder) {
       item.tags.forEach((tagText) => {
         tagRow.appendChild(el("span", `tag ${tagToneClass(tagText)}`, tagText));
       });
-      card.appendChild(tagRow);
+      contentMain.appendChild(tagRow);
     }
 
-    if (item.links?.length) {
-      const linkRow = el("div", "link-row");
-      item.links.forEach((itemLink) => {
-        linkRow.appendChild(resourceLink(itemLink));
-      });
-      card.appendChild(linkRow);
+    if (item.image) {
+      const mediaClass = item.imageStyle ? `card-media card-media--${item.imageStyle}` : "card-media";
+      const media = el("div", mediaClass);
+      const frame = el("div", "card-media__frame");
+      const img = document.createElement("img");
+      img.className = "card-media__image";
+      img.src = item.image;
+      img.alt = item.imageAlt || item.title;
+      if (item.imagePosition) {
+        img.style.objectPosition = item.imagePosition;
+      }
+      frame.appendChild(img);
+      media.appendChild(frame);
+      contentWrap.appendChild(media);
     }
+
+    contentWrap.appendChild(contentMain);
+    card.appendChild(contentWrap);
 
     target.appendChild(card);
   });
