@@ -440,18 +440,6 @@ img {
   border-radius: 12px;
   background: #ffffff;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
-  transition:
-    transform 160ms ease,
-    box-shadow 160ms ease,
-    border-color 160ms ease;
-}
-
-.timeline-item:hover,
-.work-card:hover,
-.project-card:hover {
-  transform: translateY(-2px);
-  border-color: #d8dee6;
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
 }
 
 .item-topline {
