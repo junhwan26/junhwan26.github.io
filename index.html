@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Junhwan Heo</title>
+    <meta
+      name="description"
+      content="Academic-style personal homepage template for GitHub Pages."
+    >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    >
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header" id="top">
+      <div class="site-header__inner">
+        <a class="site-title" id="site-title" href="#top">Junhwan</a>
+        <nav class="site-nav" id="site-nav" aria-label="Section navigation"></nav>
+      </div>
+    </header>
+
+    <div class="page-shell">
+      <aside class="profile-panel">
+        <div class="profile-panel__content">
+          <div class="avatar" id="avatar"></div>
+
+          <div class="profile-copy">
+            <p class="eyebrow" id="profile-eyebrow"></p>
+            <h1 id="profile-name"></h1>
+            <p class="profile-role" id="profile-role"></p>
+            <p class="profile-bio" id="profile-bio"></p>
+          </div>
+
+          <ul class="profile-meta" id="profile-meta"></ul>
+          <div class="action-row" id="action-row"></div>
+          <div class="social-row" id="social-row"></div>
+        </div>
+      </aside>
+
+      <main class="content-panel">
+        <section class="intro-card" id="intro-card">
+          <p class="section-label">About</p>
+          <h2 id="intro-headline"></h2>
+          <div class="intro-copy" id="intro-copy"></div>
+          <ul class="focus-list" id="focus-list"></ul>
+        </section>
+
+        <section class="content-section" id="education-section">
+          <div class="section-heading">
+            <h2 class="section-heading__title">
+              <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+              <span>Education</span>
+            </h2>
+          </div>
+          <div class="timeline" id="education-list"></div>
+        </section>
+
+        <section class="content-section" id="experience-section">
+          <div class="section-heading">
+            <h2 class="section-heading__title">
+              <i class="fa-solid fa-microscope" aria-hidden="true"></i>
+              <span>Research Experience</span>
+            </h2>
+          </div>
+          <div class="timeline" id="experience-list"></div>
+        </section>
+
+        <section class="content-section" id="publication-section">
+          <div class="section-heading">
+            <h2 class="section-heading__title">
+              <i class="fa-regular fa-file-lines" aria-hidden="true"></i>
+              <span>Publications</span>
+            </h2>
+          </div>
+          <div class="stack" id="publication-list"></div>
+        </section>
+
+        <section class="content-section" id="project-section">
+          <div class="section-heading">
+            <h2 class="section-heading__title">
+              <i class="fa-solid fa-diagram-project" aria-hidden="true"></i>
+              <span>Projects</span>
+            </h2>
+          </div>
+          <div class="stack" id="project-list"></div>
+        </section>
+
+        <section class="content-section" id="other-experience-section">
+          <div class="section-heading">
+            <h2 class="section-heading__title">
+              <i class="fa-solid fa-briefcase" aria-hidden="true"></i>
+              <span>Other Experience</span>
+            </h2>
+          </div>
+          <div class="stack" id="other-experience-list"></div>
+        </section>
+
+        <section class="content-section" id="skills-section">
+          <div class="section-heading">
+            <h2 class="section-heading__title">
+              <i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i>
+              <span>Skills &amp; Certifications</span>
+            </h2>
+          </div>
+          <div class="stack" id="skills-list"></div>
+        </section>
+
+        <section class="content-section" id="contact-section">
+          <div class="section-heading">
+            <h2 class="section-heading__title">
+              <i class="fa-regular fa-paper-plane" aria-hidden="true"></i>
+              <span>Contact</span>
+            </h2>
+          </div>
+          <div class="contact-card">
+            <p id="contact-copy"></p>
+            <a class="button button--primary" id="contact-link" href="/">Send an email</a>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="site-data.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
