@@ -99,8 +99,14 @@ window.siteData = {
     {
       title: "AgentRVOS: Reasoning Over Object Tracks for Zero-Shot Referring Video Object Segmentation",
       authors: "Woojeong Jin*, Jaeho Lee*, Heeseong Shin, Seungho Jang, Junhwan Heo, Seungryong Kim",
-      venue: "Under Review (ECCV)",
+      venue: "arXiv",
       period: "2026",
+      links: [
+        {
+          label: "arXiv",
+          href: "https://arxiv.org/abs/2603.23489",
+        },
+      ],
     },
   ],
   projects: [
